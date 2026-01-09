@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northern Engineering Consortium | Integrated Engineering & Professional Solutions</title>
+    <meta name="description" content="Northern Engineering Consortium provides integrated engineering and professional solutions across mechanical, civil, IT, agriculture, and finance sectors.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #3B82F6;
+            --accent: #10B981;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .sticky-nav {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Hero background */
+        .hero-bg {
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+                url('web home .png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Mobile optimization for hero image */
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-position: center;
+                min-height: 90vh;
+                background-attachment: scroll;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-bg {
+                min-height: 85vh;
+            }
+        }
+        
+        /* Tablet optimization */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-bg {
+                min-height: 95vh;
+            }
+        }
+        
+        /* Desktop large screens */
+        @media (min-width: 1400px) {
+            .hero-bg {
+                min-height: 105vh;
+            }
+        }
+        
+        /* Overlay for better readability */
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            padding: 4rem 0 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-overlay {
+                padding: 3rem 0 1.5rem;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+            }
+        }
+        
+        .director-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .cta-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            .mobile-menu.open {
+                max-height: 500px;
+            }
+        }
+        
+        /* Modern Header Styles */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: rgba(30, 58, 138, 0.05);
+            color: #1E3A8A;
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+        }
+        
+        .logo-img {
+            height: 55px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+        
+        .footer-logo-img {
+            height: 50px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+        
+        /* Modern Footer Styles */
+        .modern-footer {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .footer-link {
+            position: relative;
+            padding-left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            padding-left: 8px;
+            color: white;
+        }
+        
+        .footer-link::before {
+            content: '→';
+            position: absolute;
+            left: -10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover::before {
+            left: 0;
+            opacity: 1;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Division Card Styles - UPDATED FOR 4 CARDS */
+        .division-container {
+            perspective: 1000px;
+        }
+        
+        .division-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            min-height: 380px;
+        }
+        
+        @media (max-width: 640px) {
+            .division-card {
+                min-height: 350px;
+            }
+        }
+        
+        .division-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            z-index: 2;
+        }
+        
+        .division-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(30, 58, 138, 0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .division-card:hover {
+                transform: translateY(-8px);
+            }
+        }
+        
+        .card-header {
+            padding: 2rem 1.5rem 1.5rem;
+            position: relative;
+            min-height: 180px;
+        }
+        
+        @media (max-width: 640px) {
+            .card-header {
+                padding: 1.5rem 1.25rem 1.25rem;
+                min-height: 160px;
+            }
+        }
+        
+        .card-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: white;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+        
+        @media (max-width: 640px) {
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                top: 1.25rem;
+                right: 1.25rem;
+            }
+        }
+        
+        .division-card:hover .card-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .card-bg-shape {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 0 20px 0 100px;
+            opacity: 0.1;
+            transition: all 0.5s ease;
+        }
+        
+        @media (max-width: 640px) {
+            .card-bg-shape {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        
+        .division-card:hover .card-bg-shape {
+            transform: scale(1.1);
+            opacity: 0.15;
+        }
+        
+        .card-number {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            font-size: 3rem;
+            font-weight: 800;
+            opacity: 0.1;
+            line-height: 1;
+            color: var(--primary);
+        }
+        
+        @media (max-width: 640px) {
+            .card-number {
+                font-size: 2.5rem;
+                bottom: 1.25rem;
+                left: 1.25rem;
+            }
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @media (max-width: 640px) {
+            .card-content {
+                padding: 1.25rem;
+            }
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        
+        @media (max-width: 768px) {
+            .card-title {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .card-title {
+                font-size: 1.15rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+        
+        .card-description {
+            color: #64748B;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .card-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .card-description {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+        }
+        
+        .card-footer {
+            padding: 1.5rem;
+            padding-top: 0;
+        }
+        
+        @media (max-width: 640px) {
+            .card-footer {
+                padding: 1.25rem;
+                padding-top: 0;
+            }
+        }
+        
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 640px) {
+            .card-link {
+                font-size: 0.85rem;
+            }
+        }
+        
+        .card-link:hover {
+            color: var(--secondary);
+        }
+        
+        .card-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card-link:hover i {
+            transform: translateX(4px);
+        }
+        
+        /* Different colors for each card */
+        .card-1 .card-icon,
+        .card-1 .card-bg-shape {
+            background: linear-gradient(135deg, #3B82F6, #1E3A8A);
+        }
+        
+        .card-2 .card-icon,
+        .card-2 .card-bg-shape {
+            background: linear-gradient(135deg, #10B981, #047857);
+        }
+        
+        .card-3 .card-icon,
+        .card-3 .card-bg-shape {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+        }
+        
+        .card-4 .card-icon,
+        .card-4 .card-bg-shape {
+            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+        }
+        
+        /* UPDATED: OPTIMIZED 4-CARD LAYOUT - FULLY RESPONSIVE */
+        .division-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 480px) {
+            .division-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .division-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.75rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .division-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .division-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .division-card .card-header {
+                min-height: 170px;
+            }
+            
+            .division-card .card-title {
+                font-size: 1.2rem;
+            }
+            
+            .division-card .card-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+        }
+        
+        @media (min-width: 1536px) {
+            .division-grid {
+                gap: 2rem;
+            }
+        }
+        
+        /* Animation for cards */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .division-card {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .division-card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .division-card:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        .division-card:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+        
+        .division-card:hover {
+            animation: none;
+        }
+        
+        /* MODAL/POPUP STYLES */
+        .policy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .policy-modal.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .policy-modal.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: white;
+            padding: 1.75rem 2rem 1.5rem;
+            border-radius: 20px 20px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+        
+        .modal-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.25rem;
+            z-index: 101;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .modal-body {
+            padding: 2.5rem 2rem;
+        }
+        
+        .policy-date {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3B82F6;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .policy-date i {
+            color: #3B82F6;
+            font-size: 1.25rem;
+        }
+        
+        .policy-date p {
+            margin: 0;
+            color: #475569;
+            font-weight: 500;
+        }
+        
+        .policy-section {
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 120px;
+        }
+        
+        .policy-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .policy-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1E3A8A;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .policy-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3B82F6, #10B981);
+        }
+        
+        .policy-section p {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+        }
+        
+        .policy-section ul, .policy-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .policy-section li {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .policy-section strong {
+            color: #1E293B;
+            font-weight: 600;
+        }
+        
+        .policy-highlight {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.05));
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #3B82F6;
+            margin: 1.5rem 0;
+        }
+        
+        .contact-info-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.75rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            border: 1px solid rgba(30, 58, 138, 0.1);
+        }
+        
+        .contact-info-box h4 {
+            color: #1E3A8A;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Mobile Responsive Modal Styles */
+        @media (max-width: 768px) {
+            .policy-modal {
+                padding: 0.75rem;
+                align-items: flex-start;
+                padding-top: 2rem;
+            }
+            
+            .modal-content {
+                max-height: 95vh;
+                border-radius: 16px;
+            }
+            
+            .modal-header {
+                padding: 1.5rem 1.5rem 1.25rem;
+                position: relative;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.5rem;
+                padding-right: 2rem;
+            }
+            
+            .modal-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .modal-close {
+                top: 1.25rem;
+                right: 1.25rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+            
+            .modal-body {
+                padding: 1.75rem 1.5rem;
+            }
+            
+            .policy-date {
+                padding: 1rem 1.25rem;
+                margin-bottom: 1.75rem;
+            }
+            
+            .policy-section {
+                margin-bottom: 2rem;
+            }
+            
+            .policy-section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .policy-section p, .policy-section li {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .policy-section ul, .policy-section ol {
+                margin-left: 1.25rem;
+            }
+            
+            .contact-info-box {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .policy-modal {
+                padding: 0.5rem;
+                padding-top: 1.5rem;
+            }
+            
+            .modal-header {
+                padding: 1.25rem 1.25rem 1rem;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.35rem;
+            }
+            
+            .modal-body {
+                padding: 1.5rem 1.25rem;
+            }
+            
+            .policy-section h3 {
+                font-size: 1.15rem;
+            }
+            
+            .policy-section p, .policy-section li {
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Modal Scrollbar Styling */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        
+        .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3B82F6, #10B981);
+            border-radius: 4px;
+        }
+        
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563EB, #059669);
+        }
+        
+        /* Modal Links */
+        .modal-link {
+            color: #3B82F6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px dotted transparent;
+        }
+        
+        .modal-link:hover {
+            color: #1E3A8A;
+            border-bottom: 1px dotted #3B82F6;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- MODERN HEADER -->
+    <header class="sticky-nav fixed top-0 left-0 w-full z-50 glass-nav">
+        <div class="container mx-auto px-4 sm:px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 hover-lift">
+                    <img src="logo .png" alt="Northern Engineering Consortium Logo" class="logo-img"
+                         onerror="this.style.display='none';">
+                    
+                    <div class="hidden lg:block">
+                        <h1 class="text-lg font-bold text-gray-900">Northern Engineering Consortium</h1>
+                        <p class="text-xs text-gray-500">Private Limited</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-1">
+                        <li><a href="index.html" class="nav-link active text-sm font-medium">Home</a></li>
+                        <li><a href="about.html" class="nav-link text-sm font-medium text-gray-600">About Us</a></li>
+                        <li><a href="divisions.html" class="nav-link text-sm font-medium text-gray-600">Divisions</a></li>
+                        <li><a href="projects.html" class="nav-link text-sm font-medium text-gray-600">Projects</a></li>
+                        <li><a href="careers.html" class="nav-link text-sm font-medium text-gray-600">Careers</a></li>
+                        <li><a href="contact.html" class="ml-4 px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-blue-900">
+                    <div class="w-8 h-8 flex flex-col justify-center space-y-1.5">
+                        <span class="block w-6 h-0.5 bg-blue-900 transition-transform"></span>
+                        <span class="block w-6 h-0.5 bg-blue-900 transition-opacity"></span>
+                        <span class="block w-6 h-0.5 bg-blue-900 transition-transform"></span>
+                    </div>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="mobile-menu md:hidden mt-4 bg-white rounded-xl shadow-2xl border border-gray-100">
+                <div class="p-6 space-y-1">
+                    <div class="flex items-center space-x-4 pb-4 mb-4 border-b border-gray-100">
+                        <img src="logo .png" alt="Logo" class="h-10 w-auto">
+                        <div>
+                            <h2 class="text-base font-bold text-gray-900">Northern Engineering Consortium</h2>
+                            <p class="text-xs text-gray-500">Private Limited</p>
+                        </div>
+                    </div>
+                    <a href="index.html" class="block px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg">Home</a>
+                    <a href="about.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">About Us</a>
+                    <a href="divisions.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Divisions</a>
+                    <a href="projects.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Projects</a>
+                    <a href="careers.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Careers</a>
+                    <a href="contact.html" class="block px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg text-center mt-4">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-bg flex items-center pt-16">
+        <div class="hero-overlay">
+            <div class="container mx-auto px-4">
+                <div class="text-center fade-in">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+                        Building Tomorrow's Infrastructure Today
+                    </h2>
+                    <p class="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                        Comprehensive engineering solutions across multiple disciplines for a sustainable future.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                        <a href="#divisions" class="btn-hover bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg shadow-lg text-center text-sm sm:text-base">
+                            Explore Our Services
+                        </a>
+                        <a href="contact.html" class="btn-hover bg-white text-blue-900 hover:bg-gray-100 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg shadow-lg text-center text-sm sm:text-base">
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+       <!-- Divisions Overview Section - UPDATED TO MATCH DIVISIONS PAGE -->
+    <section id="divisions" class="py-12 md:py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 md:mb-16 fade-in">
+                <div class="inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-sitemap mr-2"></i> Our Divisions
+                </div>
+                <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Four Specialized Engineering Divisions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto md:text-lg">Comprehensive engineering and technical solutions tailored to meet the complex demands of modern infrastructure and technology.</p>
+            </div>
+            
+            <!-- UPDATED: Division Cards - MATCHING DIVISIONS PAGE LAYOUT -->
+            <div class="division-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                
+                <!-- Card 1: MEP & Maintenance Division -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6">
+                        <i class="fas fa-cogs text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">MEP & Maintenance Division</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Reliable engineering solutions for industries, buildings, and infrastructure with focus on preventive maintenance and efficient energy use.</p>
+                    
+                    <h4 class="font-bold text-blue-700 mb-2 text-sm md:text-base">Key Services</h4>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-blue-600 mr-2 mt-1"></i>
+                            <span>Preventive & predictive maintenance</span>
+                        </li>
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-blue-600 mr-2 mt-1"></i>
+                            <span>Electrical & mechanical systems</span>
+                        </li>
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-blue-600 mr-2 mt-1"></i>
+                            <span>Electronic & network solutions</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="divisions.html#mep-maintenance" class="inline-flex items-center text-blue-600 font-semibold text-sm md:text-base hover:text-blue-800 transition-colors">
+                        Explore Division
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Card 2: Construction & Civil Division -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-green-500 to-green-700 rounded-xl flex items-center justify-center mb-4 md:mb-6">
+                        <i class="fas fa-hard-hat text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Construction & Civil Division</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">End-to-end building and infrastructure solutions with sustainable construction practices and modern engineering technologies.</p>
+                    
+                    <h4 class="font-bold text-green-700 mb-2 text-sm md:text-base">Key Services</h4>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                            <span>Structural design & engineering</span>
+                        </li>
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                            <span>Construction project management</span>
+                        </li>
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                            <span>Quantity surveying & architecture</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="divisions.html#construction-civil" class="inline-flex items-center text-green-600 font-semibold text-sm md:text-base hover:text-green-800 transition-colors">
+                        Explore Division
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Card 3: Agriculture & Agro-Solution Division -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-yellow-500 to-yellow-700 rounded-xl flex items-center justify-center mb-4 md:mb-6">
+                        <i class="fas fa-tractor text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Agriculture & Agro-Solution Division</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Modern, sustainable, and technology-driven agriculture solutions to improve productivity and promote value-added products.</p>
+                    
+                    <h4 class="font-bold text-yellow-700 mb-2 text-sm md:text-base">Key Services</h4>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-yellow-600 mr-2 mt-1"></i>
+                            <span>Agricultural development & farm management</span>
+                        </li>
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-yellow-600 mr-2 mt-1"></i>
+                            <span>Agro-engineering & farm mechanization</span>
+                        </li>
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-yellow-600 mr-2 mt-1"></i>
+                            <span>Agro-processing & value-addition</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="divisions.html#agriculture-agro" class="inline-flex items-center text-yellow-600 font-semibold text-sm md:text-base hover:text-yellow-800 transition-colors">
+                        Explore Division
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Card 4: Energy & Sustainable Solutions Division -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-purple-500 to-purple-700 rounded-xl flex items-center justify-center mb-4 md:mb-6">
+                        <i class="fas fa-solar-panel text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Energy & Sustainable Solutions Division</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Innovative, environmentally responsible solutions for power, water, and infrastructure systems supporting a low-carbon future.</p>
+                    
+                    <h4 class="font-bold text-purple-700 mb-2 text-sm md:text-base">Key Services</h4>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-purple-600 mr-2 mt-1"></i>
+                            <span>Renewable energy & wind-solar power</span>
+                        </li>
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-purple-600 mr-2 mt-1"></i>
+                            <span>Utilities management & energy efficiency</span>
+                        </li>
+                        <li class="flex items-start text-sm md:text-base">
+                            <i class="fas fa-check-circle text-purple-600 mr-2 mt-1"></i>
+                            <span>Sustainable technology solutions</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="divisions.html#energy-sustainable" class="inline-flex items-center text-purple-600 font-semibold text-sm md:text-base hover:text-purple-800 transition-colors">
+                        Explore Division
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            
+           
+            
+            <div class="mt-8 text-center">
+                <a href="divisions.html" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-arrow-right mr-2"></i>
+                    View All Divisions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chairman / Managing Director Message -->
+    <section id="about" class="director-bg py-16 sm:py-20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center fade-in">
+                <div class="lg:w-2/5 mb-12 lg:mb-0 lg:pr-12">
+                    <div class="relative">
+                        <div class="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden mx-auto border-6 sm:border-8 border-white shadow-xl">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Chairman & Managing Director" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-3 right-6 sm:-bottom-4 sm:right-10 lg:right-20 bg-blue-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg">
+                            <h4 class="font-bold text-sm sm:text-base">James A. Richardson</h4>
+                            <p class="text-xs sm:text-sm">Chairman & Managing Director</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-3/5">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-6">Message from Leadership</h2>
+                    <p class="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed">
+                        For over four decades, Northern Engineering Consortium has stood at the forefront of engineering innovation. Our integrated approach brings together diverse technical expertise under one roof, enabling us to deliver complex, multi-disciplinary projects with precision and efficiency.
+                    </p>
+                    <p class="text-gray-700 text-base sm:text-lg mb-8 leading-relaxed">
+                        We believe that true engineering excellence lies in balancing technical mastery with sustainable practices and professional integrity. As we look to the future, our commitment remains steadfast: to build infrastructure and solutions that empower communities, drive economic growth, and leave a positive legacy for generations to come.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="h-1 w-12 sm:w-16 bg-blue-700 mr-4"></div>
+                        <p class="text-blue-900 font-semibold text-sm sm:text-base">James A. Richardson</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Value Proposition -->
+    <section class="py-16 sm:py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 sm:mb-16 fade-in">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4">Why Choose Northern Engineering</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">Our unique value proposition combines technical excellence with strategic management for unparalleled project outcomes.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <!-- Value 1 -->
+                <div class="fade-in flex flex-col items-center text-center p-4 sm:p-6">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-users text-blue-700 text-2xl sm:text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3">Multi-Disciplinary Expertise</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Integrated teams spanning engineering, construction, agriculture, energy, and IT sectors provide holistic solutions.</p>
+                </div>
+                
+                <!-- Value 2 -->
+                <div class="fade-in flex flex-col items-center text-center p-4 sm:p-6">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-clipboard-check text-blue-700 text-2xl sm:text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3">Proven Project Delivery</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Over 200 large-scale projects successfully delivered on time and within budget across five continents.</p>
+                </div>
+                
+                <!-- Value 3 -->
+                <div class="fade-in flex flex-col items-center text-center p-4 sm:p-6">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-user-tie text-blue-700 text-2xl sm:text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3">Professional Management</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Boardroom-level strategic oversight combined with rigorous project management methodologies.</p>
+                </div>
+                
+                <!-- Value 4 -->
+                <div class="fade-in flex flex-col items-center text-center p-4 sm:p-6">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-leaf text-blue-700 text-2xl sm:text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3">Sustainable Solutions</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Future-focused engineering that prioritizes environmental stewardship and long-term sustainability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action Section -->
+    <section class="cta-bg py-16 sm:py-20">
+        <div class="container mx-auto px-4 text-center fade-in">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">Let's Build the Future Together</h2>
+            <p class="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto mb-8 sm:mb-10">Partner with Northern Engineering Consortium for your next large-scale engineering initiative. Our integrated approach delivers superior results.</p>
+            <a href="#contact" class="btn-hover inline-block bg-white text-blue-900 font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-lg shadow-lg hover:shadow-xl transition-all text-sm sm:text-base">
+                Contact Our Team
+            </a>
+        </div>
+    </section>
+
+    <!-- MODERN FOOTER -->
+    <footer id="contact" class="modern-footer text-gray-300 pt-12 sm:pt-16 pb-8 sm:pb-12">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+                <div class="space-y-4 sm:space-y-6">
+                    <div class="flex items-center space-x-3 sm:space-x-4 hover-lift">
+                        <img src="logo .png" alt="Northern Engineering Consortium Logo" class="footer-logo-img"
+                             onerror="this.style.display='none';">
+                        
+                        <div><h2 class="text-base sm:text-lg font-bold text-white">Northern Engineering Consortium</h2>
+                            <p class="text-xs text-gray-400">Private Limited</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                        Pioneering integrated engineering solutions since 1978. Transforming visions into sustainable infrastructure across five continents.
+                    </p>
+                    <div class="flex space-x-2 sm:space-x-3">
+                        <a href="#" class="social-icon hover-lift w-8 h-8 sm:w-10 sm:h-10">
+                            <i class="fab fa-linkedin-in text-sm sm:text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift w-8 h-8 sm:w-10 sm:h-10">
+                            <i class="fab fa-twitter text-sm sm:text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift w-8 h-8 sm:w-10 sm:h-10">
+                            <i class="fab fa-facebook-f text-sm sm:text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift w-8 h-8 sm:w-10 sm:h-10">
+                            <i class="fab fa-youtube text-sm sm:text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-base sm:text-lg font-bold text-white mb-4 sm:mb-6 pb-2 border-b border-gray-800">Quick Links</h3>
+                    <ul class="space-y-3 sm:space-y-4">
+                        <li><a href="index.html" class="footer-link text-gray-400 hover:text-white text-xs sm:text-sm">Home</a></li>
+                        <li><a href="about.html" class="footer-link text-gray-400 hover:text-white text-xs sm:text-sm">About Us</a></li>
+                        <li><a href="divisions.html" class="footer-link text-gray-400 hover:text-white text-xs sm:text-sm">Our Divisions</a></li>
+                        <li><a href="projects.html" class="footer-link text-gray-400 hover:text-white text-xs sm:text-sm">Projects</a></li>
+                        <li><a href="careers.html" class="footer-link text-gray-400 hover:text-white text-xs sm:text-sm">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Services</h3>
+                    <ul class="space-y-4">
+                        <li><a href="divisions.html#mep-maintenance" class="footer-link text-gray-400 hover:text-white">MEP & Maintenance</a></li>
+                        <li><a href="divisions.html#construction-civil" class="footer-link text-gray-400 hover:text-white">Construction & Civil</a></li>
+                        <li><a href="divisions.html#agriculture-agro" class="footer-link text-gray-400 hover:text-white">Agriculture & Agro-Solution</a></li>
+                        <li><a href="divisions.html#energy-sustainable" class="footer-link text-gray-400 hover:text-white">Energy & Sustainable Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-base sm:text-lg font-bold text-white mb-4 sm:mb-6 pb-2 border-b border-gray-800">Contact Info</h3>
+                    <ul class="space-y-3 sm:space-y-5">
+                        <li class="flex items-start space-x-2 sm:space-x-3">
+                            <i class="fas fa-map-marker-alt mt-0.5 sm:mt-1 text-blue-400 text-xs sm:text-sm"></i>
+                            <span class="text-gray-400 text-xs sm:text-sm">124 Engineering Plaza, Industrial Zone, Northern City 10001</span>
+                        </li>
+                        <li class="flex items-center space-x-2 sm:space-x-3">
+                            <i class="fas fa-phone text-blue-400 text-xs sm:text-sm"></i>
+                            <span class="text-gray-400 text-xs sm:text-sm">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center space-x-2 sm:space-x-3">
+                            <i class="fas fa-envelope text-blue-400 text-xs sm:text-sm"></i>
+                            <span class="text-gray-400 text-xs sm:text-sm">careers@northernengineering.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 sm:mt-12 pt-6 sm:pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-gray-500 text-xs sm:text-sm text-center md:text-left">
+                        &copy; 2023 Northern Engineering Consortium (Private) Limited. All rights reserved.
+                        <span class="block md:inline mt-1 md:mt-0 md:ml-2">Registration No:PV-00213709</span>
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-x-3 gap-y-1 md:flex-nowrap md:space-x-6 text-xs sm:text-sm text-gray-500">
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors whitespace-nowrap" data-modal="privacy-policy-modal">Privacy Policy</a>
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors whitespace-nowrap" data-modal="terms-modal">Terms of Service</a>
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors whitespace-nowrap" data-modal="cookie-policy-modal">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS FOR POLICIES -->
+    
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-policy-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('privacy-policy-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <p>Northern Engineering Consortium Pvt Ltd ("we", "our", or "us") operates the website <strong>northernsustain.com</strong> and is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information in accordance with the applicable laws of Sri Lanka.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>1. Information We Collect</h3>
+                    <p>We may collect the following information when you interact with us or visit our website:</p>
+                    <ul>
+                        <li>Name, email address, phone number, postal address</li>
+                        <li>Company or organization details</li>
+                        <li>Messages or inquiries sent through forms or email</li>
+                        <li>IP address, browser type, and basic website usage data through cookies</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>2. How We Use Your Information</h3>
+                    <p>Your information may be used for the following purposes:</p>
+                    <ul>
+                        <li>To provide, operate, and manage our engineering and consultancy services</li>
+                        <li>To communicate regarding inquiries, quotations, and projects</li>
+                        <li>To improve our website and customer support</li>
+                        <li>To comply with legal and regulatory obligations in Sri Lanka</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>3. Sharing of Information</h3>
+                    <p>We do <strong>not sell, rent, or trade</strong> your personal information.</p>
+                    <p>We may share information with:</p>
+                    <ul>
+                        <li>Trusted service providers working on our behalf</li>
+                        <li>Regulatory or legal authorities, if required by law</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>4. Cookies</h3>
+                    <p>Our website may use cookies to enhance your browsing experience and analyze traffic.</p>
+                    <p>You may disable cookies through your browser settings; however, some features may not function properly.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>5. Data Security</h3>
+                    <p>We implement reasonable technical and organizational safeguards to protect your personal information. However, no internet-based method of data transmission is completely secure.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>6. Your Rights</h3>
+                    <p>Subject to applicable law, you may request:</p>
+                    <ul>
+                        <li>Access to your personal data</li>
+                        <li>Correction of inaccurate data</li>
+                        <li>Deletion of certain data</li>
+                        <li>Withdrawal of consent for marketing communications</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>7. Third-Party Websites</h3>
+                    <p>Our website may include links to third-party websites. We are not responsible for their privacy policies or practices.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>8. Data Retention</h3>
+                    <p>We retain personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, comply with legal obligations, resolve disputes, and enforce agreements. When personal data is no longer required, it will be securely deleted or anonymized.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>9. Changes to This Privacy Policy</h3>
+                    <p>We may update this Privacy Policy periodically. Changes will be posted on <strong>northernsustain.com</strong> with a revised "Last updated" date.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Us</h4>
+                    <p>For privacy-related inquiries, please contact:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Modal -->
+    <div id="terms-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms & Conditions</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('terms-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <p>These Terms & Conditions govern the use of <strong>northernsustain.com</strong> and the services provided by Northern Engineering Consortium Pvt Ltd in Sri Lanka. By accessing or using our website, you agree to be bound by these Terms.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>1. Use of Website</h3>
+                    <p>You agree to use our website lawfully and not to:</p>
+                    <ul>
+                        <li>Engage in fraudulent or harmful activities</li>
+                        <li>Upload or transmit malicious software</li>
+                        <li>Copy or misuse website content</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>2. Services</h3>
+                    <p>Northern Engineering Consortium Pvt Ltd provides engineering, construction, energy, sustainability, consultancy, and related professional services. Specific service scope, timelines, and pricing will be defined in written quotations, proposals, or agreements.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>3. Intellectual Property</h3>
+                    <p>All text, graphics, logos, photos, and other content on <strong>northernsustain.com</strong> are the property of Northern Engineering Consortium Pvt Ltd. Reproduction or distribution without written permission is prohibited.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>4. Quotations, Orders, and Payments</h3>
+                    <ul>
+                        <li>All quotations are valid for the period stated in the quotation document</li>
+                        <li>Work will commence upon written confirmation and agreed payment terms</li>
+                        <li>Delayed payments may result in suspension of services or additional charges as permitted by law</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>5. Limitation of Liability</h3>
+                    <p>To the maximum extent permitted by Sri Lankan law, we shall not be liable for:</p>
+                    <ul>
+                        <li>Indirect or consequential loss or damage</li>
+                        <li>Business interruption, loss of data, or profit loss</li>
+                        <li>Issues arising from third-party websites linked from ours</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>6. Disclaimer of Warranties</h3>
+                    <p>The website and its content are provided on an "as is" and "as available" basis. While we strive to keep information accurate and up to date, we do not warrant that the website will be uninterrupted, error-free, secure, or free of viruses or other harmful components.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>7. User Information Accuracy</h3>
+                    <p>You are responsible for ensuring that any information you submit through our website is accurate, complete, and lawful. We shall not be responsible for any consequences arising from incorrect or misleading information provided by users.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>8. Force Majeure</h3>
+                    <p>We shall not be liable for any failure or delay in performance caused by events beyond our reasonable control, including but not limited to natural disasters, power failures, labor disputes, government actions, pandemics, or internet service disruptions.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>9. Termination</h3>
+                    <p>We reserve the right to restrict or terminate website access and service provision in case of misuse or violation of these Terms.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>10. Governing Law and Jurisdiction</h3>
+                    <p>These Terms & Conditions are governed by the laws of Sri Lanka.</p>
+                    <p>Any disputes will be subject to the jurisdiction of the courts of Sri Lanka.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>11. Changes to Terms</h3>
+                    <p>We may revise these Terms & Conditions at any time. Continued use of our website after changes indicates acceptance of the updated Terms.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Information</h4>
+                    <p>For questions regarding these Terms & Conditions, please contact:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Policy Modal -->
+    <div id="cookie-policy-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cookie Policy</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('cookie-policy-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>What Are Cookies?</h3>
+                    <p>Cookies are small text files that are placed on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and understanding how you use our site.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>How We Use Cookies</h3>
+                    <p>We use cookies for the following purposes:</p>
+                    <ul>
+                        <li><strong>Essential Cookies:</strong> Necessary for the website to function properly</li>
+                        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
+                        <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-highlight">
+                    <p><strong>Important:</strong> By continuing to use our website, you consent to our use of cookies as described in this policy. You can manage your cookie preferences through your browser settings.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Managing Cookies</h3>
+                    <p>You can control and/or delete cookies as you wish. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed.</p>
+                    <p>However, if you do this, you may have to manually adjust some preferences every time you visit our site and some services and functionalities may not work.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Third-Party Cookies</h3>
+                    <p>Our website may use third-party services that may place their own cookies on your device. We have no control over these cookies.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Changes to This Cookie Policy</h3>
+                    <p>We may update this Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page and updating the "Last updated" date.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Us</h4>
+                    <p>If you have any questions about our use of cookies, please contact us:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if(mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                    }
+                }
+            });
+        });
+        
+        // Sticky navigation on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.sticky-nav');
+            if(window.scrollY > 50) {
+                header.classList.add('shadow-lg', 'py-2');
+                header.classList.remove('py-3');
+            } else {
+                header.classList.remove('shadow-lg', 'py-2');
+                header.classList.add('py-3');
+            }
+        });
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Modern mobile menu toggle with animation
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuSpans = mobileMenuButton.querySelectorAll('span');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            
+            // Animate hamburger to X
+            if(mobileMenu.classList.contains('open')) {
+                menuSpans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                menuSpans[1].style.opacity = '0';
+                menuSpans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                menuSpans[0].style.transform = 'none';
+                menuSpans[1].style.opacity = '1';
+                menuSpans[2].style.transform = 'none';
+            }
+        });
+        
+        // Button hover effects
+        document.querySelectorAll('.btn-hover').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 10px 25px rgba(30, 64, 175, 0.3)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '';
+            });
+        });
+        
+        // Modal functionality
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Add smooth entrance animation
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                }, 10);
+            }
+        }
+        
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // Close modal when clicking outside content
+        document.querySelectorAll('.policy-modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if(e.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if(e.key === 'Escape') {
+                const activeModal = document.querySelector('.policy-modal.active');
+                if(activeModal) {
+                    closeModal(activeModal.id);
+                }
+            }
+        });
+        
+        // Initialize animations for elements already in view
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trigger initial animation for hero
+            const hero = document.querySelector('.hero-overlay .fade-in');
+            if(hero) {
+                setTimeout(() => {
+                    hero.classList.add('visible');
+                }, 100);
+            }
+            
+            // Set sticky nav initial state
+            const header = document.querySelector('.sticky-nav');
+            if(window.scrollY > 50) {
+                header.classList.add('shadow-lg', 'py-2');
+                header.classList.remove('py-3');
+            }
+            
+            // Add click event listeners to footer policy links
+            document.querySelectorAll('[data-modal]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.getAttribute('data-modal');
+                    openModal(modalId);
+                });
+            });
+            
+            // Add touch events for mobile swipe to close
+            let touchStartY = 0;
+            let touchEndY = 0;
+            
+            document.querySelectorAll('.modal-content').forEach(content => {
+                content.addEventListener('touchstart', function(e) {
+                    touchStartY = e.changedTouches[0].screenY;
+                });
+                
+                content.addEventListener('touchend', function(e) {
+                    touchEndY = e.changedTouches[0].screenY;
+                    
+                    // If user swiped down significantly, close the modal
+                    if (touchEndY - touchStartY > 100) {
+                        const modal = this.closest('.policy-modal');
+                        if (modal) {
+                            closeModal(modal.id);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

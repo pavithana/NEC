@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northern Engineering Consortium | Careers</title>
+    <meta name="description" content="Join Northern Engineering Consortium - Build your career with a leader in integrated engineering solutions. Explore current vacancies and growth opportunities.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #3B82F6;
+            --accent: #10B981;
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: rgba(30, 58, 138, 0.05);
+            color: #1E3A8A;
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+        }
+        
+        .logo-img {
+            height: 55px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+        
+        .footer-logo-img {
+            height: 50px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+        
+        /* Modern Footer Styles */
+        .modern-footer {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .footer-link {
+            position: relative;
+            padding-left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            padding-left: 8px;
+            color: white;
+        }
+        
+        .footer-link::before {
+            content: '→';
+            position: absolute;
+            left: -10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover::before {
+            left: 0;
+            opacity: 1;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Careers Page Specific Styles */
+        .careers-hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(37, 99, 235, 0.8) 100%), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .benefit-card {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            overflow: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+        
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.03), rgba(59, 130, 246, 0.03));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+        
+        .benefit-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.1);
+        }
+        
+        .job-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .job-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .job-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(30, 58, 138, 0.08);
+        }
+        
+        .apply-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .apply-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .apply-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(50, 50);
+                opacity: 0;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+        .stagger-delay-5 { transition-delay: 0.5s; }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Job Filter Tabs */
+        .job-filter {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .job-filter::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        .job-filter.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .job-filter.active::after {
+            width: 100%;
+        }
+        
+        /* Stats Counter */
+        .stat-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.05), rgba(59, 130, 246, 0.05));
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+        }
+        
+        .stat-item.visible::before {
+            transform: translateX(0);
+        }
+        
+        /* Mobile Menu - MATCHING DIVISIONS PAGE */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px; /* Increased to show all menu items */
+        }
+        
+        /* Hamburger Menu Animation - MATCHING DIVISIONS PAGE */
+        #mobile-menu-button span {
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .mobile-menu.open {
+                max-height: 500px;
+            }
+            
+            /* Hero Section Mobile Fixes */
+            .careers-hero {
+                background-attachment: scroll;
+                padding: 120px 0 60px 0;
+            }
+            
+            .careers-hero h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2;
+            }
+            
+            /* Stats Grid Mobile */
+            .careers-hero .grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px;
+            }
+            
+            /* Job Cards Mobile */
+            .job-card {
+                padding: 20px !important;
+            }
+            
+            .job-card .flex-col {
+                gap: 15px;
+            }
+            
+            /* Filter Tabs Mobile */
+            .job-filter {
+                padding: 10px 15px !important;
+                font-size: 14px !important;
+                margin-bottom: 5px;
+            }
+            
+            /* Footer Mobile */
+            .modern-footer .grid-cols-4 {
+                grid-template-columns: 1fr !important;
+                gap: 30px;
+            }
+            
+            /* Buttons Mobile */
+            .apply-btn, button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            /* CTA Buttons in Hero Mobile */
+            .careers-hero .flex-wrap {
+                flex-direction: column;
+            }
+            
+            .careers-hero .flex-wrap a {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            
+            /* FAQ Mobile */
+            .faq-question {
+                padding: 16px !important;
+                font-size: 16px;
+            }
+            
+            .faq-answer {
+                padding: 16px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra small devices */
+            .careers-hero {
+                padding: 100px 0 40px 0;
+            }
+            
+            .careers-hero h1 {
+                font-size: 2rem !important;
+            }
+            
+            .careers-hero .text-xl {
+                font-size: 1.1rem !important;
+            }
+            
+            /* Container padding */
+            .container {
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+            
+            /* Stats counters */
+            .careers-hero .grid-cols-4 {
+                grid-template-columns: 1fr 1fr !important;
+            }
+            
+            /* Job cards text */
+            .job-card h3 {
+                font-size: 1.2rem !important;
+            }
+            
+            /* Header logo */
+            .logo-img {
+                height: 40px !important;
+                max-width: 180px !important;
+            }
+        }
+        
+        /* Tablet fixes */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .careers-hero {
+                padding-top: 140px;
+            }
+            
+            .careers-hero h1 {
+                font-size: 3.5rem !important;
+            }
+            
+            .grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .job-card .lg\:flex-row {
+                flex-direction: column !important;
+            }
+            
+            .job-card .lg\:w-2\/3, .job-card .lg\:w-1\/3 {
+                width: 100% !important;
+            }
+            
+            .job-card .lg\:text-right {
+                text-align: left !important;
+            }
+        }
+        
+        /* Sticky header */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        /* Add margin to all sections to prevent overlap */
+        section {
+            scroll-margin-top: 100px;
+        }
+        
+        /* Application Modal */
+        .application-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .application-modal {
+                padding: 10px;
+            }
+            
+            .modal-content {
+                max-height: 95vh;
+            }
+        }
+        
+        /* Logo fallback styles */
+        .logo-fallback {
+            display: none;
+            height: 55px;
+            width: auto;
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+            border-radius: 8px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            padding: 0 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .footer-logo-fallback {
+            display: none;
+            height: 50px;
+            width: auto;
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+            border-radius: 6px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            padding: 0 12px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        /* NEW: MODAL STYLES FROM HOMEPAGE */
+        .policy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .policy-modal.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .policy-modal .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .policy-modal.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+        
+        .policy-modal .modal-header {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: white;
+            padding: 1.75rem 2rem 1.5rem;
+            border-radius: 20px 20px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .policy-modal .modal-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+        
+        .policy-modal .modal-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .policy-modal .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.25rem;
+            z-index: 101;
+        }
+        
+        .policy-modal .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .policy-modal .modal-body {
+            padding: 2.5rem 2rem;
+        }
+        
+        .policy-date {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3B82F6;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .policy-date i {
+            color: #3B82F6;
+            font-size: 1.25rem;
+        }
+        
+        .policy-date p {
+            margin: 0;
+            color: #475569;
+            font-weight: 500;
+        }
+        
+        .policy-section {
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 120px;
+        }
+        
+        .policy-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .policy-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1E3A8A;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .policy-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3B82F6, #10B981);
+        }
+        
+        .policy-section p {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+        }
+        
+        .policy-section ul, .policy-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .policy-section li {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .policy-section strong {
+            color: #1E293B;
+            font-weight: 600;
+        }
+        
+        .policy-highlight {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.05));
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #3B82F6;
+            margin: 1.5rem 0;
+        }
+        
+        .contact-info-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.75rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            border: 1px solid rgba(30, 58, 138, 0.1);
+        }
+        
+        .contact-info-box h4 {
+            color: #1E3A8A;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Mobile Responsive Modal Styles */
+        @media (max-width: 768px) {
+            .policy-modal {
+                padding: 0.75rem;
+                align-items: flex-start;
+                padding-top: 2rem;
+            }
+            
+            .policy-modal .modal-content {
+                max-height: 95vh;
+                border-radius: 16px;
+            }
+            
+            .policy-modal .modal-header {
+                padding: 1.5rem 1.5rem 1.25rem;
+                position: relative;
+            }
+            
+            .policy-modal .modal-header h2 {
+                font-size: 1.5rem;
+                padding-right: 2rem;
+            }
+            
+            .policy-modal .modal-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .policy-modal .modal-close {
+                top: 1.25rem;
+                right: 1.25rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+            
+            .policy-modal .modal-body {
+                padding: 1.75rem 1.5rem;
+            }
+            
+            .policy-date {
+                padding: 1rem 1.25rem;
+                margin-bottom: 1.75rem;
+            }
+            
+            .policy-section {
+                margin-bottom: 2rem;
+            }
+            
+            .policy-section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .policy-section p, .policy-section li {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .policy-section ul, .policy-section ol {
+                margin-left: 1.25rem;
+            }
+            
+            .contact-info-box {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .policy-modal {
+                padding: 0.5rem;
+                padding-top: 1.5rem;
+            }
+            
+            .policy-modal .modal-header {
+                padding: 1.25rem 1.25rem 1rem;
+            }
+            
+            .policy-modal .modal-header h2 {
+                font-size: 1.35rem;
+            }
+            
+            .policy-modal .modal-body {
+                padding: 1.5rem 1.25rem;
+            }
+            
+            .policy-section h3 {
+                font-size: 1.15rem;
+            }
+            
+            .policy-section p, .policy-section li {
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Modal Scrollbar Styling */
+        .policy-modal .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .policy-modal .modal-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        
+        .policy-modal .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3B82F6, #10B981);
+            border-radius: 4px;
+        }
+        
+        .policy-modal .modal-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563EB, #059669);
+        }
+        
+        /* Modal Links */
+        .modal-link {
+            color: #3B82F6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px dotted transparent;
+        }
+        
+        .modal-link:hover {
+            color: #1E3A8A;
+            border-bottom: 1px dotted #3B82F6;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+   <!-- MODERN HEADER - LOGO LEFT, HAMBURGER RIGHT -->
+<header class="sticky-nav fixed top-0 left-0 w-full z-50 glass-nav">
+    <div class="container mx-auto px-6 py-3">
+        <div class="flex justify-between items-center">
+            <!-- Logo - LEFT SIDE -->
+            <div class="flex items-center">
+                <img src="logo .png" alt="Northern Engineering Consortium Logo" class="logo-img"
+                     onerror="this.style.display='none'; document.getElementById('header-logo-fallback').style.display='flex';">
+                
+                <div id="header-logo-fallback" class="logo-fallback" style="display: none;">
+                    NEC
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation - CENTER (hidden on mobile) -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-1">
+                    <li><a href="index.html" class="nav-link text-sm font-medium text-gray-600">Home</a></li>
+                    <li><a href="about.html" class="nav-link text-sm font-medium text-gray-600">About Us</a></li>
+                    <li><a href="divisions.html" class="nav-link text-sm font-medium text-gray-600">Divisions</a></li>
+                    <li><a href="projects.html" class="nav-link text-sm font-medium text-gray-600">Projects</a></li>
+                    <li><a href="careers.html" class="nav-link active text-sm font-medium">Careers</a></li>
+                    <li><a href="contact.html" class="ml-4 px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Mobile Menu Button - RIGHT SIDE (only shows on mobile) -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-blue-900">
+                    <div class="w-8 h-8 flex flex-col justify-center space-y-1.5">
+                        <span class="block w-6 h-0.5 bg-blue-900 transition-transform"></span>
+                        <span class="block w-6 h-0.5 bg-blue-900 transition-opacity"></span>
+                        <span class="block w-6 h-0.5 bg-blue-900 transition-transform"></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu (hidden by default) -->
+        <div id="mobile-menu" class="mobile-menu md:hidden mt-4 bg-white rounded-xl shadow-2xl border border-gray-100">
+            <div class="p-6 space-y-1">
+                <div class="flex items-center space-x-4 pb-4 mb-4 border-b border-gray-100">
+                    <img src="logo .png" alt="Logo" class="h-10 w-auto"
+                         onerror="this.style.display='none'; document.getElementById('mobile-logo-fallback').style.display='flex';">
+                    
+                    <div id="mobile-logo-fallback" class="logo-fallback" style="height: 40px; font-size: 12px; display: none;">
+                        NEC
+                    </div>
+                    
+                    <div>
+                        <h2 class="text-base font-bold text-gray-900">Northern Engineering Consortium</h2>
+                        <p class="text-xs text-gray-500">Private Limited</p>
+                    </div>
+                </div>
+                <a href="index.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Home</a>
+                <a href="about.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">About Us</a>
+                <a href="divisions.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Divisions</a>
+                <a href="projects.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Projects</a>
+                <a href="careers.html" class="block px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg">Careers</a>
+                <a href="contact.html" class="block px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg text-center mt-4">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</header>
+    <!-- NEW HERO SECTION (Projects Page Style) -->
+    <section class="careers-hero pt-32 pb-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center fade-up">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    Build Your Career <span class="text-yellow-300">With Us</span>
+                </h1>
+                <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+                    Join Northern Engineering Consortium where we're building tomorrow's infrastructure today. 
+                    Work on groundbreaking projects that redefine what's possible in engineering.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mt-10">
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-6 py-3">
+                        <p class="text-white text-sm md:text-base">
+                            <i class="fas fa-briefcase text-yellow-300 mr-2"></i>
+                            <span class="font-bold">85+</span> Open Positions
+                        </p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-6 py-3">
+                        <p class="text-white text-sm md:text-base">
+                            <i class="fas fa-users text-yellow-300 mr-2"></i>
+                            <span class="font-bold">120+</span> Team Members
+                        </p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-6 py-3">
+                        <p class="text-white text-sm md:text-base">
+                            <i class="fas fa-globe text-yellow-300 mr-2"></i>
+                            <span class="font-bold">24+</span> Countries
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- CTA Buttons -->
+                <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#vacancies" 
+                       class="inline-block bg-white text-blue-900 font-bold py-4 px-8 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1">
+                        <i class="fas fa-search mr-2"></i> Explore Careers
+                    </a>
+                    <a href="#application-modal" 
+                       class="inline-block bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-xl hover:bg-white/10 transition-all">
+                        <i class="fas fa-paper-plane mr-2"></i> Quick Apply
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Stats -->
+    <section class="py-16 bg-gradient-to-r from-blue-50 to-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                <div class="stat-item fade-up text-center p-6 rounded-2xl bg-white shadow-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-900 mb-2 counter" data-count="85">0</div>
+                    <p class="text-gray-600 font-medium">Open Positions</p>
+                </div>
+                
+                <div class="stat-item fade-up stagger-delay-1 text-center p-6 rounded-2xl bg-white shadow-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-900 mb-2 counter" data-count="120">0</div>
+                    <p class="text-gray-600 font-medium">Team Members</p>
+                </div>
+                
+                <div class="stat-item fade-up stagger-delay-2 text-center p-6 rounded-2xl bg-white shadow-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-900 mb-2 counter" data-count="24">0</div>
+                    <p class="text-gray-600 font-medium">Countries</p>
+                </div>
+                
+                <div class="stat-item fade-up stagger-delay-3 text-center p-6 rounded-2xl bg-white shadow-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-900 mb-2 counter" data-count="1978">0</div>
+                    <p class="text-gray-600 font-medium">Established</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Work With Us -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 md:mb-16 fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Why Work With Northern Engineering?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">We offer more than just a job - we provide a platform for professional growth, innovation, and meaningful impact.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Benefit 1 -->
+                <div class="benefit-card fade-up p-6 md:p-8 rounded-2xl bg-white shadow-sm">
+                    <div class="h-14 md:h-16 w-14 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6">
+                        <i class="fas fa-chart-line text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3">Career Growth</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Structured career progression paths, mentorship programs, and continuous learning opportunities to help you advance.</p>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="benefit-card fade-up stagger-delay-1 p-6 md:p-8 rounded-2xl bg-white shadow-sm">
+                    <div class="h-14 md:h-16 w-14 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6">
+                        <i class="fas fa-users text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3">Collaborative Culture</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Work with diverse teams of experts across engineering disciplines in a supportive, innovative environment.</p>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="benefit-card fade-up stagger-delay-2 p-6 md:p-8 rounded-2xl bg-white shadow-sm">
+                    <div class="h-14 md:h-16 w-14 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6">
+                        <i class="fas fa-project-diagram text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3">Impactful Projects</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Contribute to large-scale, meaningful projects that shape infrastructure and communities for future generations.</p>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="benefit-card fade-up stagger-delay-3 p-6 md:p-8 rounded-2xl bg-white shadow-sm">
+                    <div class="h-14 md:h-16 w-14 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6">
+                        <i class="fas fa-award text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3">Competitive Benefits</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Comprehensive health coverage, retirement plans, performance bonuses, and flexible work arrangements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Vacancies -->
+    <section id="vacancies" class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10 md:mb-12 fade-up">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900 mb-4">Current Vacancies</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">Explore opportunities to join our team across various engineering disciplines and locations.</p>
+            </div>
+            
+            <!-- Job Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
+                <button class="job-filter active px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium text-gray-700" data-filter="all">
+                    <i class="fas fa-th-large mr-2"></i> All Positions
+                </button>
+                <button class="job-filter px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium text-gray-700" data-filter="engineering">
+                    <i class="fas fa-cogs mr-2"></i> Engineering
+                </button>
+                <button class="job-filter px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium text-gray-700" data-filter="it">
+                    <i class="fas fa-server mr-2"></i> IT & Technology
+                </button>
+                <button class="job-filter px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium text-gray-700" data-filter="management">
+                    <i class="fas fa-user-tie mr-2"></i> Management
+                </button>
+                <button class="job-filter px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-medium text-gray-700" data-filter="internship">
+                    <i class="fas fa-graduation-cap mr-2"></i> Internships
+                </button>
+            </div>
+            
+            <!-- Jobs Grid -->
+            <div class="space-y-4 md:space-y-6" id="jobs-list">
+                <!-- Job 1 - Engineering -->
+                <div class="job-card fade-up p-6 md:p-8 rounded-2xl bg-white shadow-sm" data-category="engineering" data-type="full-time">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-2/3">
+                            <div class="flex flex-col sm:flex-row sm:items-start mb-4">
+                                <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mr-0 sm:mr-4 mb-4 sm:mb-0">
+                                    <i class="fas fa-hard-hat text-blue-700 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-1">Senior Civil Engineer</h3>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Civil Engineering Division</span>
+                                        <span class="px-2 md:px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Full-time</span>
+                                        <span class="px-2 md:px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">5+ Years Experience</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm md:text-base">Lead civil engineering projects from concept to completion, ensuring quality, safety, and compliance with regulations.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:w-1/3 lg:text-right mt-6 lg:mt-0">
+                            <div class="mb-4">
+                                <div class="flex items-center lg:justify-end text-gray-600 mb-1 text-sm md:text-base">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Northern City, Industrial Zone</span>
+                                </div>
+                                <div class="flex items-center lg:justify-end text-gray-600 text-sm md:text-base">
+                                    <i class="fas fa-calendar-alt mr-2"></i>
+                                    <span>Posted: 2 days ago</span>
+                                </div>
+                            </div>
+                            <button class="view-details apply-btn bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium py-2 md:py-3 px-4 md:px-8 rounded-lg hover:shadow-lg transition-all w-full">
+                                <i class="fas fa-eye mr-2"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Job 2 - IT -->
+                <div class="job-card fade-up stagger-delay-1 p-6 md:p-8 rounded-2xl bg-white shadow-sm" data-category="it" data-type="full-time">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-2/3">
+                            <div class="flex flex-col sm:flex-row sm:items-start mb-4">
+                                <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mr-0 sm:mr-4 mb-4 sm:mb-0">
+                                    <i class="fas fa-laptop-code text-blue-700 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-1">Full Stack Developer</h3>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">IT Division</span>
+                                        <span class="px-2 md:px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Full-time</span>
+                                        <span class="px-2 md:px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">3+ Years Experience</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm md:text-base">Develop and maintain web applications, APIs, and database systems for engineering management solutions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:w-1/3 lg:text-right mt-6 lg:mt-0">
+                            <div class="mb-4">
+                                <div class="flex items-center lg:justify-end text-gray-600 mb-1 text-sm md:text-base">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Remote / Northern City Office</span>
+                                </div>
+                                <div class="flex items-center lg:justify-end text-gray-600 text-sm md:text-base">
+                                    <i class="fas fa-calendar-alt mr-2"></i>
+                                    <span>Posted: 1 week ago</span>
+                                </div>
+                            </div>
+                            <button class="view-details apply-btn bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium py-2 md:py-3 px-4 md:px-8 rounded-lg hover:shadow-lg transition-all w-full">
+                                <i class="fas fa-eye mr-2"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Job 3 - Engineering -->
+                <div class="job-card fade-up stagger-delay-2 p-6 md:p-8 rounded-2xl bg-white shadow-sm" data-category="engineering" data-type="full-time">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-2/3">
+                            <div class="flex flex-col sm:flex-row sm:items-start mb-4">
+                                <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mr-0 sm:mr-4 mb-4 sm:mb-0">
+                                    <i class="fas fa-solar-panel text-blue-700 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-1">Renewable Energy Engineer</h3>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Energy Division</span>
+                                        <span class="px-2 md:px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Full-time</span>
+                                        <span class="px-2 md:px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">2+ Years Experience</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm md:text-base">Design and implement solar PV systems, conduct energy audits, and develop sustainable energy solutions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:w-1/3 lg:text-right mt-6 lg:mt-0">
+                            <div class="mb-4">
+                                <div class="flex items-center lg:justify-end text-gray-600 mb-1 text-sm md:text-base">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Multiple Project Sites</span>
+                                </div>
+                                <div class="flex items-center lg:justify-end text-gray-600 text-sm md:text-base">
+                                    <i class="fas fa-calendar-alt mr-2"></i>
+                                    <span>Posted: 3 days ago</span>
+                                </div>
+                            </div>
+                            <button class="view-details apply-btn bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium py-2 md:py-3 px-4 md:px-8 rounded-lg hover:shadow-lg transition-all w-full">
+                                <i class="fas fa-eye mr-2"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Job 4 - Management -->
+                <div class="job-card fade-up p-6 md:p-8 rounded-2xl bg-white shadow-sm" data-category="management" data-type="full-time">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-2/3">
+                            <div class="flex flex-col sm:flex-row sm:items-start mb-4">
+                                <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mr-0 sm:mr-4 mb-4 sm:mb-0">
+                                    <i class="fas fa-user-tie text-blue-700 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-1">Project Manager</h3>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Engineering Division</span>
+                                        <span class="px-2 md:px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Full-time</span>
+                                        <span class="px-2 md:px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">7+ Years Experience</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm md:text-base">Oversee engineering projects from initiation to closure, managing resources, timelines, budgets, and stakeholders.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:w-1/3 lg:text-right mt-6 lg:mt-0">
+                            <div class="mb-4">
+                                <div class="flex items-center lg:justify-end text-gray-600 mb-1 text-sm md:text-base">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Head Office, Northern City</span>
+                                </div>
+                                <div class="flex items-center lg:justify-end text-gray-600 text-sm md:text-base">
+                                    <i class="fas fa-calendar-alt mr-2"></i>
+                                    <span>Posted: 5 days ago</span>
+                                </div>
+                            </div>
+                            <button class="view-details apply-btn bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium py-2 md:py-3 px-4 md:px-8 rounded-lg hover:shadow-lg transition-all w-full">
+                                <i class="fas fa-eye mr-2"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Job 5 - Internship -->
+                <div class="job-card fade-up stagger-delay-1 p-6 md:p-8 rounded-2xl bg-white shadow-sm" data-category="internship" data-type="internship">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div class="lg:w-2/3">
+                            <div class="flex flex-col sm:flex-row sm:items-start mb-4">
+                                <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mr-0 sm:mr-4 mb-4 sm:mb-0">
+                                    <i class="fas fa-graduation-cap text-blue-700 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-1">Engineering Intern</h3>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Multiple Divisions</span>
+                                        <span class="px-2 md:px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Internship</span>
+                                        <span class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Students & Graduates</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm md:text-base">Gain hands-on experience in engineering projects, working alongside experienced professionals across different divisions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:w-1/3 lg:text-right mt-6 lg:mt-0">
+                            <div class="mb-4">
+                                <div class="flex items-center lg:justify-end text-gray-600 mb-1 text-sm md:text-base">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Various Locations</span>
+                                </div>
+                                <div class="flex items-center lg:justify-end text-gray-600 text-sm md:text-base">
+                                    <i class="fas fa-calendar-alt mr-2"></i>
+                                    <span>Posted: 1 week ago</span>
+                                </div>
+                            </div>
+                            <button class="view-details apply-btn bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium py-2 md:py-3 px-4 md:px-8 rounded-lg hover:shadow-lg transition-all w-full">
+                                <i class="fas fa-eye mr-2"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- No Jobs Message (Hidden by default) -->
+            <div id="no-jobs-message" class="text-center p-8 md:p-12 hidden fade-up">
+                <div class="h-20 md:h-24 w-20 md:w-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-search text-blue-700 text-2xl md:text-3xl"></i>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3">No positions match your filter</h3>
+                <p class="text-gray-600 max-w-md mx-auto mb-6 text-sm md:text-base">Try selecting a different category or check back soon for new opportunities.</p>
+                <button id="reset-filters" class="apply-btn bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium py-2 md:py-3 px-4 md:px-8 rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-redo mr-2"></i> Reset Filters
+                </button>
+            </div>
+            
+            <!-- Quick Apply Button -->
+            <div class="text-center mt-10 md:mt-12 fade-up">
+                <button id="quick-apply-btn" class="apply-btn inline-block bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-3 md:py-4 px-6 md:px-10 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                    <i class="fas fa-paper-plane mr-2"></i> Quick Apply
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 md:py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-10 md:mb-12 fade-up">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900 mb-4">Frequently Asked Questions</h2>
+                    <p class="text-gray-600 text-sm md:text-base">Find answers to common questions about careers at Northern Engineering Consortium.</p>
+                </div>
+                
+                <div class="space-y-4 md:space-y-6">
+                    <!-- FAQ 1 -->
+                    <div class="fade-up stagger-delay-1 border border-gray-200 rounded-xl md:rounded-2xl overflow-hidden">
+                        <button class="faq-question w-full text-left p-4 md:p-6 bg-gray-50 hover:bg-blue-50 transition-all flex justify-between items-center">
+                            <h3 class="text-base md:text-lg font-medium text-gray-800">What is the typical hiring process?</h3>
+                            <i class="fas fa-chevron-down text-blue-600 transition-transform ml-2"></i>
+                        </button>
+                        <div class="faq-answer p-4 md:p-6 border-t border-gray-200 hidden">
+                            <p class="text-gray-600 text-sm md:text-base">Our hiring process typically includes: 1) Initial application review, 2) Phone screening with HR, 3) Technical assessment or task, 4) Interview with hiring manager, 5) Final interview with division head, and 6) Offer stage. The entire process usually takes 2-4 weeks.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 2 -->
+                    <div class="fade-up stagger-delay-2 border border-gray-200 rounded-xl md:rounded-2xl overflow-hidden">
+                        <button class="faq-question w-full text-left p-4 md:p-6 bg-gray-50 hover:bg-blue-50 transition-all flex justify-between items-center">
+                            <h3 class="text-base md:text-lg font-medium text-gray-800">Do you offer remote work options?</h3>
+                            <i class="fas fa-chevron-down text-blue-600 transition-transform ml-2"></i>
+                        </button>
+                        <div class="faq-answer p-4 md:p-6 border-t border-gray-200 hidden">
+                            <p class="text-gray-600 text-sm md:text-base">Yes, we offer flexible work arrangements including remote work, hybrid schedules, and flexible hours for many positions, particularly in our IT and management divisions. Field engineering roles typically require on-site presence for project work.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 3 -->
+                    <div class="fade-up stagger-delay-3 border border-gray-200 rounded-xl md:rounded-2xl overflow-hidden">
+                        <button class="faq-question w-full text-left p-4 md:p-6 bg-gray-50 hover:bg-blue-50 transition-all flex justify-between items-center">
+                            <h3 class="text-base md:text-lg font-medium text-gray-800">What training and development opportunities are available?</h3>
+                            <i class="fas fa-chevron-down text-blue-600 transition-transform ml-2"></i>
+                        </button>
+                        <div class="faq-answer p-4 md:p-6 border-t border-gray-200 hidden">
+                            <p class="text-gray-600 text-sm md:text-base">We provide comprehensive training including: technical skills workshops, leadership development programs, conference sponsorships, online learning platform access, mentorship programs, and regular performance reviews with personalized development plans.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 4 -->
+                    <div class="fade-up stagger-delay-4 border border-gray-200 rounded-xl md:rounded-2xl overflow-hidden">
+                        <button class="faq-question w-full text-left p-4 md:p-6 bg-gray-50 hover:bg-blue-50 transition-all flex justify-between items-center">
+                            <h3 class="text-base md:text-lg font-medium text-gray-800">Are internships paid?</h3>
+                            <i class="fas fa-chevron-down text-blue-600 transition-transform ml-2"></i>
+                        </button>
+                        <div class="faq-answer p-4 md:p-6 border-t border-gray-200 hidden">
+                            <p class="text-gray-600 text-sm md:text-base">Yes, all our internships are paid positions. Compensation varies based on the role, location, and candidate's experience level. Interns also receive mentorship, training opportunities, and may be considered for full-time positions upon successful completion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Modal -->
+    <div id="application-modal" class="application-modal">
+        <div class="modal-content relative p-4 md:p-8">
+            <button class="modal-close" id="modal-close">&times;</button>
+            
+            <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-blue-900 mb-2">Application Form</h2>
+                <p class="text-gray-600">Submit your application to join Northern Engineering Consortium</p>
+            </div>
+            
+            <form id="career-application-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2 text-sm md:text-base" for="first-name">First Name *</label>
+                        <input type="text" id="first-name" name="first-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2 text-sm md:text-base" for="last-name">Last Name *</label>
+                        <input type="text" id="last-name" name="last-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2 text-sm md:text-base" for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2 text-sm md:text-base" for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2 text-sm md:text-base" for="position">Position Applied For *</label>
+                    <select id="position" name="position" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
+                        <option value="">Select a position</option>
+                        <option value="senior-civil-engineer">Senior Civil Engineer</option>
+                        <option value="full-stack-developer">Full Stack Developer</option>
+                        <option value="renewable-energy-engineer">Renewable Energy Engineer</option>
+                        <option value="project-manager">Project Manager</option>
+                        <option value="engineering-intern">Engineering Intern</option>
+                        <option value="other">Other (Specify in Cover Letter)</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2 text-sm md:text-base" for="resume">Upload Resume *</label>
+                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
+                    <p class="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX (Max: 5MB)</p>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2 text-sm md:text-base" for="coverletter">Cover Letter (Optional)</label>
+                    <textarea id="coverletter" name="coverletter" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base" placeholder="Tell us why you're interested in this position..."></textarea>
+                </div>
+                
+                <div class="flex items-start">
+                    <input type="checkbox" id="privacy-agreement" name="privacy-agreement" required class="mt-1 mr-3">
+                    <label for="privacy-agreement" class="text-gray-700 text-sm md:text-base">
+                        I agree to the <a href="#" class="text-blue-600 hover:underline modal-link" data-modal="privacy-policy-modal">Privacy Policy</a> and consent to Northern Engineering Consortium processing my personal data for recruitment purposes.
+                    </label>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4">
+                    <div>
+                        <a href="downloads/nec-application-form.pdf" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm md:text-base" download>
+                            <i class="fas fa-download mr-2"></i> Download Form
+                        </a>
+                        <p class="text-xs text-gray-500 mt-1">Prefer to apply by email? Download and fill out our form.</p>
+                    </div>
+                    
+                    <button type="submit" class="apply-btn bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-3 md:py-4 px-6 md:px-10 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 w-full sm:w-auto">
+                        <i class="fas fa-paper-plane mr-2"></i> Submit Application
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Success Modal -->
+    <div id="application-success" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-6 md:p-10 max-w-md mx-4 text-center transform transition-all duration-500 scale-95 opacity-0" id="success-modal-content">
+            <div class="h-16 md:h-20 w-16 md:w-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-check text-green-600 text-2xl md:text-3xl"></i>
+            </div>
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3">Application Submitted!</h3>
+            <p class="text-gray-600 mb-6 text-sm md:text-base">Thank you for applying to Northern Engineering Consortium. We'll review your application and contact you if there's a match with our requirements.</p>
+            <button id="close-success-modal" class="apply-btn bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium py-2 md:py-3 px-6 md:px-8 rounded-lg hover:shadow-lg transition-all w-full sm:w-auto">
+                <i class="fas fa-check mr-2"></i> Done
+            </button>
+        </div>
+    </div>
+
+    <!-- MODERN FOOTER (Updated with Modal Links) -->
+    <footer id="contact" class="modern-footer text-gray-300 pt-16 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4 hover-lift">
+                        <img src="logo .png" alt="Northern Engineering Consortium Logo" class="footer-logo-img"
+                             onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').style.display='flex';">
+                        
+                        <div><h2 class="text-lg font-bold text-white">Northern Engineering Consortium</h2>
+                            <p class="text-sm text-gray-400">Private Limited</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Pioneering integrated engineering solutions since 1978. Transforming visions into sustainable infrastructure across five continents.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-youtube text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Quick Links</h3>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="footer-link text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="footer-link text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="divisions.html" class="footer-link text-gray-400 hover:text-white">Our Divisions</a></li>
+                        <li><a href="projects.html" class="footer-link text-gray-400 hover:text-white">Projects</a></li>
+                        <li><a href="careers.html" class="footer-link text-gray-400 hover:text-white">Careers</a></li>
+                    </ul>
+                </div>
+                
+               <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Services</h3>
+                    <ul class="space-y-4">
+                        <li><a href="divisions.html#mep-maintenance" class="footer-link text-gray-400 hover:text-white">MEP & Maintenance</a></li>
+                        <li><a href="divisions.html#construction-civil" class="footer-link text-gray-400 hover:text-white">Construction & Civil</a></li>
+                        <li><a href="divisions.html#agriculture-agro" class="footer-link text-gray-400 hover:text-white">Agriculture & Agro-Solution</a></li>
+                        <li><a href="divisions.html#energy-sustainable" class="footer-link text-gray-400 hover:text-white">Energy & Sustainable Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Contact Info</h3>
+                    <ul class="space-y-5">
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-blue-400"></i>
+                            <span class="text-gray-400 text-sm">124 Engineering Plaza, Industrial Zone, Northern City 10001</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-blue-400"></i>
+                            <span class="text-gray-400 text-sm">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-blue-400"></i>
+                            <span class="text-gray-400 text-sm">careers@northernengineering.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-gray-500 text-sm">
+                        &copy; 2023 Northern Engineering Consortium (Private) Limited. All rights reserved.
+                        <span class="block md:inline mt-1 md:mt-0 md:ml-2">Registration No:PV-00213709</span>
+                    </p>
+                    <div class="flex space-x-6 text-sm text-gray-500">
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors" data-modal="privacy-policy-modal">Privacy Policy</a>
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors" data-modal="terms-modal">Terms of Service</a>
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors" data-modal="cookie-policy-modal">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS FOR POLICIES -->
+    
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-policy-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('privacy-policy-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <p>Northern Engineering Consortium Pvt Ltd ("we", "our", or "us") operates the website <strong>northernsustain.com</strong> and is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information in accordance with the applicable laws of Sri Lanka.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>1. Information We Collect</h3>
+                    <p>We may collect the following information when you interact with us or visit our website:</p>
+                    <ul>
+                        <li>Name, email address, phone number, postal address</li>
+                        <li>Company or organization details</li>
+                        <li>Messages or inquiries sent through forms or email</li>
+                        <li>IP address, browser type, and basic website usage data through cookies</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>2. How We Use Your Information</h3>
+                    <p>Your information may be used for the following purposes:</p>
+                    <ul>
+                        <li>To provide, operate, and manage our engineering and consultancy services</li>
+                        <li>To communicate regarding inquiries, quotations, and projects</li>
+                        <li>To improve our website and customer support</li>
+                        <li>To comply with legal and regulatory obligations in Sri Lanka</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>3. Sharing of Information</h3>
+                    <p>We do <strong>not sell, rent, or trade</strong> your personal information.</p>
+                    <p>We may share information with:</p>
+                    <ul>
+                        <li>Trusted service providers working on our behalf</li>
+                        <li>Regulatory or legal authorities, if required by law</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>4. Cookies</h3>
+                    <p>Our website may use cookies to enhance your browsing experience and analyze traffic.</p>
+                    <p>You may disable cookies through your browser settings; however, some features may not function properly.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>5. Data Security</h3>
+                    <p>We implement reasonable technical and organizational safeguards to protect your personal information. However, no internet-based method of data transmission is completely secure.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>6. Your Rights</h3>
+                    <p>Subject to applicable law, you may request:</p>
+                    <ul>
+                        <li>Access to your personal data</li>
+                        <li>Correction of inaccurate data</li>
+                        <li>Deletion of certain data</li>
+                        <li>Withdrawal of consent for marketing communications</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>7. Third-Party Websites</h3>
+                    <p>Our website may include links to third-party websites. We are not responsible for their privacy policies or practices.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>8. Data Retention</h3>
+                    <p>We retain personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, comply with legal obligations, resolve disputes, and enforce agreements. When personal data is no longer required, it will be securely deleted or anonymized.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>9. Changes to This Privacy Policy</h3>
+                    <p>We may update this Privacy Policy periodically. Changes will be posted on <strong>northernsustain.com</strong> with a revised "Last updated" date.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Us</h4>
+                    <p>For privacy-related inquiries, please contact:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Modal -->
+    <div id="terms-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms & Conditions</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('terms-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <p>These Terms & Conditions govern the use of <strong>northernsustain.com</strong> and the services provided by Northern Engineering Consortium Pvt Ltd in Sri Lanka. By accessing or using our website, you agree to be bound by these Terms.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>1. Use of Website</h3>
+                    <p>You agree to use our website lawfully and not to:</p>
+                    <ul>
+                        <li>Engage in fraudulent or harmful activities</li>
+                        <li>Upload or transmit malicious software</li>
+                        <li>Copy or misuse website content</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>2. Services</h3>
+                    <p>Northern Engineering Consortium Pvt Ltd provides engineering, construction, energy, sustainability, consultancy, and related professional services. Specific service scope, timelines, and pricing will be defined in written quotations, proposals, or agreements.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>3. Intellectual Property</h3>
+                    <p>All text, graphics, logos, photos, and other content on <strong>northernsustain.com</strong> are the property of Northern Engineering Consortium Pvt Ltd. Reproduction or distribution without written permission is prohibited.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>4. Quotations, Orders, and Payments</h3>
+                    <ul>
+                        <li>All quotations are valid for the period stated in the quotation document</li>
+                        <li>Work will commence upon written confirmation and agreed payment terms</li>
+                        <li>Delayed payments may result in suspension of services or additional charges as permitted by law</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>5. Limitation of Liability</h3>
+                    <p>To the maximum extent permitted by Sri Lankan law, we shall not be liable for:</p>
+                    <ul>
+                        <li>Indirect or consequential loss or damage</li>
+                        <li>Business interruption, loss of data, or profit loss</li>
+                        <li>Issues arising from third-party websites linked from ours</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>6. Disclaimer of Warranties</h3>
+                    <p>The website and its content are provided on an "as is" and "as available" basis. While we strive to keep information accurate and up to date, we do not warrant that the website will be uninterrupted, error-free, secure, or free of viruses or other harmful components.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>7. User Information Accuracy</h3>
+                    <p>You are responsible for ensuring that any information you submit through our website is accurate, complete, and lawful. We shall not be responsible for any consequences arising from incorrect or misleading information provided by users.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>8. Force Majeure</h3>
+                    <p>We shall not be liable for any failure or delay in performance caused by events beyond our reasonable control, including but not limited to natural disasters, power failures, labor disputes, government actions, pandemics, or internet service disruptions.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>9. Termination</h3>
+                    <p>We reserve the right to restrict or terminate website access and service provision in case of misuse or violation of these Terms.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>10. Governing Law and Jurisdiction</h3>
+                    <p>These Terms & Conditions are governed by the laws of Sri Lanka.</p>
+                    <p>Any disputes will be subject to the jurisdiction of the courts of Sri Lanka.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>11. Changes to Terms</h3>
+                    <p>We may revise these Terms & Conditions at any time. Continued use of our website after changes indicates acceptance of the updated Terms.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Information</h4>
+                    <p>For questions regarding these Terms & Conditions, please contact:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Policy Modal -->
+    <div id="cookie-policy-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cookie Policy</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('cookie-policy-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>What Are Cookies?</h3>
+                    <p>Cookies are small text files that are placed on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and understanding how you use our site.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>How We Use Cookies</h3>
+                    <p>We use cookies for the following purposes:</p>
+                    <ul>
+                        <li><strong>Essential Cookies:</strong> Necessary for the website to function properly</li>
+                        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
+                        <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-highlight">
+                    <p><strong>Important:</strong> By continuing to use our website, you consent to our use of cookies as described in this policy. You can manage your cookie preferences through your browser settings.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Managing Cookies</h3>
+                    <p>You can control and/or delete cookies as you wish. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed.</p>
+                    <p>However, if you do this, you may have to manually adjust some preferences every time you visit our site and some services and functionalities may not work.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Third-Party Cookies</h3>
+                    <p>Our website may use third-party services that may place their own cookies on your device. We have no control over these cookies.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Changes to This Cookie Policy</h3>
+                    <p>We may update this Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page and updating the "Last updated" date.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Us</h4>
+                    <p>If you have any questions about our use of cookies, please contact us:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle - MATCHING DIVISIONS PAGE
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuSpans = mobileMenuButton.querySelectorAll('span');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                
+                // Animate hamburger to X - MATCHING DIVISIONS PAGE
+                if (mobileMenu.classList.contains('open')) {
+                    menuSpans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    menuSpans[1].style.opacity = '0';
+                    menuSpans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    menuSpans[0].style.transform = 'none';
+                    menuSpans[1].style.opacity = '1';
+                    menuSpans[2].style.transform = 'none';
+                }
+            });
+            
+            // Close menu when clicking on links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    menuSpans[0].style.transform = 'none';
+                    menuSpans[1].style.opacity = '1';
+                    menuSpans[2].style.transform = 'none';
+                });
+            });
+        }
+
+        // Smooth scrolling with proper offset for mobile
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    // For modal links, handle differently
+                    if (href === '#application-modal') {
+                        const modal = document.getElementById('application-modal');
+                        if (modal) {
+                            modal.style.display = 'flex';
+                            document.body.style.overflow = 'hidden';
+                        }
+                        return;
+                    }
+                    
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        // Calculate offset based on header height and device type
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const isMobile = window.innerWidth <= 768;
+                        const offset = isMobile ? headerHeight + 20 : headerHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (mobileMenu && mobileMenu.classList.contains('open')) {
+                            mobileMenu.classList.remove('open');
+                            menuSpans[0].style.transform = 'none';
+                            menuSpans[1].style.opacity = '1';
+                            menuSpans[2].style.transform = 'none';
+                        }
+                    }
+                }
+            });
+        });
+
+        // Animation observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-up, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Job filters
+        const jobFilters = document.querySelectorAll('.job-filter');
+        const jobCards = document.querySelectorAll('.job-card');
+        const jobsList = document.getElementById('jobs-list');
+        const noJobsMessage = document.getElementById('no-jobs-message');
+        const resetFiltersBtn = document.getElementById('reset-filters');
+
+        if (jobFilters.length > 0) {
+            jobFilters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    jobFilters.forEach(f => f.classList.remove('active'));
+                    filter.classList.add('active');
+                    const filterCategory = filter.getAttribute('data-filter');
+                    filterJobs(filterCategory);
+                });
+            });
+        }
+
+        function filterJobs(category) {
+            let visibleJobs = 0;
+            
+            jobCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'block';
+                    visibleJobs++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            if (visibleJobs === 0 && noJobsMessage) {
+                noJobsMessage.classList.remove('hidden');
+                if (jobsList) jobsList.classList.add('hidden');
+            } else {
+                if (noJobsMessage) noJobsMessage.classList.add('hidden');
+                if (jobsList) jobsList.classList.remove('hidden');
+            }
+        }
+
+        if (resetFiltersBtn) {
+            resetFiltersBtn.addEventListener('click', () => {
+                jobFilters.forEach(f => f.classList.remove('active'));
+                const allFilter = document.querySelector('.job-filter[data-filter="all"]');
+                if (allFilter) allFilter.classList.add('active');
+                filterJobs('all');
+            });
+        }
+
+        // View job details buttons - Now opens application modal
+        document.querySelectorAll('.view-details').forEach(button => {
+            button.addEventListener('click', function() {
+                const jobCard = this.closest('.job-card');
+                const jobTitle = jobCard.querySelector('h3').textContent;
+                
+                // Open application modal
+                const modal = document.getElementById('application-modal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Set the job position in the form
+                    const positionSelect = document.getElementById('position');
+                    if (positionSelect && jobTitle) {
+                        // Try to match the job title with position options
+                        const jobTitleLower = jobTitle.toLowerCase();
+                        for(let option of positionSelect.options) {
+                            const optionTextLower = option.text.toLowerCase();
+                            if(optionTextLower.includes(jobTitleLower.split(' ')[0].toLowerCase()) || 
+                               jobTitleLower.includes(optionTextLower.split(' ')[0].toLowerCase())) {
+                                positionSelect.value = option.value;
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Initialize with all jobs showing
+        filterJobs('all');
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                // Toggle answer
+                answer.classList.toggle('hidden');
+                
+                // Rotate icon
+                if(answer.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Application Modal functionality
+        const modal = document.getElementById('application-modal');
+        const modalClose = document.getElementById('modal-close');
+        const quickApplyBtn = document.getElementById('quick-apply-btn');
+        const applicationForm = document.getElementById('career-application-form');
+        const successModal = document.getElementById('application-success');
+        const successModalContent = document.getElementById('success-modal-content');
+        const closeSuccessModal = document.getElementById('close-success-modal');
+        
+        // Open modal when Quick Apply button is clicked
+        if (quickApplyBtn) {
+            quickApplyBtn.addEventListener('click', () => {
+                if (modal) {
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        }
+        
+        // Close modal when X is clicked
+        if (modalClose) {
+            modalClose.addEventListener('click', () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
+        
+        // Close modal when clicking outside content
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+        
+        // Form submission
+        if (applicationForm && successModal) {
+            applicationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple validation
+                let isValid = true;
+                const requiredFields = applicationForm.querySelectorAll('[required]');
+                
+                requiredFields.forEach(field => {
+                    if(!field.value.trim()) {
+                        field.classList.add('border-red-500');
+                        isValid = false;
+                    } else {
+                        field.classList.remove('border-red-500');
+                    }
+                });
+                
+                if(!isValid) {
+                    // Shake form for error indication
+                    applicationForm.classList.add('shake');
+                    setTimeout(() => {
+                        applicationForm.classList.remove('shake');
+                    }, 500);
+                    return;
+                }
+                
+                // Close application modal
+                modal.style.display = 'none';
+                
+                // Show success modal
+                setTimeout(() => {
+                    successModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                    
+                    setTimeout(() => {
+                        successModalContent.classList.remove('scale-95', 'opacity-0');
+                        successModalContent.classList.add('scale-100', 'opacity-100');
+                    }, 10);
+                }, 300);
+                
+                // In a real application, you would submit the form data to a server here
+                console.log('Form submitted successfully');
+            });
+
+            if (closeSuccessModal) {
+                closeSuccessModal.addEventListener('click', () => {
+                    successModalContent.classList.remove('scale-100', 'opacity-100');
+                    successModalContent.classList.add('scale-95', 'opacity-0');
+                    
+                    setTimeout(() => {
+                        successModal.classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                    }, 300);
+                });
+            }
+        }
+
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-count'));
+            const increment = target / 50;
+            let current = 0;
+            
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.textContent = Math.floor(current);
+                    setTimeout(updateCounter, 30);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            
+            // Start animation when element is in view
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        updateCounter();
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            counterObserver.observe(counter);
+        });
+
+        // Sticky navigation on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (header) {
+                if(window.scrollY > 50) {
+                    header.classList.add('shadow-lg', 'py-2');
+                    header.classList.remove('py-3');
+                } else {
+                    header.classList.remove('shadow-lg', 'py-2');
+                    header.classList.add('py-3');
+                }
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                // Close mobile menu on desktop
+                if (mobileMenu && mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    menuSpans[0].style.transform = 'none';
+                    menuSpans[1].style.opacity = '1';
+                    menuSpans[2].style.transform = 'none';
+                }
+            }
+        });
+
+        // Add shake animation CSS
+        if (!document.querySelector('#shake-animation')) {
+            const style = document.createElement('style');
+            style.id = 'shake-animation';
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+                .shake {
+                    animation: shake 0.5s ease-in-out;
+                }
+                .border-red-500 {
+                    border-color: #ef4444 !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Initialize animations for hero section
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trigger initial animation for hero
+            const hero = document.querySelector('.careers-hero .fade-up');
+            if(hero) {
+                setTimeout(() => {
+                    hero.classList.add('visible');
+                }, 100);
+            }
+            
+            // MODAL FUNCTIONALITY INITIALIZATION
+            initModalFunctionality();
+        });
+
+        // MODAL FUNCTIONALITY
+        function initModalFunctionality() {
+            // Modal functions
+            window.openModal = function(modalId) {
+                const modal = document.getElementById(modalId);
+                if(modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Add smooth entrance animation
+                    setTimeout(() => {
+                        modal.style.opacity = '1';
+                    }, 10);
+                }
+            };
+            
+            window.closeModal = function(modalId) {
+                const modal = document.getElementById(modalId);
+                if(modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            };
+            
+            // Close modal when clicking outside content
+            document.querySelectorAll('.policy-modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if(e.target === this) {
+                        closeModal(this.id);
+                    }
+                });
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if(e.key === 'Escape') {
+                    const activeModal = document.querySelector('.policy-modal.active');
+                    if(activeModal) {
+                        closeModal(activeModal.id);
+                    }
+                }
+            });
+            
+            // Add click event listeners to footer policy links
+            document.querySelectorAll('.modal-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.getAttribute('data-modal');
+                    if (modalId) {
+                        openModal(modalId);
+                    }
+                });
+            });
+            
+            // Add touch events for mobile swipe to close
+            let touchStartY = 0;
+            let touchEndY = 0;
+            
+            document.querySelectorAll('.policy-modal .modal-content').forEach(content => {
+                content.addEventListener('touchstart', function(e) {
+                    touchStartY = e.changedTouches[0].screenY;
+                });
+                
+                content.addEventListener('touchend', function(e) {
+                    touchEndY = e.changedTouches[0].screenY;
+                    
+                    // If user swiped down significantly, close the modal
+                    if (touchEndY - touchStartY > 100) {
+                        const modal = this.closest('.policy-modal');
+                        if (modal) {
+                            closeModal(modal.id);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+</body> 
+</html>

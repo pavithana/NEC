@@ -1,0 +1,3977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northern Engineering Consortium | Our Projects</title>
+    <meta name="description" content="Explore Northern Engineering Consortium's portfolio of completed and ongoing projects across engineering, construction, IT, agriculture, and infrastructure sectors.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #3B82F6;
+            --accent: #10B981;
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: rgba(30, 58, 138, 0.05);
+            color: #1E3A8A;
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+        }
+        
+        .logo-img {
+            height: 55px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Modern Footer Styles - MATCHING HOME PAGE */
+        .modern-footer {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .footer-logo-img {
+            height: 50px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+        
+        /* Social Icons */
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.3);
+        }
+        
+        /* Footer Links */
+        .footer-link {
+            position: relative;
+            padding-left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            padding-left: 8px;
+        }
+        
+        .footer-link::before {
+            content: '→';
+            position: absolute;
+            left: -10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover::before {
+            left: 0;
+            opacity: 1;
+        }
+        
+        /* Hover Lift Effect */
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Projects Page Specific Styles */
+        .projects-hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(37, 99, 235, 0.8) 100%), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            overflow: hidden;
+            position: relative;
+            isolation: isolate;
+            cursor: pointer;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(30, 58, 138, 0.15);
+        }
+        
+        .project-image {
+            transition: transform 0.8s ease;
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(30, 58, 138, 0.95), transparent);
+            color: white;
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2;
+        }
+        
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+        
+        .project-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 3;
+            backdrop-filter: blur(10px);
+        }
+        
+        .status-ongoing {
+            background: rgba(251, 191, 36, 0.9);
+            color: #78350f;
+        }
+        
+        .status-completed {
+            background: rgba(34, 197, 94, 0.9);
+            color: #052e16;
+        }
+        
+        .status-upcoming {
+            background: rgba(59, 130, 246, 0.9);
+            color: #1e3a8a;
+        }
+        
+        /* Division Badges */
+        .division-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            z-index: 3;
+            backdrop-filter: blur(10px);
+        }
+        
+        .badge-civil {
+            background: rgba(30, 58, 138, 0.9);
+            color: white;
+        }
+        
+        .badge-mechanical {
+            background: rgba(219, 39, 119, 0.9);
+            color: white;
+        }
+        
+        .badge-it {
+            background: rgba(20, 184, 166, 0.9);
+            color: white;
+        }
+        
+        .badge-agriculture {
+            background: rgba(132, 204, 22, 0.9);
+            color: white;
+        }
+        
+        .badge-financial {
+            background: rgba(168, 85, 247, 0.9);
+            color: white;
+        }
+        
+        /* Animation Classes */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+        .stagger-delay-5 { transition-delay: 0.5s; }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Filter Tabs */
+        .filter-tab {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        .filter-tab.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .filter-tab.active::after {
+            width: 100%;
+        }
+        
+        /* Stats Counter */
+        .stat-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.05), rgba(59, 130, 246, 0.05));
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+        }
+        
+        .stat-item.visible::before {
+            transform: translateX(0);
+        }
+        
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            .mobile-menu.open {
+                max-height: 500px;
+            }
+        }
+
+        /* Project Modal Styles */
+        .project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .project-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 1200px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(50px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 30px;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: #f3f4f6;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 11;
+        }
+
+        .modal-close:hover {
+            background: #e5e7eb;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .modal-section {
+            margin-bottom: 30px;
+        }
+
+        .modal-section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+        }
+
+        .modal-section-title i {
+            margin-right: 10px;
+        }
+
+        .proposal-download {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .proposal-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .download-all-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .download-all-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .project-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .detail-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .detail-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* View More Button in Card */
+        .view-more-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .view-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .view-more-btn i {
+            margin-right: 8px;
+        }
+
+        /* Mobile Responsive Modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-height: 95vh;
+                margin: 10px;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .modal-image {
+                height: 250px;
+            }
+
+            .project-details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-close {
+                top: 15px;
+                right: 15px;
+                width: 35px;
+                height: 35px;
+            }
+
+            .project-modal {
+                padding: 10px;
+            }
+
+            .download-all-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Download Options Modal */
+        .download-options-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .download-options-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .download-options-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            padding: 30px;
+            transform: translateY(30px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-options-modal.active .download-options-content {
+            transform: translateY(0);
+        }
+
+        .download-option-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .download-option-btn:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .download-option-btn i {
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+        .download-option-btn .btn-text {
+            flex: 1;
+        }
+
+        .download-option-btn .btn-text h4 {
+            margin: 0;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .download-option-btn .btn-text p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .download-option-btn .btn-icon {
+            color: #3b82f6;
+            font-size: 18px;
+        }
+
+        /* Download Progress Bar */
+        .download-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 3000;
+            display: none;
+        }
+
+        .download-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .download-progress.active {
+            display: block;
+        }
+        
+        /* Division Filter Buttons */
+        .division-filter {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .division-filter.active {
+            background: #3b82f6 !important;
+            color: white !important;
+            transform: scale(1.05);
+        }
+        
+        /* Projects Counter */
+        .projects-counter {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        
+        .projects-counter span {
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+        
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .projects-hero h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .projects-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .project-card {
+                padding: 1.5rem !important;
+            }
+            
+            .modal-content {
+                margin: 0.5rem;
+            }
+        }
+        
+        /* Ensure proper stacking */
+        .sticky-nav {
+            z-index: 50;
+        }
+        
+        .project-modal {
+            z-index: 1000;
+        }
+        
+        .download-options-modal {
+            z-index: 2000;
+        }
+        
+        .download-progress {
+            z-index: 3000;
+        }
+        
+        /* Ensure proper spacing */
+        .modern-footer .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Policy Modal Styles (From Home Page) */
+        .policy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .policy-modal.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .policy-modal .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .policy-modal.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+        
+        .policy-modal .modal-header {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: white;
+            padding: 1.75rem 2rem 1.5rem;
+            border-radius: 20px 20px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .policy-modal .modal-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+        
+        .modal-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .policy-modal .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.25rem;
+            z-index: 101;
+        }
+        
+        .policy-modal .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .policy-modal .modal-body {
+            padding: 2.5rem 2rem;
+        }
+        
+        .policy-date {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3B82F6;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .policy-date i {
+            color: #3B82F6;
+            font-size: 1.25rem;
+        }
+        
+        .policy-date p {
+            margin: 0;
+            color: #475569;
+            font-weight: 500;
+        }
+        
+        .policy-section {
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 120px;
+        }
+        
+        .policy-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .policy-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1E3A8A;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .policy-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3B82F6, #10B981);
+        }
+        
+        .policy-section p {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+        }
+        
+        .policy-section ul, .policy-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .policy-section li {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .policy-section strong {
+            color: #1E293B;
+            font-weight: 600;
+        }
+        
+        .policy-highlight {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.05));
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #3B82F6;
+            margin: 1.5rem 0;
+        }
+        
+        .contact-info-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.75rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            border: 1px solid rgba(30, 58, 138, 0.1);
+        }
+        
+        .contact-info-box h4 {
+            color: #1E3A8A;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Mobile Responsive Modal Styles */
+        @media (max-width: 768px) {
+            .policy-modal {
+                padding: 0.75rem;
+                align-items: flex-start;
+                padding-top: 2rem;
+            }
+            
+            .policy-modal .modal-content {
+                max-height: 95vh;
+                border-radius: 16px;
+            }
+            
+            .policy-modal .modal-header {
+                padding: 1.5rem 1.5rem 1.25rem;
+                position: relative;
+            }
+            
+            .policy-modal .modal-header h2 {
+                font-size: 1.5rem;
+                padding-right: 2rem;
+            }
+            
+            .modal-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .policy-modal .modal-close {
+                top: 1.25rem;
+                right: 1.25rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+            
+            .policy-modal .modal-body {
+                padding: 1.75rem 1.5rem;
+            }
+            
+            .policy-date {
+                padding: 1rem 1.25rem;
+                margin-bottom: 1.75rem;
+            }
+            
+            .policy-section {
+                margin-bottom: 2rem;
+            }
+            
+            .policy-section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .policy-section p, .policy-section li {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .policy-section ul, .policy-section ol {
+                margin-left: 1.25rem;
+            }
+            
+            .contact-info-box {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .policy-modal {
+                padding: 0.5rem;
+                padding-top: 1.5rem;
+            }
+            
+            .policy-modal .modal-header {
+                padding: 1.25rem 1.25rem 1rem;
+            }
+            
+            .policy-modal .modal-header h2 {
+                font-size: 1.35rem;
+            }
+            
+            .policy-modal .modal-body {
+                padding: 1.5rem 1.25rem;
+            }
+            
+            .policy-section h3 {
+                font-size: 1.15rem;
+            }
+            
+            .policy-section p, .policy-section li {
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Modal Scrollbar Styling */
+        .policy-modal .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .policy-modal .modal-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        
+        .policy-modal .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3B82F6, #10B981);
+            border-radius: 4px;
+        }
+        
+        .policy-modal .modal-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563EB, #059669);
+        }
+        
+        /* Modal Links */
+        .modal-link {
+            color: #3B82F6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px dotted transparent;
+        }
+        
+        .modal-link:hover {
+            color: #1E3A8A;
+            border-bottom: 1px dotted #3B82F6;
+        }
+
+        /* Footer Policy Links */
+        .footer-policy-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-policy-links {
+                gap: 0.75rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .footer-policy-links {
+                gap: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Download Progress Bar -->
+    <div class="download-progress" id="downloadProgress">
+        <div class="download-progress-bar" id="downloadProgressBar"></div>
+    </div>
+
+    <!-- Download Options Modal -->
+    <div class="download-options-modal" id="downloadOptionsModal">
+        <div class="download-options-content">
+            <h3 class="text-2xl font-bold text-blue-900 mb-2">Download Project Details</h3>
+            <p class="text-gray-600 mb-6">Choose your preferred format:</p>
+            
+            <button class="download-option-btn" onclick="downloadProjectDetails('pdf')">
+                <div class="btn-text">
+                    <h4>PDF Document</h4>
+                    <p>High-quality PDF with images and formatting</p>
+                </div>
+                <div class="btn-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+            </button>
+            
+            <button class="download-option-btn" onclick="downloadProjectDetails('docx')">
+                <div class="btn-text">
+                    <h4>Word Document</h4>
+                    <p>Editable DOCX file for Microsoft Word</p>
+                </div>
+                <div class="btn-icon">
+                    <i class="fas fa-file-word"></i>
+                </div>
+            </button>
+            
+            <button class="download-option-btn" onclick="downloadProjectDetails('txt')">
+                <div class="btn-text">
+                    <h4>Text File</h4>
+                    <p>Simple text file with all project details</p>
+                </div>
+                <div class="btn-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+            </button>
+            
+            <button class="download-option-btn" onclick="downloadProjectDetails('excel')">
+                <div class="btn-text">
+                    <h4>Excel Spreadsheet</h4>
+                    <p>Structured data for analysis</p>
+                </div>
+                <div class="btn-icon">
+                    <i class="fas fa-file-excel"></i>
+                </div>
+            </button>
+            
+            <div class="mt-6 pt-6 border-t border-gray-200">
+                <button onclick="closeDownloadOptions()" class="w-full py-3 text-gray-600 hover:text-gray-800 font-medium">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODERN HEADER -->
+    <header class="sticky-nav fixed top-0 left-0 w-full z-50 glass-nav">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="logo .png" alt="Northern Engineering Consortium Logo" class="logo-img"
+                         onerror="this.style.display='none'; document.getElementById('header-logo-fallback').style.display='flex';">
+                    
+                    <div class="hidden lg:block">
+                        <h1 class="text-lg font-bold text-gray-900">Northern Engineering Consortium</h1>
+                        <p class="text-xs text-gray-500">Private Limited</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-1">
+                        <li><a href="index.html" class="nav-link text-sm font-medium text-gray-600">Home</a></li>
+                        <li><a href="about.html" class="nav-link text-sm font-medium text-gray-600">About Us</a></li>
+                        <li><a href="divisions.html" class="nav-link text-sm font-medium text-gray-600">Divisions</a></li>
+                        <li><a href="projects.html" class="nav-link active text-sm font-medium">Projects</a></li>
+                        <li><a href="careers.html" class="nav-link text-sm font-medium text-gray-600">Careers</a></li>
+                        <li><a href="contact.html" class="ml-4 px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-blue-900">
+                    <div class="w-8 h-8 flex flex-col justify-center space-y-1.5">
+                        <span class="block w-6 h-0.5 bg-blue-900 transition-transform"></span>
+                        <span class="block w-6 h-0.5 bg-blue-900 transition-opacity"></span>
+                        <span class="block w-6 h-0.5 bg-blue-900 transition-transform"></span>
+                    </div>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="mobile-menu md:hidden mt-4 bg-white rounded-xl shadow-2xl border border-gray-100">
+                <div class="p-6 space-y-1">
+                    <div class="flex items-center space-x-4 pb-4 mb-4 border-b border-gray-100">
+                        <img src="logo .png" alt="Logo" class="h-10 w-auto">
+                        <div>
+                            <h2 class="text-base font-bold text-gray-900">Northern Engineering Consortium</h2>
+                            <p class="text-xs text-gray-500">Private Limited</p>
+                        </div>
+                    </div>
+                    <a href="index.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Home</a>
+                    <a href="about.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">About Us</a>
+                    <a href="divisions.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Divisions</a>
+                    <a href="projects.html" class="block px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg">Projects</a>
+                    <a href="careers.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Careers</a>
+                    <a href="contact.html" class="block px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg text-center mt-4">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times text-gray-700"></i>
+                </button>
+                <h2 id="modalTitle" class="text-2xl md:text-3xl font-bold text-blue-900 mb-2"></h2>
+                <p id="modalSubtitle" class="text-gray-600"></p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span id="modalStatus" class="px-3 py-1 rounded-full text-sm font-medium"></span>
+                    <span id="modalDivision" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium"></span>
+                </div>
+            </div>
+            
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Project Image" class="modal-image">
+                
+                <div class="project-details-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Location</div>
+                        <div id="modalLocation" class="detail-value"></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Client</div>
+                        <div id="modalClient" class="detail-value"></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Timeline</div>
+                        <div id="modalTimeline" class="detail-value"></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Project Value</div>
+                        <div id="modalValue" class="detail-value"></div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-info-circle"></i> Project Overview
+                    </h3>
+                    <p id="modalOverview" class="text-gray-700 leading-relaxed"></p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-tasks"></i> Key Features & Specifications
+                    </h3>
+                    <ul id="modalFeatures" class="space-y-2 text-gray-700"></ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-cogs"></i> Scope of Work
+                    </h3>
+                    <div id="modalScope" class="text-gray-700"></div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-chart-line"></i> Project Impact
+                    </h3>
+                    <p id="modalImpact" class="text-gray-700 leading-relaxed"></p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-file-pdf"></i> Project Documents
+                    </h3>
+                    <p class="text-gray-600 mb-4">Download the complete project proposal and detailed specifications:</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" id="proposalLink" class="proposal-download" target="_blank">
+                            <i class="fas fa-download mr-2"></i> Download Project Proposal
+                        </a>
+                        <a href="#" id="specsLink" class="proposal-download" target="_blank">
+                            <i class="fas fa-file-alt mr-2"></i> View Technical Specifications
+                        </a>
+                    </div>
+                    
+                    <!-- Download All Button -->
+                    <button id="downloadAllBtn" class="download-all-btn">
+                        <i class="fas fa-download mr-2"></i> Download All Project Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Hero Section -->
+    <section class="projects-hero pt-32 pb-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center fade-up">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    Our Engineering <span class="text-yellow-300">Projects</span>
+                </h1>
+                <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+                    Showcasing our expertise through a diverse portfolio of completed and ongoing projects across all 5 divisions.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mt-10">
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-6 py-3">
+                        <p class="text-white text-sm md:text-base">
+                            <i class="fas fa-hard-hat text-yellow-300 mr-2"></i>
+                            <span class="font-bold">150+</span> Projects Completed
+                        </p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-6 py-3">
+                        <p class="text-white text-sm md:text-base">
+                            <i class="fas fa-map-marker-alt text-yellow-300 mr-2"></i>
+                            <span class="font-bold">25+</span> Locations Nationwide
+                        </p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-6 py-3">
+                        <p class="text-white text-sm md:text-base">
+                            <i class="fas fa-users text-yellow-300 mr-2"></i>
+                            <span class="font-bold">50+</span> Satisfied Clients
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Stats -->
+    <section class="py-16 bg-gradient-to-r from-blue-50 to-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <div class="stat-item fade-up text-center p-6 rounded-2xl bg-white shadow-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-900 mb-2 counter" data-count="45">0</div>
+                    <p class="text-gray-600 font-medium">Civil Projects</p>
+                </div>
+                
+                <div class="stat-item fade-up stagger-delay-1 text-center p-6 rounded-2xl bg-white shadow-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-900 mb-2 counter" data-count="38">0</div>
+                    <p class="text-gray-600 font-medium">M&E Projects</p>
+                </div>
+                
+                <div class="stat-item fade-up stagger-delay-2 text-center p-6 rounded-2xl bg-white shadow-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-900 mb-2 counter" data-count="52">0</div>
+                    <p class="text-gray-600 font-medium">IT Solutions</p>
+                </div>
+                
+                <div class="stat-item fade-up stagger-delay-3 text-center p-6 rounded-2xl bg-white shadow-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-900 mb-2 counter" data-count="29">0</div>
+                    <p class="text-gray-600 font-medium">Agriculture Projects</p>
+                </div>
+                
+                <div class="stat-item fade-up stagger-delay-4 text-center p-6 rounded-2xl bg-white shadow-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-900 mb-2 counter" data-count="34">0</div>
+                    <p class="text-gray-600 font-medium">Financial Advisory</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Filter Tabs -->
+    <section class="py-10 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+                <button class="filter-tab active px-6 py-3 text-lg font-medium text-gray-700" data-filter="all">
+                    <i class="fas fa-th-large mr-2"></i> All Projects
+                </button>
+                <button class="filter-tab px-6 py-3 text-lg font-medium text-gray-700" data-filter="ongoing">
+                    <i class="fas fa-sync-alt mr-2 pulse"></i> Ongoing
+                </button>
+                <button class="filter-tab px-6 py-3 text-lg font-medium text-gray-700" data-filter="completed">
+                    <i class="fas fa-check-circle mr-2"></i> Completed
+                </button>
+                <button class="filter-tab px-6 py-3 text-lg font-medium text-gray-700" data-filter="upcoming">
+                    <i class="fas fa-calendar-alt mr-2"></i> Upcoming
+                </button>
+            </div>
+            
+            <div class="mt-6 flex flex-wrap justify-center gap-3">
+                <button class="division-filter active px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-200 hover:text-blue-800 transition-all" data-division="all">
+                    All Divisions
+                </button>
+                <button class="division-filter px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-700 transition-all" data-division="civil">
+                    <i class="fas fa-hard-hat mr-1"></i> Civil Engineering
+                </button>
+                <button class="division-filter px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-700 transition-all" data-division="mechanical">
+                    <i class="fas fa-cogs mr-1"></i> Mechanical & Electrical
+                </button>
+                <button class="division-filter px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-700 transition-all" data-division="it">
+                    <i class="fas fa-server mr-1"></i> IT Solutions
+                </button>
+                <button class="division-filter px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-700 transition-all" data-division="agriculture">
+                    <i class="fas fa-tractor mr-1"></i> Agricultural Engineering
+                </button>
+                <button class="division-filter px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-700 transition-all" data-division="financial">
+                    <i class="fas fa-chart-line mr-1"></i> Financial Advisory
+                </button>
+            </div>
+            
+            <!-- Projects Counter -->
+            <div class="projects-counter" id="projectsCounter">
+                Showing <span id="visibleCount">0</span> of <span id="totalCount">0</span> projects
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                
+                <!-- ==================== CIVIL ENGINEERING PROJECTS ==================== -->
+                
+                <!-- Project 1 - Civil -->
+                <div class="project-card fade-up rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="1"
+                     data-status="ongoing" 
+                     data-division="civil"
+                     data-project-data='{
+                        "title": "Northern City Commercial Complex",
+                        "subtitle": "Multi-story commercial building with modern amenities",
+                        "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "ongoing",
+                        "division": "Civil Engineering",
+                        "location": "Northern City CBD",
+                        "client": "Northern Developments Ltd.",
+                        "timeline": "Jan 2023 - Dec 2024 (Ongoing)",
+                        "value": "$15.2 Million",
+                        "overview": "A state-of-the-art 15-story commercial complex featuring premium office spaces, retail outlets, food courts, and underground parking facilities. The project incorporates sustainable design principles with energy-efficient systems and smart building technology.",
+                        "features": [
+                            "15-story architectural marvel with glass facade",
+                            "40,000 sq ft of premium office space",
+                            "20,000 sq ft of retail and dining areas",
+                            "3-level underground parking for 300 vehicles",
+                            "LEED Gold certification targeted",
+                            "Smart building management system",
+                            "Green roofs and rainwater harvesting"
+                        ],
+                        "scope": "Complete turnkey solution including architectural design, structural engineering, MEP systems, interior fit-outs, and landscape development. Project management and coordination with multiple subcontractors.",
+                        "impact": "Expected to generate 500+ permanent jobs and revitalize the Northern City CBD. The complex will serve as a landmark for sustainable commercial development in the region.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Northern City Commercial Complex" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-civil">
+                            <i class="fas fa-hard-hat mr-1"></i> Civil
+                        </div>
+                        <div class="project-status status-ongoing">
+                            <i class="fas fa-sync-alt mr-1"></i> Ongoing
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Northern City Commercial Complex</h3>
+                            <p class="text-blue-100 mb-3">Multi-story commercial building with modern amenities</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Start: Jan 2023 | Est. Completion: Dec 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-hard-hat text-blue-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Northern City Commercial Complex</h3>
+                                <p class="text-sm text-gray-500">Civil Engineering Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">A 15-story commercial complex featuring office spaces, retail outlets, and underground parking in the heart of Northern City.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Building Construction</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Structural Works</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Finishing Works</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Northern City</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Northern Developments Ltd.</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 2 - Civil -->
+                <div class="project-card fade-up stagger-delay-1 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="2"
+                     data-status="completed" 
+                     data-division="civil"
+                     data-project-data='{
+                        "title": "Riverfront Residential Towers",
+                        "subtitle": "Luxury residential development with river views",
+                        "image": "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "completed",
+                        "division": "Civil Engineering",
+                        "location": "Riverfront District, East City",
+                        "client": "Luxury Living Properties",
+                        "timeline": "Jun 2021 - Nov 2022 (Completed)",
+                        "value": "$28.5 Million",
+                        "overview": "Three luxury residential towers offering premium apartments with panoramic river views, featuring state-of-the-art amenities and sustainable living solutions.",
+                        "features": [
+                            "Three 25-story residential towers",
+                            "Total 450 luxury apartments",
+                            "Infinity pool and spa facilities",
+                            "Underground automated parking",
+                            "Solar-powered common areas",
+                            "Smart home automation systems",
+                            "Landscaped gardens and walking trails"
+                        ],
+                        "scope": "Complete civil works including piling, foundation, structural framework, finishing works, and landscape development. Coordination with MEP contractors and interior designers.",
+                        "impact": "Created 300+ construction jobs and established new standards for luxury residential living in the region. Awarded Best Residential Development 2022.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Riverfront Residential Towers" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-civil">
+                            <i class="fas fa-hard-hat mr-1"></i> Civil
+                        </div>
+                        <div class="project-status status-completed">
+                            <i class="fas fa-check-circle mr-1"></i> Completed
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Riverfront Residential Towers</h3>
+                            <p class="text-blue-100 mb-3">Luxury residential development with river views</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Completed: November 2022</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-building text-blue-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Riverfront Residential Towers</h3>
+                                <p class="text-sm text-gray-500">Civil Engineering Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Three luxury residential towers offering premium apartments with panoramic river views and modern amenities.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Residential Construction</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Structural Design</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Landscape Works</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Riverfront District</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Luxury Living Properties</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 3 - Civil -->
+                <div class="project-card fade-up stagger-delay-2 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="3"
+                     data-status="upcoming" 
+                     data-division="civil"
+                     data-project-data='{
+                        "title": "Northern Metro Extension",
+                        "subtitle": "Underground metro rail extension project",
+                        "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "upcoming",
+                        "division": "Civil Engineering",
+                        "location": "Northern City Metropolitan Area",
+                        "client": "City Metro Authority",
+                        "timeline": "Mar 2024 - Dec 2026 (Planned)",
+                        "value": "$120 Million",
+                        "overview": "Extension of existing metro rail network with 8 new underground stations, connecting suburban areas to the city center. Includes tunnel boring, station construction, and track laying.",
+                        "features": [
+                            "12km underground tunnel extension",
+                            "8 new underground stations",
+                            "Automated fare collection systems",
+                            "Accessibility features for differently-abled",
+                            "Emergency evacuation systems",
+                            "Underground ventilation systems",
+                            "Station architecture and finishes"
+                        ],
+                        "scope": "Complete civil works including tunnel boring, station construction, structural works, waterproofing, and finishes. Coordination with rail systems contractors.",
+                        "impact": "Expected to serve 50,000+ daily commuters, reduce traffic congestion by 25%, and reduce carbon emissions by 15,000 tons annually.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Northern Metro Extension" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-civil">
+                            <i class="fas fa-hard-hat mr-1"></i> Civil
+                        </div>
+                        <div class="project-status status-upcoming">
+                            <i class="fas fa-calendar-alt mr-1"></i> Upcoming
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Northern Metro Extension</h3>
+                            <p class="text-blue-100 mb-3">Underground metro rail extension project</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Start: March 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-subway text-blue-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Northern Metro Extension</h3>
+                                <p class="text-sm text-gray-500">Civil Engineering Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Extension of existing metro rail network with 8 new underground stations connecting suburban areas to the city center.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Tunnel Boring</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Station Construction</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Infrastructure</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Northern City Area</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>City Metro Authority</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- ==================== MECHANICAL & ELECTRICAL PROJECTS ==================== -->
+                
+                <!-- Project 4 - Mechanical -->
+                <div class="project-card fade-up rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="4"
+                     data-status="completed" 
+                     data-division="mechanical"
+                     data-project-data='{
+                        "title": "Industrial Automation System",
+                        "subtitle": "Complete automation and electrical systems for manufacturing plant",
+                        "image": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "completed",
+                        "division": "Mechanical & Electrical",
+                        "location": "Industrial Zone, Central District",
+                        "client": "Precision Manufacturing Co.",
+                        "timeline": "Mar 2022 - Aug 2023 (Completed)",
+                        "value": "$8.7 Million",
+                        "overview": "Comprehensive automation and electrical systems installation for a state-of-the-art manufacturing facility, increasing production efficiency by 40% and reducing energy consumption by 25%.",
+                        "features": [
+                            "PLC-based automation control systems",
+                            "Robotic assembly line integration",
+                            "Energy-efficient HVAC systems",
+                            "Smart power distribution network",
+                            "Real-time production monitoring",
+                            "Predictive maintenance systems",
+                            "Safety interlocks and emergency systems"
+                        ],
+                        "scope": "Design, supply, installation, and commissioning of complete mechanical, electrical, and automation systems. Training of operational staff and ongoing maintenance support.",
+                        "impact": "Increased production capacity by 40%, reduced downtime by 60%, and achieved 25% energy savings. The project created 150 new jobs in the manufacturing sector.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Industrial Automation System" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-mechanical">
+                            <i class="fas fa-cogs mr-1"></i> M&E
+                        </div>
+                        <div class="project-status status-completed">
+                            <i class="fas fa-check-circle mr-1"></i> Completed
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Industrial Automation System</h3>
+                            <p class="text-blue-100 mb-3">Complete automation and electrical systems for manufacturing plant</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Completed: August 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-pink-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-cogs text-pink-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Industrial Automation System</h3>
+                                <p class="text-sm text-gray-500">Mechanical & Electrical Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Design and installation of complete automation, electrical distribution, and mechanical systems for a new manufacturing facility.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">HVAC Systems</span>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">Power Distribution</span>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">Automation</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Industrial Zone</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Precision Manufacturing Co.</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 5 - Mechanical -->
+                <div class="project-card fade-up stagger-delay-1 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="5"
+                     data-status="ongoing" 
+                     data-division="mechanical"
+                     data-project-data='{
+                        "title": "Hospital HVAC & Electrical Upgrade",
+                        "subtitle": "Complete HVAC and electrical systems modernization",
+                        "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "ongoing",
+                        "division": "Mechanical & Electrical",
+                        "location": "Central City General Hospital",
+                        "client": "City Health Department",
+                        "timeline": "Feb 2023 - Oct 2024 (Ongoing)",
+                        "value": "$12.3 Million",
+                        "overview": "Complete modernization of HVAC, electrical, and medical gas systems for a 500-bed general hospital, ensuring uninterrupted critical care services during the upgrade.",
+                        "features": [
+                            "Energy-efficient central HVAC plant",
+                            "Hospital-grade air filtration systems",
+                            "Redundant power supply with UPS",
+                            "Medical gas pipeline systems",
+                            "Building management system integration",
+                            "Fire detection and suppression systems",
+                            "Critical care power backup"
+                        ],
+                        "scope": "Phased installation to maintain hospital operations, including design, equipment supply, installation, testing, and commissioning of all MEP systems.",
+                        "impact": "Expected to reduce energy costs by 35%, improve indoor air quality by 70%, and ensure uninterrupted power for critical care units. Will serve 200,000+ patients annually.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Hospital HVAC & Electrical Upgrade" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-mechanical">
+                            <i class="fas fa-cogs mr-1"></i> M&E
+                        </div>
+                        <div class="project-status status-ongoing">
+                            <i class="fas fa-sync-alt mr-1"></i> Ongoing
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Hospital HVAC & Electrical Upgrade</h3>
+                            <p class="text-blue-100 mb-3">Complete HVAC and electrical systems modernization</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Start: Feb 2023 | Est. Completion: Oct 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-pink-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-wind text-pink-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Hospital HVAC & Electrical Upgrade</h3>
+                                <p class="text-sm text-gray-500">Mechanical & Electrical Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Complete modernization of HVAC, electrical, and medical gas systems for a 500-bed general hospital.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">HVAC Systems</span>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">Electrical Upgrade</span>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">Medical Systems</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Central City Hospital</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>City Health Department</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 6 - Mechanical -->
+                <div class="project-card fade-up stagger-delay-2 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="6"
+                     data-status="completed" 
+                     data-division="mechanical"
+                     data-project-data='{
+                        "title": "Shopping Mall MEP Systems",
+                        "subtitle": "Complete MEP installation for mega shopping mall",
+                        "image": "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "completed",
+                        "division": "Mechanical & Electrical",
+                        "location": "Westgate Shopping District",
+                        "client": "Mall Developments Inc.",
+                        "timeline": "Apr 2022 - Dec 2022 (Completed)",
+                        "value": "$9.8 Million",
+                        "overview": "Complete mechanical, electrical, and plumbing systems installation for a 500,000 sq ft shopping mall featuring 200+ stores, food court, and entertainment facilities.",
+                        "features": [
+                            "Centralized air conditioning plant",
+                            "Smart lighting control systems",
+                            "Escalator and elevator installations",
+                            "Fire protection and suppression",
+                            "Water treatment and recycling",
+                            "Waste management systems",
+                            "Parking management systems"
+                        ],
+                        "scope": "Design, supply, installation, and commissioning of all MEP systems. Coordination with multiple contractors and adherence to strict timelines.",
+                        "impact": "Created 1500+ retail jobs and established energy efficiency benchmarks. The mall serves 50,000+ visitors weekly with optimal comfort and safety.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Shopping Mall MEP Systems" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-mechanical">
+                            <i class="fas fa-cogs mr-1"></i> M&E
+                        </div>
+                        <div class="project-status status-completed">
+                            <i class="fas fa-check-circle mr-1"></i> Completed
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Shopping Mall MEP Systems</h3>
+                            <p class="text-blue-100 mb-3">Complete MEP installation for mega shopping mall</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Completed: December 2022</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-pink-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-shopping-cart text-pink-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Shopping Mall MEP Systems</h3>
+                                <p class="text-sm text-gray-500">Mechanical & Electrical Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Complete mechanical, electrical, and plumbing systems installation for a 500,000 sq ft shopping mall with 200+ stores.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">MEP Systems</span>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">Lighting Control</span>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 text-xs font-medium rounded-full">Fire Protection</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Westgate District</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Mall Developments Inc.</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- ==================== IT SOLUTIONS PROJECTS ==================== -->
+                
+                <!-- Project 7 - IT -->
+                <div class="project-card fade-up rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="7"
+                     data-status="completed" 
+                     data-division="it"
+                     data-project-data='{
+                        "title": "Enterprise Resource Planning System",
+                        "subtitle": "Custom ERP development and implementation",
+                        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "completed",
+                        "division": "IT Solutions",
+                        "location": "Multiple Locations (Cloud-based)",
+                        "client": "Global Manufacturing Inc.",
+                        "timeline": "Sep 2022 - Jun 2023 (Completed)",
+                        "value": "$2.5 Million",
+                        "overview": "Custom Enterprise Resource Planning (ERP) software solution integrating production, inventory, sales, finance, and human resources modules for a multinational manufacturing corporation.",
+                        "features": [
+                            "Real-time inventory tracking across 10 locations",
+                            "Automated production scheduling",
+                            "Integrated financial accounting",
+                            "Mobile app for field sales team",
+                            "Business intelligence dashboard",
+                            "Secure cloud hosting with 99.9% uptime",
+                            "Multi-language and multi-currency support"
+                        ],
+                        "scope": "Requirements analysis, custom software development, database design, system integration, user training, and ongoing technical support. Migration from legacy systems.",
+                        "impact": "Streamlined operations reduced administrative costs by 35%, improved inventory accuracy to 99.8%, and decreased order processing time from 48 hours to 4 hours.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Enterprise Resource Planning System" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-it">
+                            <i class="fas fa-server mr-1"></i> IT
+                        </div>
+                        <div class="project-status status-completed">
+                            <i class="fas fa-check-circle mr-1"></i> Completed
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Enterprise Resource Planning System</h3>
+                            <p class="text-blue-100 mb-3">Custom ERP development and implementation</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Completed: June 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-teal-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-server text-teal-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Enterprise Resource Planning System</h3>
+                                <p class="text-sm text-gray-500">IT Solutions Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Custom ERP software development and implementation for a manufacturing company, integrating production, inventory, sales, and accounting modules.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Software Development</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">ERP System</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Database Integration</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Multiple Locations</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Global Manufacturing Inc.</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 8 - IT -->
+                <div class="project-card fade-up stagger-delay-1 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="8"
+                     data-status="ongoing" 
+                     data-division="it"
+                     data-project-data='{
+                        "title": "Smart City Platform",
+                        "subtitle": "Integrated IoT platform for city management",
+                        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "ongoing",
+                        "division": "IT Solutions",
+                        "location": "Northern City Municipality",
+                        "client": "City Council",
+                        "timeline": "Jul 2023 - Jun 2024 (Ongoing)",
+                        "value": "$4.2 Million",
+                        "overview": "Development of an integrated IoT platform for smart city management including traffic monitoring, waste management, and public utility monitoring systems.",
+                        "features": [
+                            "Real-time traffic monitoring and management",
+                            "Smart waste collection optimization",
+                            "Public utility consumption monitoring",
+                            "Emergency response coordination",
+                            "Citizen engagement mobile app",
+                            "Data analytics dashboard",
+                            "Integration with existing city systems"
+                        ],
+                        "scope": "Complete software development, IoT device integration, data center setup, network infrastructure, and training of municipal staff. 24/7 technical support.",
+                        "impact": "Expected to reduce traffic congestion by 30%, optimize waste collection routes saving $500k annually, and improve emergency response times by 40%.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Smart City Platform" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-it">
+                            <i class="fas fa-server mr-1"></i> IT
+                        </div>
+                        <div class="project-status status-ongoing">
+                            <i class="fas fa-sync-alt mr-1 pulse"></i> Ongoing
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Smart City Platform</h3>
+                            <p class="text-blue-100 mb-3">Integrated IoT platform for city management</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Start: July 2023 | Est. Completion: June 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-teal-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-city text-teal-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Smart City Platform</h3>
+                                <p class="text-sm text-gray-500">IT Solutions Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Development of an integrated IoT platform for smart city management including traffic monitoring, waste management, and public utility monitoring systems.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">IoT Platform</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Mobile Applications</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Data Analytics</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Northern City Municipality</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>City Council</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 9 - IT -->
+                <div class="project-card fade-up stagger-delay-2 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="9"
+                     data-status="completed" 
+                     data-division="it"
+                     data-project-data='{
+                        "title": "Banking Security System Upgrade",
+                        "subtitle": "Cybersecurity and network infrastructure enhancement",
+                        "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "completed",
+                        "division": "IT Solutions",
+                        "location": "National Banking Headquarters",
+                        "client": "First National Bank",
+                        "timeline": "Jan 2023 - Aug 2023 (Completed)",
+                        "value": "$3.8 Million",
+                        "overview": "Complete cybersecurity upgrade and network infrastructure enhancement for a major banking institution, ensuring PCI DSS compliance and protection against cyber threats.",
+                        "features": [
+                            "Next-generation firewall implementation",
+                            "Advanced threat detection systems",
+                            "Data encryption and tokenization",
+                            "Multi-factor authentication",
+                            "Network segmentation and monitoring",
+                            "Incident response automation",
+                            "Compliance reporting dashboard"
+                        ],
+                        "scope": "Security assessment, system design, hardware/software procurement, implementation, testing, and staff training. Ongoing security monitoring and support.",
+                        "impact": "Enhanced security posture with 99.99% uptime, achieved PCI DSS compliance, prevented potential losses of $2M+ from cyber threats, and improved customer trust.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Banking Security System Upgrade" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-it">
+                            <i class="fas fa-server mr-1"></i> IT
+                        </div>
+                        <div class="project-status status-completed">
+                            <i class="fas fa-check-circle mr-1"></i> Completed
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Banking Security System Upgrade</h3>
+                            <p class="text-blue-100 mb-3">Cybersecurity and network infrastructure enhancement</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Completed: August 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-teal-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-shield-alt text-teal-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Banking Security System Upgrade</h3>
+                                <p class="text-sm text-gray-500">IT Solutions Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Complete cybersecurity upgrade and network infrastructure enhancement for a major banking institution with PCI DSS compliance.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Cybersecurity</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Network Security</span>
+                            <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs font-medium rounded-full">Compliance</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Banking Headquarters</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>First National Bank</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- ==================== AGRICULTURAL ENGINEERING PROJECTS ==================== -->
+                
+                <!-- Project 10 - Agriculture -->
+                <div class="project-card fade-up rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="10"
+                     data-status="ongoing" 
+                     data-division="agriculture"
+                     data-project-data='{
+                        "title": "Modern Irrigation System",
+                        "subtitle": "Drip irrigation and water management for 500-acre farm",
+                        "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "ongoing",
+                        "division": "Agricultural Engineering",
+                        "location": "Green Valley Farm, Agricultural Zone",
+                        "client": "Agri-Produce Ltd.",
+                        "timeline": "Mar 2023 - Nov 2023 (Ongoing)",
+                        "value": "$3.8 Million",
+                        "overview": "Advanced drip irrigation system with automated controls and water recycling for sustainable agriculture on a 500-acre farm.",
+                        "features": [
+                            "Automated drip irrigation network",
+                            "Soil moisture sensors deployment",
+                            "Water recycling and filtration system",
+                            "Weather-based irrigation scheduling",
+                            "Mobile app for remote monitoring",
+                            "Energy-efficient pumping stations",
+                            "Fertilizer injection system"
+                        ],
+                        "scope": "Design, installation, and commissioning of complete irrigation system including pumps, filters, pipelines, control systems, and training of farm personnel.",
+                        "impact": "Expected to reduce water consumption by 60%, increase crop yield by 30%, and reduce labor costs by 40%. Sustainable water management model.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Modern Irrigation System" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-agriculture">
+                            <i class="fas fa-tractor mr-1"></i> Agriculture
+                        </div>
+                        <div class="project-status status-ongoing">
+                            <i class="fas fa-sync-alt mr-1"></i> Ongoing
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Modern Irrigation System</h3>
+                            <p class="text-blue-100 mb-3">Drip irrigation and water management for 500-acre farm</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Start: March 2023 | Est. Completion: Nov 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-tractor text-green-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Modern Irrigation System</h3>
+                                <p class="text-sm text-gray-500">Agricultural Engineering Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Design and installation of a comprehensive drip irrigation system with automated controls and water recycling for a 500-acre agricultural farm.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Irrigation Systems</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Water Management</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Farm Automation</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Green Valley Farm</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Agri-Produce Ltd.</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 11 - Agriculture -->
+                <div class="project-card fade-up stagger-delay-1 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="11"
+                     data-status="completed" 
+                     data-division="agriculture"
+                     data-project-data='{
+                        "title": "Greenhouse Complex",
+                        "subtitle": "5-acre automated greenhouse facility",
+                        "image": "smart1.jpg",
+                        "status": "completed",
+                        "division": "Agricultural Engineering",
+                        "location": "Sunshine Agricultural Park",
+                        "client": "Fresh Produce Co.",
+                        "timeline": "Sep 2022 - Apr 2023 (Completed)",
+                        "value": "$5.2 Million",
+                        "overview": "State-of-the-art 5-acre automated greenhouse complex for year-round vegetable production, featuring climate control, irrigation systems, and post-harvest handling facilities.",
+                        "features": [
+                            "Automated climate control systems",
+                            "Hydroponic growing systems",
+                            "Computerized irrigation control",
+                            "Integrated pest management",
+                            "Energy-efficient lighting",
+                            "Automated harvesting assistance",
+                            "Post-harvest processing area"
+                        ],
+                        "scope": "Design, construction, and commissioning of complete greenhouse complex including structural works, automation systems, and training of agricultural staff.",
+                        "impact": "Increased vegetable production by 400%, reduced water usage by 70%, and created 80 new agricultural jobs. Supplies fresh produce to 50+ supermarkets.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="smart1.jpg" 
+                             alt="Greenhouse Complex" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-agriculture">
+                            <i class="fas fa-tractor mr-1"></i> Agriculture
+                        </div>
+                        <div class="project-status status-completed">
+                            <i class="fas fa-check-circle mr-1"></i> Completed
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Greenhouse Complex</h3>
+                            <p class="text-blue-100 mb-3">5-acre automated greenhouse facility</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Completed: April 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-seedling text-green-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Greenhouse Complex</h3>
+                                <p class="text-sm text-gray-500">Agricultural Engineering Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Design and construction of a 5-acre automated greenhouse complex with climate control, irrigation systems, and post-harvest handling facilities.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Greenhouse Construction</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Climate Control</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Farm Infrastructure</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Sunshine Agricultural Park</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Fresh Produce Co.</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 12 - Agriculture -->
+                <div class="project-card fade-up stagger-delay-2 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="12"
+                     data-status="upcoming" 
+                     data-division="agriculture"
+                     data-project-data='{
+                        "title": "Agro-Processing Plant",
+                        "subtitle": "Modern food processing and packaging facility",
+                        "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "upcoming",
+                        "division": "Agricultural Engineering",
+                        "location": "Agricultural Industrial Zone",
+                        "client": "Farm to Table Foods Inc.",
+                        "timeline": "May 2024 - Feb 2025 (Planned)",
+                        "value": "$8.5 Million",
+                        "overview": "Modern agro-processing plant for fruits and vegetables, featuring sorting, cleaning, processing, packaging, and cold storage facilities with HACCP certification standards.",
+                        "features": [
+                            "Automated sorting and grading lines",
+                            "High-pressure cleaning systems",
+                            "Blast freezing and cold storage",
+                            "Modified atmosphere packaging",
+                            "Quality control laboratory",
+                            "Waste water treatment plant",
+                            "Solar power integration"
+                        ],
+                        "scope": "Complete design, construction, equipment installation, and commissioning of processing plant. Training of operational staff and quality assurance systems.",
+                        "impact": "Expected to process 50 tons of produce daily, reduce post-harvest losses by 60%, create 120+ jobs, and increase farmer incomes by 40% through value addition.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Agro-Processing Plant" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-agriculture">
+                            <i class="fas fa-tractor mr-1"></i> Agriculture
+                        </div>
+                        <div class="project-status status-upcoming">
+                            <i class="fas fa-calendar-alt mr-1"></i> Upcoming
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Agro-Processing Plant</h3>
+                            <p class="text-blue-100 mb-3">Modern food processing and packaging facility</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Start: May 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-industry text-green-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Agro-Processing Plant</h3>
+                                <p class="text-sm text-gray-500">Agricultural Engineering Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Modern agro-processing plant for fruits and vegetables with sorting, processing, packaging, and cold storage facilities.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Food Processing</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Cold Storage</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Packaging Systems</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Agricultural Industrial Zone</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Farm to Table Foods Inc.</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- ==================== FINANCIAL ADVISORY PROJECTS ==================== -->
+                
+                <!-- Project 13 - Financial -->
+                <div class="project-card fade-up rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="13"
+                     data-status="completed" 
+                     data-division="financial"
+                     data-project-data='{
+                        "title": "Infrastructure Fund Structuring",
+                        "subtitle": "$500M infrastructure investment fund setup",
+                        "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "completed",
+                        "division": "Financial Advisory",
+                        "location": "International Financial Center",
+                        "client": "Global Infrastructure Partners",
+                        "timeline": "Jan 2023 - Sep 2023 (Completed)",
+                        "value": "$500 Million Fund",
+                        "overview": "Structuring and establishment of a $500 million infrastructure investment fund focusing on renewable energy, transportation, and digital infrastructure projects across emerging markets.",
+                        "features": [
+                            "Fund structure design and legal setup",
+                            "Investor due diligence and documentation",
+                            "Risk assessment and mitigation strategies",
+                            "Investment thesis development",
+                            "ESG compliance framework",
+                            "Performance monitoring systems",
+                            "Exit strategy planning"
+                        ],
+                        "scope": "Complete financial advisory services including fund structuring, regulatory compliance, investor relations, risk management, and ongoing advisory services.",
+                        "impact": "Successfully raised $500M from institutional investors, created framework for 15+ infrastructure projects, and established ESG investment standards for the region.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Infrastructure Fund Structuring" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-financial">
+                            <i class="fas fa-chart-line mr-1"></i> Financial
+                        </div>
+                        <div class="project-status status-completed">
+                            <i class="fas fa-check-circle mr-1"></i> Completed
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Infrastructure Fund Structuring</h3>
+                            <p class="text-blue-100 mb-3">$500M infrastructure investment fund setup</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Completed: September 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-chart-line text-purple-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Infrastructure Fund Structuring</h3>
+                                <p class="text-sm text-gray-500">Financial Advisory Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Structuring and establishment of a $500 million infrastructure investment fund for renewable energy, transportation, and digital infrastructure.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Fund Structuring</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Investment Advisory</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Risk Management</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Financial Center</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Global Infrastructure Partners</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 14 - Financial -->
+                <div class="project-card fade-up stagger-delay-1 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="14"
+                     data-status="ongoing" 
+                     data-division="financial"
+                     data-project-data='{
+                        "title": "Project Finance for Solar Plant",
+                        "subtitle": "Debt financing and financial modeling for 100MW solar project",
+                        "image": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "ongoing",
+                        "division": "Financial Advisory",
+                        "location": "Sunshine Industrial Park",
+                        "client": "Clean Energy Corporation",
+                        "timeline": "Mar 2023 - Dec 2024 (Ongoing)",
+                        "value": "$120 Million Financing",
+                        "overview": "Complete project finance advisory services for a 100MW solar power plant, including debt structuring, financial modeling, lender negotiations, and risk allocation.",
+                        "features": [
+                            "Financial model development and validation",
+                            "Debt structuring and syndication",
+                            "Lender due diligence coordination",
+                            "Power purchase agreement analysis",
+                            "Currency and interest rate hedging",
+                            "Tax optimization strategies",
+                            "Financial close management"
+                        ],
+                        "scope": "End-to-end financial advisory from project conception to financial close, including documentation, negotiations, and post-financial close support.",
+                        "impact": "Secured $120M debt financing at competitive rates, reduced project costs by 15% through tax optimization, and established financial framework for future renewable projects.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Project Finance for Solar Plant" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-financial">
+                            <i class="fas fa-chart-line mr-1"></i> Financial
+                        </div>
+                        <div class="project-status status-ongoing">
+                            <i class="fas fa-sync-alt mr-1"></i> Ongoing
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">Project Finance for Solar Plant</h3>
+                            <p class="text-blue-100 mb-3">Debt financing and financial modeling for 100MW solar project</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Start: March 2023 | Est. Completion: Dec 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-solar-panel text-purple-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Project Finance for Solar Plant</h3>
+                                <p class="text-sm text-gray-500">Financial Advisory Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Complete project finance advisory services for a 100MW solar power plant, including debt structuring and financial modeling.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Project Finance</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Financial Modeling</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Debt Structuring</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Sunshine Industrial Park</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Clean Energy Corporation</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Project 15 - Financial -->
+                <div class="project-card fade-up stagger-delay-2 rounded-2xl bg-white overflow-hidden" 
+                     data-project-id="15"
+                     data-status="completed" 
+                     data-division="financial"
+                     data-project-data='{
+                        "title": "M&A Advisory for Construction Firm",
+                        "subtitle": "Strategic acquisition advisory and due diligence",
+                        "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "status": "completed",
+                        "division": "Financial Advisory",
+                        "location": "Corporate Headquarters",
+                        "client": "Building Solutions Group",
+                        "timeline": "Aug 2022 - May 2023 (Completed)",
+                        "value": "$85 Million Transaction",
+                        "overview": "Mergers and acquisitions advisory services for a leading construction company acquiring a regional competitor, including valuation, due diligence, negotiation, and integration planning.",
+                        "features": [
+                            "Business valuation and financial analysis",
+                            "Due diligence coordination",
+                            "Deal structuring and negotiation",
+                            "Financing arrangement",
+                            "Regulatory compliance advisory",
+                            "Integration planning",
+                            "Post-merger performance monitoring"
+                        ],
+                        "scope": "Complete M&A advisory from target identification to post-merger integration, including all financial, legal, and operational aspects of the transaction.",
+                        "impact": "Successfully completed $85M acquisition, achieved 20% cost synergies, expanded market presence by 40%, and increased shareholder value by 35% within first year.",
+                        "proposal": "#",
+                        "specs": "#"
+                     }'>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="M&A Advisory for Construction Firm" class="w-full h-full object-cover project-image">
+                        <div class="division-badge badge-financial">
+                            <i class="fas fa-chart-line mr-1"></i> Financial
+                        </div>
+                        <div class="project-status status-completed">
+                            <i class="fas fa-check-circle mr-1"></i> Completed
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="text-xl font-bold mb-2">M&A Advisory for Construction Firm</h3>
+                            <p class="text-blue-100 mb-3">Strategic acquisition advisory and due diligence</p>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>Completed: May 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-handshake text-purple-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">M&A Advisory for Construction Firm</h3>
+                                <p class="text-sm text-gray-500">Financial Advisory Division</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Mergers and acquisitions advisory services for a construction company acquiring a regional competitor with complete due diligence.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">M&A Advisory</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Due Diligence</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Business Valuation</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Corporate Headquarters</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-1"></i>
+                                <span>Building Solutions Group</span>
+                            </div>
+                        </div>
+                        <button class="view-more-btn" onclick="openProjectModal(this.closest('.project-card'))">
+                            <i class="fas fa-external-link-alt"></i> View Complete Details
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-16 fade-up">
+                <button id="load-more" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                    <i class="fas fa-plus-circle mr-2"></i> Load More Projects
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">What Our Clients Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Feedback from organizations we've partnered with on engineering projects.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="fade-up stagger-delay-1 bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:border-blue-200 transition-all">
+                    <div class="flex items-center mb-6">
+                        <div class="h-14 w-14 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Michael Chen</h4>
+                            <p class="text-sm text-gray-500">CEO, Northern Developments Ltd.</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">"Northern Engineering Consortium delivered our commercial complex project with exceptional professionalism. Their attention to detail and commitment to deadlines were impressive."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="fade-up stagger-delay-2 bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:border-blue-200 transition-all">
+                    <div class="flex items-center mb-6">
+                        <div class="h-14 w-14 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-500">Operations Director, Clean Energy Corp.</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">"The solar power plant project was completed ahead of schedule and has been performing above expectations. Their expertise in renewable energy solutions is outstanding."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="fade-up stagger-delay-3 bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:border-blue-200 transition-all">
+                    <div class="flex items-center mb-6">
+                        <div class="h-14 w-14 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Robert Williams</h4>
+                            <p class="text-sm text-gray-500">CTO, Global Manufacturing Inc.</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">"The custom ERP system developed by their IT division has streamlined our operations significantly. Their team was responsive and understood our business needs perfectly."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="py-20 bg-gradient-to-r from-blue-900 to-blue-800">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Have a Project in Mind?</h2>
+                <p class="text-xl text-blue-100 mb-10">Let's discuss how Northern Engineering Consortium can bring your vision to life with our integrated engineering solutions across all 5 divisions.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="contact.html" class="inline-block bg-white text-blue-900 font-bold py-4 px-10 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1">
+                        <i class="fas fa-envelope mr-2"></i> Start a Conversation
+                    </a>
+                    <a href="tel:+15551234567" class="inline-block bg-transparent border-2 border-white text-white font-bold py-4 px-10 rounded-xl hover:bg-white/10 transition-all">
+                        <i class="fas fa-phone mr-2"></i> Call Our Project Team
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODERN FOOTER - EXACTLY MATCHING HOME PAGE -->
+    <footer id="contact" class="modern-footer text-gray-300 pt-16 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4 hover-lift">
+                        <img src="logo .png" alt="Northern Engineering Consortium Logo" class="footer-logo-img"
+                             onerror="this.style.display='none';">
+                        
+                        <div><h2 class="text-lg font-bold text-white">Northern Engineering Consortium</h2>
+                            <p class="text-sm text-gray-400">Private Limited</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Pioneering integrated engineering solutions since 1978. Transforming visions into sustainable infrastructure across five continents.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-youtube text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Quick Links</h3>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="footer-link text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="footer-link text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="divisions.html" class="footer-link text-gray-400 hover:text-white">Our Divisions</a></li>
+                        <li><a href="projects.html" class="footer-link text-gray-400 hover:text-white">Projects</a></li>
+                        <li><a href="careers.html" class="footer-link text-gray-400 hover:text-white">Careers</a></li>
+                    </ul>
+                </div>
+                
+                 <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Services</h3>
+                    <ul class="space-y-4">
+                        <li><a href="divisions.html#mep-maintenance" class="footer-link text-gray-400 hover:text-white">MEP & Maintenance</a></li>
+                        <li><a href="divisions.html#construction-civil" class="footer-link text-gray-400 hover:text-white">Construction & Civil</a></li>
+                        <li><a href="divisions.html#agriculture-agro" class="footer-link text-gray-400 hover:text-white">Agriculture & Agro-Solution</a></li>
+                        <li><a href="divisions.html#energy-sustainable" class="footer-link text-gray-400 hover:text-white">Energy & Sustainable Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Contact Info</h3>
+                    <ul class="space-y-5">
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-blue-400"></i>
+                            <span class="text-gray-400 text-sm">124 Engineering Plaza, Industrial Zone, Northern City 10001</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-blue-400"></i>
+                            <span class="text-gray-400 text-sm">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-blue-400"></i>
+                            <span class="text-gray-400 text-sm">careers@northernengineering.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-gray-500 text-sm">
+                        &copy; 2023 Northern Engineering Consortium (Private) Limited. All rights reserved.
+                        <span class="block md:inline mt-1 md:mt-0 md:ml-2">Registration No:PV-00213709</span>
+                    </p>
+                    <!-- UPDATED: Mobile-friendly with wrapping and smaller gaps -->
+                    <div class="flex flex-wrap justify-center gap-x-3 gap-y-1 md:flex-nowrap md:space-x-6 text-sm text-gray-500">
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors whitespace-nowrap" data-modal="privacy-policy-modal">Privacy Policy</a>
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors whitespace-nowrap" data-modal="terms-modal">Terms of Service</a>
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors whitespace-nowrap" data-modal="cookie-policy-modal">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS FOR POLICIES (From Home Page) -->
+    
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-policy-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('privacy-policy-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <p>Northern Engineering Consortium Pvt Ltd ("we", "our", or "us") operates the website <strong>northernsustain.com</strong> and is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information in accordance with the applicable laws of Sri Lanka.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>1. Information We Collect</h3>
+                    <p>We may collect the following information when you interact with us or visit our website:</p>
+                    <ul>
+                        <li>Name, email address, phone number, postal address</li>
+                        <li>Company or organization details</li>
+                        <li>Messages or inquiries sent through forms or email</li>
+                        <li>IP address, browser type, and basic website usage data through cookies</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>2. How We Use Your Information</h3>
+                    <p>Your information may be used for the following purposes:</p>
+                    <ul>
+                        <li>To provide, operate, and manage our engineering and consultancy services</li>
+                        <li>To communicate regarding inquiries, quotations, and projects</li>
+                        <li>To improve our website and customer support</li>
+                        <li>To comply with legal and regulatory obligations in Sri Lanka</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>3. Sharing of Information</h3>
+                    <p>We do <strong>not sell, rent, or trade</strong> your personal information.</p>
+                    <p>We may share information with:</p>
+                    <ul>
+                        <li>Trusted service providers working on our behalf</li>
+                        <li>Regulatory or legal authorities, if required by law</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>4. Cookies</h3>
+                    <p>Our website may use cookies to enhance your browsing experience and analyze traffic.</p>
+                    <p>You may disable cookies through your browser settings; however, some features may not function properly.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>5. Data Security</h3>
+                    <p>We implement reasonable technical and organizational safeguards to protect your personal information. However, no internet-based method of data transmission is completely secure.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>6. Your Rights</h3>
+                    <p>Subject to applicable law, you may request:</p>
+                    <ul>
+                        <li>Access to your personal data</li>
+                        <li>Correction of inaccurate data</li>
+                        <li>Deletion of certain data</li>
+                        <li>Withdrawal of consent for marketing communications</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>7. Third-Party Websites</h3>
+                    <p>Our website may include links to third-party websites. We are not responsible for their privacy policies or practices.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>8. Data Retention</h3>
+                    <p>We retain personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, comply with legal obligations, resolve disputes, and enforce agreements. When personal data is no longer required, it will be securely deleted or anonymized.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>9. Changes to This Privacy Policy</h3>
+                    <p>We may update this Privacy Policy periodically. Changes will be posted on <strong>northernsustain.com</strong> with a revised "Last updated" date.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Us</h4>
+                    <p>For privacy-related inquiries, please contact:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Modal -->
+    <div id="terms-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms & Conditions</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('terms-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <p>These Terms & Conditions govern the use of <strong>northernsustain.com</strong> and the services provided by Northern Engineering Consortium Pvt Ltd in Sri Lanka. By accessing or using our website, you agree to be bound by these Terms.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>1. Use of Website</h3>
+                    <p>You agree to use our website lawfully and not to:</p>
+                    <ul>
+                        <li>Engage in fraudulent or harmful activities</li>
+                        <li>Upload or transmit malicious software</li>
+                        <li>Copy or misuse website content</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>2. Services</h3>
+                    <p>Northern Engineering Consortium Pvt Ltd provides engineering, construction, energy, sustainability, consultancy, and related professional services. Specific service scope, timelines, and pricing will be defined in written quotations, proposals, or agreements.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>3. Intellectual Property</h3>
+                    <p>All text, graphics, logos, photos, and other content on <strong>northernsustain.com</strong> are the property of Northern Engineering Consortium Pvt Ltd. Reproduction or distribution without written permission is prohibited.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>4. Quotations, Orders, and Payments</h3>
+                    <ul>
+                        <li>All quotations are valid for the period stated in the quotation document</li>
+                        <li>Work will commence upon written confirmation and agreed payment terms</li>
+                        <li>Delayed payments may result in suspension of services or additional charges as permitted by law</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>5. Limitation of Liability</h3>
+                    <p>To the maximum extent permitted by Sri Lankan law, we shall not be liable for:</p>
+                    <ul>
+                        <li>Indirect or consequential loss or damage</li>
+                        <li>Business interruption, loss of data, or profit loss</li>
+                        <li>Issues arising from third-party websites linked from ours</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>6. Disclaimer of Warranties</h3>
+                    <p>The website and its content are provided on an "as is" and "as available" basis. While we strive to keep information accurate and up to date, we do not warrant that the website will be uninterrupted, error-free, secure, or free of viruses or other harmful components.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>7. User Information Accuracy</h3>
+                    <p>You are responsible for ensuring that any information you submit through our website is accurate, complete, and lawful. We shall not be responsible for any consequences arising from incorrect or misleading information provided by users.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>8. Force Majeure</h3>
+                    <p>We shall not be liable for any failure or delay in performance caused by events beyond our reasonable control, including but not limited to natural disasters, power failures, labor disputes, government actions, pandemics, or internet service disruptions.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>9. Termination</h3>
+                    <p>We reserve the right to restrict or terminate website access and service provision in case of misuse or violation of these Terms.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>10. Governing Law and Jurisdiction</h3>
+                    <p>These Terms & Conditions are governed by the laws of Sri Lanka.</p>
+                    <p>Any disputes will be subject to the jurisdiction of the courts of Sri Lanka.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>11. Changes to Terms</h3>
+                    <p>We may revise these Terms & Conditions at any time. Continued use of our website after changes indicates acceptance of the updated Terms.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Information</h4>
+                    <p>For questions regarding these Terms & Conditions, please contact:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Policy Modal -->
+    <div id="cookie-policy-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cookie Policy</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('cookie-policy-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>What Are Cookies?</h3>
+                    <p>Cookies are small text files that are placed on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and understanding how you use our site.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>How We Use Cookies</h3>
+                    <p>We use cookies for the following purposes:</p>
+                    <ul>
+                        <li><strong>Essential Cookies:</strong> Necessary for the website to function properly</li>
+                        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
+                        <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-highlight">
+                    <p><strong>Important:</strong> By continuing to use our website, you consent to our use of cookies as described in this policy. You can manage your cookie preferences through your browser settings.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Managing Cookies</h3>
+                    <p>You can control and/or delete cookies as you wish. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed.</p>
+                    <p>However, if you do this, you may have to manually adjust some preferences every time you visit our site and some services and functionalities may not work.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Third-Party Cookies</h3>
+                    <p>Our website may use third-party services that may place their own cookies on your device. We have no control over these cookies.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Changes to This Cookie Policy</h3>
+                    <p>We may update this Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page and updating the "Last updated" date.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Us</h4>
+                    <p>If you have any questions about our use of cookies, please contact us:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Global variable to store current project data
+    let currentProjectData = null;
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if(targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if(mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                }
+            }
+        });
+    });
+    
+    // Sticky navigation on scroll
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.sticky-nav');
+        if(window.scrollY > 50) {
+            header.classList.add('shadow-lg', 'py-2');
+            header.classList.remove('py-3');
+        } else {
+            header.classList.remove('shadow-lg', 'py-2');
+            header.classList.add('py-3');
+        }
+    });
+    
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Animate counters if element has counter class
+                if(entry.target.classList.contains('stat-item')) {
+                    const counter = entry.target.querySelector('.counter');
+                    if(counter) {
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if(current >= target) {
+                                clearInterval(timer);
+                                current = target;
+                            }
+                            counter.textContent = Math.floor(current);
+                        }, 16);
+                    }
+                }
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all animated elements
+    document.querySelectorAll('.fade-up, .stat-item').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuSpans = mobileMenuButton.querySelectorAll('span');
+    
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        
+        // Animate hamburger to X
+        if(mobileMenu.classList.contains('open')) {
+            menuSpans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            menuSpans[1].style.opacity = '0';
+            menuSpans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+            menuSpans[0].style.transform = 'none';
+            menuSpans[1].style.opacity = '1';
+            menuSpans[2].style.transform = 'none';
+        }
+    });
+    
+    // Project Filtering
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const divisionFilters = document.querySelectorAll('.division-filter');
+    const projectCards = document.querySelectorAll('.project-card');
+    const projectsGrid = document.getElementById('projects-grid');
+    const loadMoreBtn = document.getElementById('load-more');
+    const projectsCounter = document.getElementById('projectsCounter');
+    
+    let currentStatus = 'all';
+    let currentDivision = 'all';
+    let visibleProjects = 6;
+    
+    // Initialize projects counter
+    updateProjectsCounter();
+    
+    // Filter by status
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Update active tab
+            filterTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            currentStatus = tab.getAttribute('data-filter');
+            filterProjects();
+        });
+    });
+    
+    // Filter by division
+    divisionFilters.forEach(filter => {
+        filter.addEventListener('click', () => {
+            // Update active division filter
+            divisionFilters.forEach(f => f.classList.remove('active', 'bg-blue-100', 'text-blue-700'));
+            filter.classList.remove('bg-gray-100', 'text-gray-700');
+            filter.classList.add('active', 'bg-blue-100', 'text-blue-700');
+            
+            currentDivision = filter.getAttribute('data-division');
+            filterProjects();
+        });
+    });
+    
+    // Update projects counter
+    function updateProjectsCounter() {
+        let filteredCount = 0;
+        let totalFiltered = 0;
+        
+        projectCards.forEach(card => {
+            const status = card.getAttribute('data-status');
+            const division = card.getAttribute('data-division');
+            
+            // Check if card matches current filters
+            const statusMatch = currentStatus === 'all' || status === currentStatus;
+            const divisionMatch = currentDivision === 'all' || division === currentDivision;
+            
+            if(statusMatch && divisionMatch) {
+                totalFiltered++;
+                if(card.style.opacity !== '0' && card.style.display !== 'none') {
+                    filteredCount++;
+                }
+            }
+        });
+        
+        // Update the counter element text
+        projectsCounter.innerHTML = `Showing <span id="visibleCount">${filteredCount}</span> of <span id="totalCount">${totalFiltered}</span> projects`;
+    }
+    
+    // Filter projects function - FIXED VERSION
+    function filterProjects() {
+        let filteredCount = 0;
+        let totalFiltered = 0;
+        
+        // Reset all cards first
+        projectCards.forEach((card, index) => {
+            card.style.display = 'none';
+            card.style.opacity = '0';
+            card.style.pointerEvents = 'none';
+            card.style.position = 'absolute';
+            card.style.top = '-9999px';
+        });
+        
+        // Filter and show matching cards
+        projectCards.forEach((card, index) => {
+            const status = card.getAttribute('data-status');
+            const division = card.getAttribute('data-division');
+            
+            // Check if card matches current filters
+            const statusMatch = currentStatus === 'all' || status === currentStatus;
+            const divisionMatch = currentDivision === 'all' || division === currentDivision;
+            
+            if(statusMatch && divisionMatch) {
+                totalFiltered++;
+                
+                // Show card with proper styling
+                card.style.display = 'block';
+                card.style.position = 'relative';
+                card.style.top = '0';
+                
+                // Apply staggered animation delays
+                card.classList.remove('stagger-delay-1', 'stagger-delay-2');
+                if (filteredCount % 3 === 1) card.classList.add('stagger-delay-1');
+                if (filteredCount % 3 === 2) card.classList.add('stagger-delay-2');
+                
+                // Show only visible projects count
+                if(filteredCount < visibleProjects) {
+                    card.style.opacity = '1';
+                    card.style.pointerEvents = 'auto';
+                    filteredCount++;
+                } else {
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                    card.style.position = 'absolute';
+                    card.style.top = '-9999px';
+                }
+            }
+        });
+        
+        // Show/Hide load more button
+        if(totalFiltered > visibleProjects) {
+            loadMoreBtn.style.display = 'inline-block';
+        } else {
+            loadMoreBtn.style.display = 'none';
+        }
+        
+        // Update projects counter
+        updateProjectsCounter();
+        
+        // Re-initialize animations for visible cards
+        setTimeout(() => {
+            projectCards.forEach(el => {
+                if(el.style.display === 'block' && el.style.opacity === '1') {
+                    observer.observe(el);
+                }
+            });
+        }, 100);
+    }
+    
+    // Load more projects
+    loadMoreBtn.addEventListener('click', () => {
+        visibleProjects += 6;
+        filterProjects();
+        
+        // Animate the button
+        loadMoreBtn.classList.add('scale-95');
+        setTimeout(() => {
+            loadMoreBtn.classList.remove('scale-95');
+        }, 300);
+    });
+    
+    // Project Modal Functionality
+    const projectModal = document.getElementById('projectModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const modalImage = document.getElementById('modalImage');
+    const modalStatus = document.getElementById('modalStatus');
+    const modalDivision = document.getElementById('modalDivision');
+    const modalLocation = document.getElementById('modalLocation');
+    const modalClient = document.getElementById('modalClient');
+    const modalTimeline = document.getElementById('modalTimeline');
+    const modalValue = document.getElementById('modalValue');
+    const modalOverview = document.getElementById('modalOverview');
+    const modalFeatures = document.getElementById('modalFeatures');
+    const modalScope = document.getElementById('modalScope');
+    const modalImpact = document.getElementById('modalImpact');
+    const proposalLink = document.getElementById('proposalLink');
+    const specsLink = document.getElementById('specsLink');
+    const downloadAllBtn = document.getElementById('downloadAllBtn');
+    
+    // Function to open project modal
+    function openProjectModal(projectCard) {
+        currentProjectData = JSON.parse(projectCard.getAttribute('data-project-data'));
+        
+        // Populate modal with project data
+        modalTitle.textContent = currentProjectData.title;
+        modalSubtitle.textContent = currentProjectData.subtitle;
+        modalImage.src = currentProjectData.image;
+        modalImage.alt = currentProjectData.title;
+        
+        // Set status with appropriate class
+        modalStatus.textContent = currentProjectData.status.charAt(0).toUpperCase() + currentProjectData.status.slice(1);
+        modalStatus.className = 'px-3 py-1 rounded-full text-sm font-medium';
+        if(currentProjectData.status === 'ongoing') {
+            modalStatus.classList.add('bg-yellow-100', 'text-yellow-800');
+        } else if(currentProjectData.status === 'completed') {
+            modalStatus.classList.add('bg-green-100', 'text-green-800');
+        } else {
+            modalStatus.classList.add('bg-blue-100', 'text-blue-800');
+        }
+        
+        modalDivision.textContent = currentProjectData.division;
+        modalLocation.textContent = currentProjectData.location;
+        modalClient.textContent = currentProjectData.client;
+        modalTimeline.textContent = currentProjectData.timeline;
+        modalValue.textContent = currentProjectData.value;
+        modalOverview.textContent = currentProjectData.overview;
+        
+        // Populate features list
+        modalFeatures.innerHTML = '';
+        currentProjectData.features.forEach(feature => {
+            const li = document.createElement('li');
+            li.className = 'flex items-start';
+            li.innerHTML = `<i class="fas fa-check text-green-500 mr-2 mt-1"></i><span>${feature}</span>`;
+            modalFeatures.appendChild(li);
+        });
+        
+        modalScope.innerHTML = `<p class="mb-4">${currentProjectData.scope}</p>`;
+        modalImpact.textContent = currentProjectData.impact;
+        
+        // Set download links (you can replace # with actual file URLs)
+        proposalLink.href = currentProjectData.proposal;
+        specsLink.href = currentProjectData.specs;
+        
+        // Show modal
+        document.body.style.overflow = 'hidden';
+        projectModal.classList.add('active');
+        
+        // Set up download all button
+        downloadAllBtn.onclick = () => openDownloadOptions();
+    }
+    
+    // Close project modal
+    function closeProjectModal() {
+        document.body.style.overflow = 'auto';
+        projectModal.classList.remove('active');
+    }
+    
+    // Event listeners for modal
+    closeModalBtn.addEventListener('click', closeProjectModal);
+    
+    // Close modal when clicking outside
+    projectModal.addEventListener('click', (e) => {
+        if(e.target === projectModal) {
+            closeProjectModal();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && projectModal.classList.contains('active')) {
+            closeProjectModal();
+        }
+    });
+    
+    // Make entire project card clickable
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Don't open modal if clicking on the view more button
+            if(!e.target.closest('.view-more-btn') && !e.target.classList.contains('view-more-btn')) {
+                openProjectModal(card);
+            }
+        });
+    });
+    
+    // Download Options Modal
+    const downloadOptionsModal = document.getElementById('downloadOptionsModal');
+    const downloadProgress = document.getElementById('downloadProgress');
+    const downloadProgressBar = document.getElementById('downloadProgressBar');
+    
+    function openDownloadOptions() {
+        downloadOptionsModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeDownloadOptions() {
+        downloadOptionsModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Close download options when clicking outside
+    downloadOptionsModal.addEventListener('click', (e) => {
+        if(e.target === downloadOptionsModal) {
+            closeDownloadOptions();
+        }
+    });
+    
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && downloadOptionsModal.classList.contains('active')) {
+            closeDownloadOptions();
+        }
+    });
+    
+    // Download Project Details Function
+    async function downloadProjectDetails(format) {
+        if (!currentProjectData) return;
+        
+        closeDownloadOptions();
+        
+        // Show progress bar
+        downloadProgress.classList.add('active');
+        downloadProgressBar.style.width = '30%';
+        
+        try {
+            switch(format) {
+                case 'pdf':
+                    await downloadAsPDF();
+                    break;
+                case 'docx':
+                    await downloadAsDOCX();
+                    break;
+                case 'txt':
+                    await downloadAsTXT();
+                    break;
+                case 'excel':
+                    await downloadAsExcel();
+                    break;
+            }
+            
+            // Complete progress
+            downloadProgressBar.style.width = '100%';
+            
+            // Show success message
+            setTimeout(() => {
+                showDownloadSuccess(format);
+                downloadProgress.classList.remove('active');
+                downloadProgressBar.style.width = '0%';
+            }, 500);
+            
+        } catch (error) {
+            console.error('Download failed:', error);
+            downloadProgress.classList.remove('active');
+            downloadProgressBar.style.width = '0%';
+            alert('Download failed. Please try again.');
+        }
+    }
+    
+    // Download as PDF
+    async function downloadAsPDF() {
+        downloadProgressBar.style.width = '60%';
+        
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // Add company header
+        doc.setFontSize(20);
+        doc.setTextColor(30, 58, 138);
+        doc.text('Northern Engineering Consortium', 20, 20);
+        doc.setFontSize(12);
+        doc.setTextColor(100, 100, 100);
+        doc.text('Project Details Document', 20, 30);
+        
+        // Add project title
+        doc.setFontSize(16);
+        doc.setTextColor(0, 0, 0);
+        doc.text(currentProjectData.title, 20, 50);
+        
+        // Add project details
+        doc.setFontSize(12);
+        doc.text(`Status: ${currentProjectData.status.toUpperCase()}`, 20, 65);
+        doc.text(`Division: ${currentProjectData.division}`, 20, 72);
+        doc.text(`Location: ${currentProjectData.location}`, 20, 79);
+        doc.text(`Client: ${currentProjectData.client}`, 20, 86);
+        doc.text(`Timeline: ${currentProjectData.timeline}`, 20, 93);
+        doc.text(`Project Value: ${currentProjectData.value}`, 20, 100);
+        
+        // Add overview
+        doc.setFontSize(14);
+        doc.text('Project Overview', 20, 115);
+        doc.setFontSize(11);
+        const overviewLines = doc.splitTextToSize(currentProjectData.overview, 170);
+        doc.text(overviewLines, 20, 125);
+        
+        // Add features
+        let yPos = 125 + (overviewLines.length * 7) + 10;
+        doc.setFontSize(14);
+        doc.text('Key Features:', 20, yPos);
+        doc.setFontSize(11);
+        
+        currentProjectData.features.forEach((feature, index) => {
+            yPos += 7;
+            doc.text(`• ${feature}`, 25, yPos);
+        });
+        
+        // Add scope
+        yPos += 10;
+        doc.setFontSize(14);
+        doc.text('Scope of Work:', 20, yPos);
+        doc.setFontSize(11);
+        yPos += 7;
+        const scopeLines = doc.splitTextToSize(currentProjectData.scope, 170);
+        scopeLines.forEach((line, index) => {
+            doc.text(line, 20, yPos);
+            yPos += 7;
+        });
+        
+        // Add impact
+        yPos += 10;
+        doc.setFontSize(14);
+        doc.text('Project Impact:', 20, yPos);
+        doc.setFontSize(11);
+        yPos += 7;
+        const impactLines = doc.splitTextToSize(currentProjectData.impact, 170);
+        impactLines.forEach((line, index) => {
+            doc.text(line, 20, yPos);
+            yPos += 7;
+        });
+        
+        // Add footer
+        const totalPages = doc.internal.getNumberOfPages();
+        for(let i = 1; i <= totalPages; i++) {
+            doc.setPage(i);
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text(`Page ${i} of ${totalPages}`, 20, 280);
+            doc.text('Northern Engineering Consortium - Confidential', 105, 280, null, null, 'center');
+        }
+        
+        // Save the PDF
+        doc.save(`${currentProjectData.title.replace(/\s+/g, '_')}_Project_Details.pdf`);
+    }
+    
+    // Download as DOCX (simulated with HTML download)
+    async function downloadAsDOCX() {
+        downloadProgressBar.style.width = '70%';
+        
+        // Create HTML content for DOCX simulation
+        const htmlContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>${currentProjectData.title} - Project Details</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 40px; }
+                    .header { color: #1E3A8A; border-bottom: 2px solid #3B82F6; padding-bottom: 10px; }
+                    .section { margin: 20px 0; }
+                    .section-title { color: #1E3A8A; font-weight: bold; margin-bottom: 10px; }
+                    .detail-item { margin: 5px 0; }
+                    .feature-list { margin-left: 20px; }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>Northern Engineering Consortium</h1>
+                    <h2>Project Details Document</h2>
+                </div>
+                
+                <div class="section">
+                    <h1>${currentProjectData.title}</h1>
+                    <p><em>${currentProjectData.subtitle}</em></p>
+                </div>
+                
+                <div class="section">
+                    <div class="detail-item"><strong>Status:</strong> ${currentProjectData.status}</div>
+                    <div class="detail-item"><strong>Division:</strong> ${currentProjectData.division}</div>
+                    <div class="detail-item"><strong>Location:</strong> ${currentProjectData.location}</div>
+                    <div class="detail-item"><strong>Client:</strong> ${currentProjectData.client}</div>
+                    <div class="detail-item"><strong>Timeline:</strong> ${currentProjectData.timeline}</div>
+                    <div class="detail-item"><strong>Project Value:</strong> ${currentProjectData.value}</div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">Project Overview</div>
+                    <p>${currentProjectData.overview}</p>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">Key Features & Specifications</div>
+                    <ul class="feature-list">
+                        ${currentProjectData.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">Scope of Work</div>
+                    <p>${currentProjectData.scope}</p>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">Project Impact</div>
+                    <p>${currentProjectData.impact}</p>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">Contact Information</div>
+                    <p>Northern Engineering Consortium<br>
+                    124 Engineering Plaza, Industrial Zone<br>
+                    Northern City 10001<br>
+                    Phone: +1 (555) 123-4567<br>
+                    Email: info@northernengineering.com</p>
+                </div>
+                
+                <footer>
+                    <p><em>Document generated on ${new Date().toLocaleDateString()} - Confidential</em></p>
+                </footer>
+            </body>
+            </html>
+        `;
+        
+        // Create and download the file
+        const blob = new Blob([htmlContent], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${currentProjectData.title.replace(/\s+/g, '_')}_Project_Details.docx`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    
+    // Download as TXT
+    async function downloadAsTXT() {
+        downloadProgressBar.style.width = '80%';
+        
+        const textContent = `
+NORTHERN ENGINEERING CONSORTIUM
+================================
+Project Details Document
+${new Date().toLocaleDateString()}
+
+PROJECT TITLE: ${currentProjectData.title}
+${currentProjectData.subtitle}
+
+PROJECT DETAILS
+---------------
+Status: ${currentProjectData.status}
+Division: ${currentProjectData.division}
+Location: ${currentProjectData.location}
+Client: ${currentProjectData.client}
+Timeline: ${currentProjectData.timeline}
+Project Value: ${currentProjectData.value}
+
+OVERVIEW
+--------
+${currentProjectData.overview}
+
+KEY FEATURES & SPECIFICATIONS
+-----------------------------
+${currentProjectData.features.map(feature => `• ${feature}`).join('\n')}
+
+SCOPE OF WORK
+-------------
+${currentProjectData.scope}
+
+PROJECT IMPACT
+--------------
+${currentProjectData.impact}
+
+CONTACT INFORMATION
+-------------------
+Northern Engineering Consortium
+124 Engineering Plaza, Industrial Zone
+Northern City 10001
+Phone: +1 (555) 123-4567
+Email: info@northernengineering.com
+
+--- END OF DOCUMENT ---
+Generated on ${new Date().toLocaleDateString()}
+Confidential - Northern Engineering Consortium
+        `;
+        
+        const blob = new Blob([textContent], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${currentProjectData.title.replace(/\s+/g, '_')}_Project_Details.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    
+    // Download as Excel
+    async function downloadAsExcel() {
+        downloadProgressBar.style.width = '90%';
+        
+        // Create CSV content (simplified Excel format)
+        const csvContent = `
+Project Title,${currentProjectData.title}
+Project Subtitle,${currentProjectData.subtitle}
+Status,${currentProjectData.status}
+Division,${currentProjectData.division}
+Location,${currentProjectData.location}
+Client,${currentProjectData.client}
+Timeline,${currentProjectData.timeline}
+Project Value,${currentProjectData.value}
+,
+Project Overview,${currentProjectData.overview}
+,
+Key Features,,
+${currentProjectData.features.map(feature => `,${feature}`).join('\n')}
+,
+Scope of Work,${currentProjectData.scope}
+,
+Project Impact,${currentProjectData.impact}
+,
+Generated Date,${new Date().toLocaleDateString()}
+Company,Northern Engineering Consortium
+        `;
+        
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${currentProjectData.title.replace(/\s+/g, '_')}_Project_Details.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    
+    // Show download success notification
+    function showDownloadSuccess(format) {
+        const successMessage = document.createElement('div');
+        successMessage.className = 'fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-6 py-3 rounded-lg shadow-lg z-5000';
+        successMessage.innerHTML = `
+            <div class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Project details downloaded as ${format.toUpperCase()} successfully!</span>
+            </div>
+        `;
+        document.body.appendChild(successMessage);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            successMessage.remove();
+        }, 3000);
+    }
+    
+    // Initialize filters
+    function initializeFilters() {
+        // Reset visible projects count
+        visibleProjects = 6;
+        
+        // Initially show all projects
+        filterProjects();
+    }
+    
+    // Initialize animations for elements already in view
+    document.addEventListener('DOMContentLoaded', function() {
+        // Trigger initial animation for hero
+        const hero = document.querySelector('.projects-hero .fade-up');
+        if(hero) {
+            setTimeout(() => {
+                hero.classList.add('visible');
+            }, 100);
+        }
+        
+        // Set sticky nav initial state
+        const header = document.querySelector('.sticky-nav');
+        if(window.scrollY > 50) {
+            header.classList.add('shadow-lg', 'py-2');
+            header.classList.remove('py-3');
+        }
+        
+        // Initialize filters
+        initializeFilters();
+        
+        // Initialize policy modals functionality
+        initPolicyModals();
+    });
+
+    // Policy Modals Functionality (From Home Page)
+    function initPolicyModals() {
+        // Function to open modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Add smooth entrance animation
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                }, 10);
+            }
+        }
+        
+        // Function to close modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // Close modal when clicking outside
+        document.querySelectorAll('.policy-modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if(e.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if(e.key === 'Escape') {
+                const activeModal = document.querySelector('.policy-modal.active');
+                if(activeModal) {
+                    closeModal(activeModal.id);
+                }
+            }
+        });
+        
+        // Add click event listeners to footer policy links
+        document.querySelectorAll('[data-modal]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const modalId = this.getAttribute('data-modal');
+                openModal(modalId);
+            });
+        });
+        
+        // Add touch events for mobile swipe to close
+        let touchStartY = 0;
+        let touchEndY = 0;
+        
+        document.querySelectorAll('.policy-modal .modal-content').forEach(content => {
+            content.addEventListener('touchstart', function(e) {
+                touchStartY = e.changedTouches[0].screenY;
+            });
+            
+            content.addEventListener('touchend', function(e) {
+                touchEndY = e.changedTouches[0].screenY;
+                
+                // If user swiped down significantly, close the modal
+                if (touchEndY - touchStartY > 100) {
+                    const modal = this.closest('.policy-modal');
+                    if (modal) {
+                        closeModal(modal.id);
+                    }
+                }
+            });
+        });
+        
+        // Close buttons in modals
+        document.querySelectorAll('.policy-modal .modal-close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                const modal = this.closest('.policy-modal');
+                if(modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+    }
+</script>
+    
+</body>
+</html>

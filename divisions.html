@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northern Engineering Consortium | Our Divisions</title>
+    <meta name="description" content="Explore Northern Engineering Consortium's four specialized divisions offering comprehensive engineering and technical solutions.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #3B82F6;
+            --accent: #10B981;
+        }
+        
+        /* Image Carousel Styles */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            object-fit: cover;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 10;
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+        
+        .carousel-info {
+            position: absolute;
+            bottom: 35px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            padding: 0 10px;
+            z-index: 10;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: rgba(30, 58, 138, 0.05);
+            color: #1E3A8A;
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+        }
+        
+        .logo-img {
+            height: 55px;
+            width: auto;
+            max-width: 220px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Logo fallback styles */
+        .logo-fallback {
+            display: none;
+            height: 55px;
+            width: auto;
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+            border-radius: 8px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            padding: 0 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        /* Division Page Specific Styles */
+        .division-hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(37, 99, 235, 0.8) 100%), url('https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        @media (max-width: 768px) {
+            .division-hero {
+                background-attachment: scroll;
+            }
+        }
+        
+        .division-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .division-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .division-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .division-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(30, 58, 138, 0.12);
+        }
+        
+        @media (max-width: 768px) {
+            .division-card:hover {
+                transform: translateY(-4px);
+            }
+        }
+        
+        .division-icon {
+            transition: all 0.4s ease;
+        }
+        
+        .division-card:hover .division-icon {
+            transform: scale(1.05) rotate(3deg);
+        }
+        
+        .service-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .service-item:hover {
+            background: rgba(59, 130, 246, 0.05);
+            border-left-color: var(--secondary);
+            padding-left: 12px;
+        }
+        
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            margin: 40px auto;
+            width: 90%;
+            max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+            .section-divider {
+                margin: 30px auto;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .zoom-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #dbeafe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        /* Mobile Menu - MATCHING CAREERS PAGE */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        
+        /* Hamburger Menu Animation - MATCHING CAREERS PAGE */
+        #mobile-menu-button span {
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .division-hero h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .division-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .division-card {
+                padding: 1.5rem !important;
+            }
+            
+            .service-item {
+                font-size: 0.95rem;
+            }
+            
+            .sticky-top-nav {
+                top: 76px;
+            }
+            
+            .carousel-info {
+                font-size: 10px;
+                bottom: 30px;
+            }
+            
+            .carousel-dots {
+                bottom: 10px;
+            }
+            
+            .approach-box {
+                padding: 1rem !important;
+                margin-top: 1rem !important;
+            }
+        }
+        
+        /* Division Navigation Scrollbar */
+        .division-nav-container {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .division-nav-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Social Icons */
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Sticky header */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        /* Add margin to all sections to prevent overlap */
+        section {
+            scroll-margin-top: 100px;
+        }
+        
+        /* Approach Box Styling */
+        .approach-box {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.05), rgba(59, 130, 246, 0.05));
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .approach-box h4 {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Division-specific approach colors */
+        .engineering-approach {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.05), rgba(59, 130, 246, 0.05));
+            border-left-color: #3B82F6;
+        }
+        
+        .construction-approach {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.05));
+            border-left-color: #10B981;
+        }
+        
+        .agriculture-approach {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(245, 158, 11, 0.05));
+            border-left-color: #10B981;
+        }
+        
+        .energy-approach {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(239, 68, 68, 0.05));
+            border-left-color: #F59E0B;
+        }
+        
+        /* NEW: FOOTER STYLES FROM CAREERS PAGE */
+        .modern-footer {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .footer-link {
+            position: relative;
+            padding-left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            padding-left: 8px;
+            color: white;
+        }
+        
+        .footer-link::before {
+            content: '→';
+            position: absolute;
+            left: -10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover::before {
+            left: 0;
+            opacity: 1;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.3);
+        }
+        
+        .footer-logo-img {
+            height: 50px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+        
+        .footer-logo-fallback {
+            display: none;
+            height: 50px;
+            width: auto;
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+            border-radius: 6px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            padding: 0 12px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        /* NEW: MODAL STYLES FROM CAREERS PAGE */
+        .policy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .policy-modal.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .policy-modal .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .policy-modal.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+        
+        .policy-modal .modal-header {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            color: white;
+            padding: 1.75rem 2rem 1.5rem;
+            border-radius: 20px 20px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .policy-modal .modal-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+        
+        .policy-modal .modal-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .policy-modal .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.25rem;
+            z-index: 101;
+        }
+        
+        .policy-modal .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .policy-modal .modal-body {
+            padding: 2.5rem 2rem;
+        }
+        
+        .policy-date {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3B82F6;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .policy-date i {
+            color: #3B82F6;
+            font-size: 1.25rem;
+        }
+        
+        .policy-date p {
+            margin: 0;
+            color: #475569;
+            font-weight: 500;
+        }
+        
+        .policy-section {
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 120px;
+        }
+        
+        .policy-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .policy-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1E3A8A;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .policy-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3B82F6, #10B981);
+        }
+        
+        .policy-section p {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+        }
+        
+        .policy-section ul, .policy-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .policy-section li {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .policy-section strong {
+            color: #1E293B;
+            font-weight: 600;
+        }
+        
+        .policy-highlight {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.05));
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #3B82F6;
+            margin: 1.5rem 0;
+        }
+        
+        .contact-info-box {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 1.75rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            border: 1px solid rgba(30, 58, 138, 0.1);
+        }
+        
+        .contact-info-box h4 {
+            color: #1E3A8A;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Modal Links */
+        .modal-link {
+            color: #3B82F6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 1px dotted transparent;
+        }
+        
+        .modal-link:hover {
+            color: #1E3A8A;
+            border-bottom: 1px dotted #3B82F6;
+        }
+        
+        /* Mobile Responsive Footer & Modal Styles */
+        @media (max-width: 768px) {
+            .modern-footer .grid-cols-4 {
+                grid-template-columns: 1fr !important;
+                gap: 30px;
+            }
+            
+            .footer-logo-img {
+                height: 40px;
+            }
+            
+            .policy-modal {
+                padding: 0.75rem;
+                align-items: flex-start;
+                padding-top: 2rem;
+            }
+            
+            .policy-modal .modal-content {
+                max-height: 95vh;
+                border-radius: 16px;
+            }
+            
+            .policy-modal .modal-header {
+                padding: 1.5rem 1.5rem 1.25rem;
+                position: relative;
+            }
+            
+            .policy-modal .modal-header h2 {
+                font-size: 1.5rem;
+                padding-right: 2rem;
+            }
+            
+            .policy-modal .modal-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .policy-modal .modal-close {
+                top: 1.25rem;
+                right: 1.25rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+            
+            .policy-modal .modal-body {
+                padding: 1.75rem 1.5rem;
+            }
+            
+            .policy-date {
+                padding: 1rem 1.25rem;
+                margin-bottom: 1.75rem;
+            }
+            
+            .policy-section {
+                margin-bottom: 2rem;
+            }
+            
+            .policy-section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .policy-section p, .policy-section li {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .policy-section ul, .policy-section ol {
+                margin-left: 1.25rem;
+            }
+            
+            .contact-info-box {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .policy-modal {
+                padding: 0.5rem;
+                padding-top: 1.5rem;
+            }
+            
+            .policy-modal .modal-header {
+                padding: 1.25rem 1.25rem 1rem;
+            }
+            
+            .policy-modal .modal-header h2 {
+                font-size: 1.35rem;
+            }
+            
+            .policy-modal .modal-body {
+                padding: 1.5rem 1.25rem;
+            }
+            
+            .policy-section h3 {
+                font-size: 1.15rem;
+            }
+            
+            .policy-section p, .policy-section li {
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Modal Scrollbar Styling */
+        .policy-modal .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .policy-modal .modal-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        
+        .policy-modal .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3B82F6, #10B981);
+            border-radius: 4px;
+        }
+        
+        .policy-modal .modal-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563EB, #059669);
+        }
+        
+        /* Force footer policy links to stay on one line on mobile */
+        @media (max-width: 768px) {
+            [data-modal] {
+                white-space: nowrap !important;
+                display: inline-block !important;
+                margin: 0 8px !important;
+            }
+            
+            /* For the container */
+            .modern-footer .border-t > div:last-child > div:last-child {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+                -webkit-overflow-scrolling: touch !important;
+                padding-bottom: 4px !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- MODERN HEADER - MATCHING CAREERS PAGE -->
+    <header class="sticky-nav fixed top-0 left-0 w-full z-50 glass-nav">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo - LEFT SIDE -->
+                <div class="flex items-center">
+                    <img src="logo .png" alt="Northern Engineering Consortium Logo" class="logo-img"
+                         onerror="this.style.display='none'; document.getElementById('header-logo-fallback').style.display='flex';">
+                    
+                    <div id="header-logo-fallback" class="logo-fallback" style="display: none;">
+                        NEC
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation - CENTER (hidden on mobile) -->
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-1">
+                        <li><a href="index.html" class="nav-link text-sm font-medium text-gray-600">Home</a></li>
+                        <li><a href="about.html" class="nav-link text-sm font-medium text-gray-600">About Us</a></li>
+                        <li><a href="divisions.html" class="nav-link active text-sm font-medium">Divisions</a></li>
+                        <li><a href="projects.html" class="nav-link text-sm font-medium text-gray-600">Projects</a></li>
+                        <li><a href="careers.html" class="nav-link text-sm font-medium text-gray-600">Careers</a></li>
+                        <li><a href="contact.html" class="ml-4 px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Menu Button - RIGHT SIDE (only shows on mobile) -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-blue-900">
+                        <div class="w-8 h-8 flex flex-col justify-center space-y-1.5">
+                            <span class="block w-6 h-0.5 bg-blue-900 transition-transform"></span>
+                            <span class="block w-6 h-0.5 bg-blue-900 transition-opacity"></span>
+                            <span class="block w-6 h-0.5 bg-blue-900 transition-transform"></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu (hidden by default) -->
+            <div id="mobile-menu" class="mobile-menu md:hidden mt-4 bg-white rounded-xl shadow-2xl border border-gray-100">
+                <div class="p-6 space-y-1">
+                    <div class="flex items-center space-x-4 pb-4 mb-4 border-b border-gray-100">
+                        <img src="logo .png" alt="Logo" class="h-10 w-auto"
+                             onerror="this.style.display='none'; document.getElementById('mobile-logo-fallback').style.display='flex';">
+                        
+                        <div id="mobile-logo-fallback" class="logo-fallback" style="height: 40px; font-size: 12px; display: none;">
+                            NEC
+                        </div>
+                        
+                        <div>
+                            <h2 class="text-base font-bold text-gray-900">Northern Engineering Consortium</h2>
+                            <p class="text-xs text-gray-500">Private Limited</p>
+                        </div>
+                    </div>
+                    <a href="index.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Home</a>
+                    <a href="about.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">About Us</a>
+                    <a href="divisions.html" class="block px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg">Divisions</a>
+                    <a href="projects.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Projects</a>
+                    <a href="careers.html" class="block px-4 py-3 text-gray-600 font-medium hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-all">Careers</a>
+                    <a href="contact.html" class="block px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg text-center mt-4">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Divisions Hero Section -->
+    <section class="division-hero pt-28 pb-20 md:pt-32 md:pb-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center fade-up">
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                    Our <span class="gradient-text">Divisions</span>
+                </h1>
+                <p class="text-lg md:text-xl text-blue-100 mb-6 md:mb-8 leading-relaxed px-2">
+                    Four specialized divisions, each offering comprehensive engineering and technical solutions tailored to meet the complex demands of modern infrastructure and technology.
+                </p>
+                <div class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 md:p-4">
+                    <p class="text-white text-sm md:text-base">
+                        <i class="fas fa-star text-yellow-300 mr-2"></i>
+                        Over 200+ specialized services across all divisions
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Division Navigation -->
+    <section class="py-4 md:py-8 bg-gray-50 sticky-top-nav z-40 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="division-nav-container flex overflow-x-auto space-x-3 md:space-x-4 py-2 px-1">
+                <a href="#mep-maintenance" class="division-nav-btn px-4 py-2 md:px-5 md:py-3 bg-blue-100 text-blue-900 rounded-lg shadow-sm text-xs md:text-sm font-medium hover:bg-blue-50 transition-all whitespace-nowrap flex-shrink-0">
+                    <i class="fas fa-cogs mr-2"></i>MEP & Maintenance
+                </a>
+                <a href="#construction-civil" class="division-nav-btn px-4 py-2 md:px-5 md:py-3 bg-white rounded-lg shadow-sm text-xs md:text-sm font-medium text-blue-900 hover:bg-blue-50 transition-all whitespace-nowrap flex-shrink-0">
+                    <i class="fas fa-hard-hat mr-2"></i>Construction & Civil
+                </a>
+                <a href="#agriculture-agro" class="division-nav-btn px-4 py-2 md:px-5 md:py-3 bg-white rounded-lg shadow-sm text-xs md:text-sm font-medium text-blue-900 hover:bg-blue-50 transition-all whitespace-nowrap flex-shrink-0">
+                    <i class="fas fa-tractor mr-2"></i>Agriculture & Agro-Solution
+                </a>
+                <a href="#energy-sustainable" class="division-nav-btn px-4 py-2 md:px-5 md:py-3 bg-white rounded-lg shadow-sm text-xs md:text-sm font-medium text-blue-900 hover:bg-blue-50 transition-all whitespace-nowrap flex-shrink-0">
+                    <i class="fas fa-solar-panel mr-2"></i>Energy & Sustainable Solutions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Division 1: MEP & Maintenance Division -->
+    <section id="mep-maintenance" class="py-12 md:py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center mb-12 md:mb-16">
+                <div class="lg:w-3/5 lg:pr-10 mb-8 lg:mb-0 slide-in-left">
+                    <div class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-blue-100 text-blue-800 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-4">
+                        <i class="fas fa-cogs mr-2"></i> MEP & Maintenance Division
+                    </div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">MEP & Maintenance Division</h2>
+                    <p class="text-gray-700 md:text-lg mb-6 md:mb-8 leading-relaxed">
+                        The Engineering & Maintenance Division of <strong>Northern Engineering Consortium Pvt Ltd</strong> delivers reliable, modern, and sustainable engineering solutions for industries, buildings, and infrastructure facilities. Our team focuses on preventive maintenance, efficient energy use, digital monitoring, and rapid technical support to ensure minimum downtime and maximum productivity.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
+                        <div class="bg-blue-50 p-3 md:p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-blue-900 mb-1 md:mb-2 text-sm md:text-base">Maintenance & Service</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Preventive, predictive & breakdown maintenance services</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 md:p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-blue-900 mb-1 md:mb-2 text-sm md:text-base">Electrical & Mechanical</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Design, installation & maintenance of electrical systems</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 md:p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-blue-900 mb-1 md:mb-2 text-sm md:text-base">Electronic & Network</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Smart technology & ICT systems for secure operations</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-2/5 slide-in-right">
+                    <div class="relative">
+                        <!-- MEP & Maintenance Carousel -->
+                        <div class="h-56 w-56 md:h-64 md:w-64 lg:h-72 lg:w-72 mx-auto rounded-2xl overflow-hidden shadow-2xl floating carousel-container" id="carousel-1">
+                            <!-- Image 1 -->
+                            <img src="m1.png" alt="MEP Maintenance Image 1" class="carousel-slide active" data-index="0">
+                            <!-- Image 2 -->
+                            <img src="m2.jpg" alt="MEP Maintenance Image 2" class="carousel-slide" data-index="1">
+                            <!-- Image 3 -->
+                            <img src="m3.jpeg" alt="MEP Maintenance Image 3" class="carousel-slide" data-index="2">
+                            
+                            <div class="carousel-info">MEP & Maintenance Division</div>
+                            <div class="carousel-dots">
+                                <span class="carousel-dot active" data-carousel="1" data-index="0"></span>
+                                <span class="carousel-dot" data-carousel="1" data-index="1"></span>
+                                <span class="carousel-dot" data-carousel="1" data-index="2"></span>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl shadow-xl">
+                            <h4 class="font-bold text-base md:text-lg">Division 01</h4>
+                            <p class="text-xs md:text-sm">Technical Excellence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Units for Division 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Maintenance & Service Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-tools text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Maintenance & Service</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">The Maintenance & Service Unit provides comprehensive technical support for industrial plants, commercial buildings, and public facilities. We focus on preventive and corrective maintenance to ensure smooth and continuous operations.</p>
+                    
+                    <h4 class="font-bold text-blue-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Preventive and predictive maintenance programs</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Breakdown maintenance and emergency repair services</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Annual maintenance contracts (AMC)</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Building services maintenance (water, HVAC, pumps, etc.)</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Calibration and testing services</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Spare parts management and replacement</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Sustainability-focused maintenance to reduce energy waste</li>
+                    </ul>
+                    
+                    <div class="approach-box engineering-approach">
+                        <h4><i class="fas fa-lightbulb text-blue-600"></i> Our approach</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We use modern diagnostic tools, smart monitoring systems, and skilled technical teams to minimize downtime and extend equipment life while improving operational efficiency.</p>
+                    </div>
+                </div>
+                
+                <!-- Electrical & Mechanical Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-bolt text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Electrical & Mechanical</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">The Electrical & Mechanical Engineering Unit delivers design, installation, upgrading, and maintenance solutions across a wide range of electrical and mechanical systems. We support industrial, commercial, and institutional clients with safe, efficient, and compliant engineering services.</p>
+                    
+                    <h4 class="font-bold text-blue-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Electrical installation and wiring systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Power distribution, switchgear, and control panels</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Generator, motor, and pump installation & maintenance</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> HVAC, ventilation, and refrigeration systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Mechanical fabrication and structural works</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Equipment commissioning and performance testing</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Energy-efficient system upgrades and retrofits</li>
+                    </ul>
+                    
+                    <div class="approach-box engineering-approach">
+                        <h4><i class="fas fa-lightbulb text-blue-600"></i> Our specialty</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We emphasize safety standards, energy efficiency, and modern technology integration to ensure reliable operation with reduced operational costs.</p>
+                    </div>
+                </div>
+                
+                <!-- Electronic & Network Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-satellite-dish text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Electronic & Network</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">The Electronic & Network Engineering Unit provides smart technology solutions that connect systems, people, and infrastructure. We design and implement integrated electronic and ICT systems for secure, efficient, and modern operations.</p>
+                    
+                    <h4 class="font-bold text-blue-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Network design, LAN/WAN/Wi-Fi setup and maintenance</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> CCTV, surveillance, and security systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Access control and biometric systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Data centres and server installation</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Building automation & IoT solutions</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Communication systems and structured cabling</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Troubleshooting and network performance optimization</li>
+                    </ul>
+                    
+                    <div class="approach-box engineering-approach">
+                        <h4><i class="fas fa-lightbulb text-blue-600"></i> Focus area</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We promote digital transformation with smart monitoring, automation, and secure networking solutions that support modern sustainable business operations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Division 2: Construction & Civil Division -->
+    <section id="construction-civil" class="py-12 md:py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center mb-12 md:mb-16">
+                <div class="lg:w-3/5 lg:pr-10 mb-8 lg:mb-0 slide-in-left">
+                    <div class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-blue-100 text-blue-800 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-4">
+                        <i class="fas fa-hard-hat mr-2"></i> Construction & Civil Division
+                    </div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">Construction & Civil Division</h2>
+                    <p class="text-gray-700 md:text-lg mb-6 md:mb-8 leading-relaxed">
+                        The Construction & Civil Engineering Division of Northern Engineering Consortium Pvt Ltd delivers end-to-end solutions in building, infrastructure, and structural development. We focus on sustainable construction practices, quality workmanship, and modern engineering technologies to deliver durable and environmentally responsible projects.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
+                        <div class="bg-white p-3 md:p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-blue-900 mb-1 md:mb-2 text-sm md:text-base">Structural & Design</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Professional structural analysis, civil design & engineering</p>
+                        </div>
+                        <div class="bg-white p-3 md:p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-blue-900 mb-1 md:mb-2 text-sm md:text-base">Construction & Project Management</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Building & infrastructure projects from planning to completion</p>
+                        </div>
+                        <div class="bg-white p-3 md:p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-blue-900 mb-1 md:mb-2 text-sm md:text-base">Quantity Surveying & Architecture</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Creative design with cost management for financial efficiency</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-2/5 slide-in-right">
+                    <div class="relative">
+                        <!-- Construction & Civil Engineering Carousel -->
+                        <div class="h-56 w-56 md:h-64 md:w-64 lg:h-72 lg:w-72 mx-auto rounded-2xl overflow-hidden shadow-2xl floating carousel-container" id="carousel-2">
+                            <!-- Image 1 -->
+                            <img src="c1.jpg" alt="Construction Civil Image 1" class="carousel-slide active" data-index="0">
+                            <!-- Image 2 -->
+                            <img src="c2.png" alt="Construction Civil Image 2" class="carousel-slide" data-index="1">
+                            <!-- Image 3 -->
+                            <img src="c3.jpeg" alt="Construction Civil Image 3" class="carousel-slide" data-index="2">
+                            
+                            <div class="carousel-info">Construction & Civil Division</div>
+                            <div class="carousel-dots">
+                                <span class="carousel-dot active" data-carousel="2" data-index="0"></span>
+                                <span class="carousel-dot" data-carousel="2" data-index="1"></span>
+                                <span class="carousel-dot" data-carousel="2" data-index="2"></span>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl shadow-xl">
+                            <h4 class="font-bold text-base md:text-lg">Division 02</h4>
+                            <p class="text-xs md:text-sm">Infrastructure Development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Units for Division 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Structural & Design Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-drafting-compass text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Structural & Design</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">The Structural & Design Engineering Unit provides professional structural analysis, civil design, and detailed engineering solutions for residential, commercial, and industrial projects. Our designs focus on safety, cost-efficiency, and long-term durability.</p>
+                    
+                    <h4 class="font-bold text-blue-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Structural design of buildings and infrastructure</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Reinforced concrete and steel structure design</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Foundation and soil design solutions</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> 2D & 3D CAD modelling and BIM support</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Structural assessment and strengthening of existing buildings</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Seismic and wind load analysis</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Value engineering and design optimization</li>
+                    </ul>
+                    
+                    <div class="approach-box construction-approach">
+                        <h4><i class="fas fa-lightbulb text-blue-600"></i> Our strength</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We combine engineering expertise with modern software tools to deliver innovative and sustainable structural solutions that meet national and international standards.</p>
+                    </div>
+                </div>
+                
+                <!-- Construction & Project Management Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-hard-hat text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Construction & Project Management</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">The Construction Unit manages and executes building and infrastructure projects from planning to completion. We ensure quality construction, strict safety practices, and timely delivery through efficient project management.</p>
+                    
+                    <h4 class="font-bold text-blue-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Building construction (residential, commercial, industrial)</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Road and infrastructure development works</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Renovation and restoration projects</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Project planning and site management</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Turnkey construction solutions</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Material supply and logistics coordination</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Health, safety, and environmental (HSE) compliance</li>
+                    </ul>
+                    
+                    <div class="approach-box construction-approach">
+                        <h4><i class="fas fa-lightbulb text-blue-600"></i> Our commitment</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We adopt modern construction technologies and sustainable building practices to deliver strong, durable, and cost-effective projects.</p>
+                    </div>
+                </div>
+                
+                <!-- Quantity Surveying & Architecture Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-ruler-combined text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Quantity Surveying & Architecture</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">The Quantity Surveying & Architecture Unit integrates creative design with cost management to ensure projects are both beautiful and financially efficient. We support clients from concept development to project completion.</p>
+                    
+                    <h4 class="font-bold text-blue-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Architectural design and 3D visualisation</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Preparation of BOQs and cost estimates</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Tender documentation and contract administration</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Project cost control and financial management</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Feasibility studies and budget planning</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Site measurement and valuation</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-blue-600 mr-2"></i> Green building and sustainable design concepts</li>
+                    </ul>
+                    
+                    <div class="approach-box construction-approach">
+                        <h4><i class="fas fa-lightbulb text-blue-600"></i> Our vision</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We design smart, functional, and aesthetically pleasing spaces while maintaining accurate cost control and transparency throughout the project lifecycle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Division 3: Agriculture & Agro-Solution Division -->
+    <section id="agriculture-agro" class="py-12 md:py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center mb-12 md:mb-16">
+                <div class="lg:w-2/5 mb-8 lg:mb-0 lg:pr-10 slide-in-left">
+                    <div class="relative">
+                        <!-- Agriculture & Agro-Engineering Carousel -->
+                        <div class="h-56 w-56 md:h-64 md:w-64 lg:h-72 lg:w-72 mx-auto rounded-2xl overflow-hidden shadow-2xl floating carousel-container" id="carousel-3">
+                            <!-- Image 1 -->
+                            <img src="a1.png" alt="Agriculture Agro Image 1" class="carousel-slide active" data-index="0">
+                            <!-- Image 2 -->
+                            <img src="a2.jpg" alt="Agriculture Agro Image 2" class="carousel-slide" data-index="1">
+                            <!-- Image 3 -->
+                            <img src="a3.jfif" alt="Agriculture Agro Image 3" class="carousel-slide" data-index="2">
+                            
+                            <div class="carousel-info">Agriculture & Agro-Solution Division</div>
+                            <div class="carousel-dots">
+                                <span class="carousel-dot active" data-carousel="3" data-index="0"></span>
+                                <span class="carousel-dot" data-carousel="3" data-index="1"></span>
+                                <span class="carousel-dot" data-carousel="3" data-index="2"></span>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-gradient-to-r from-green-600 to-green-800 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl shadow-xl">
+                            <h4 class="font-bold text-base md:text-lg">Division 03</h4>
+                            <p class="text-xs md:text-sm">Sustainable Agriculture</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-3/5 slide-in-right">
+                    <div class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-green-100 text-green-800 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-4">
+                        <i class="fas fa-tractor mr-2"></i> Agriculture & Agro-Solution Division
+                    </div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">Agriculture & Agro-Solution Division</h2>
+                    <p class="text-gray-700 md:text-lg mb-6 md:mb-8 leading-relaxed">
+                        The Agriculture & Agro-Engineering Division of Northern Engineering Consortium Pvt Ltd supports modern, sustainable, and technology-driven agriculture. We work with farmers, agro-industries, and plantation projects to improve productivity, introduce mechanization, promote value-added products, and ensure environmentally responsible practices.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
+                        <div class="bg-green-50 p-3 md:p-4 rounded-lg">
+                            <h4 class="font-bold text-green-900 mb-1 md:mb-2 text-sm md:text-base">Agricultural Development</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Scientific farm planning, sustainable agriculture & productivity</p>
+                        </div>
+                        <div class="bg-green-50 p-3 md:p-4 rounded-lg">
+                            <h4 class="font-bold text-green-900 mb-1 md:mb-2 text-sm md:text-base">Agro-Engineering</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Farm mechanization, irrigation systems & engineering tech</p>
+                        </div>
+                        <div class="bg-green-50 p-3 md:p-4 rounded-lg">
+                            <h4 class="font-bold text-green-900 mb-1 md:mb-2 text-sm md:text-base">Agro-Processing</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Value-addition, processing plants & market development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Units for Division 3 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Agricultural Development & Farm Management Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-green-500 to-green-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-seedling text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Agricultural Development & Farm Management</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">This unit focuses on improving agricultural productivity through scientific farm planning, climate-smart agriculture, and sustainable land management practices. We support small-scale and large-scale farms from planning to harvesting.</p>
+                    
+                    <h4 class="font-bold text-green-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Farm planning and crop selection</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Organic and sustainable agriculture practices</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Irrigation and water-management solutions</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Soil testing and fertility management</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Greenhouse and protected cultivation systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Precision agriculture and digital monitoring</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Training and advisory services for farmers</li>
+                    </ul>
+                    
+                    <div class="approach-box agriculture-approach">
+                        <h4><i class="fas fa-lightbulb text-green-600"></i> Our focus</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We promote <strong>eco-friendly agriculture</strong>, improved yields, and reduced environmental impact through modern techniques and efficient resource management.</p>
+                    </div>
+                </div>
+                
+                <!-- Agro-Engineering & Farm Mechanization Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-green-500 to-green-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-tractor text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Agro-Engineering & Farm Mechanization</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">The Agro-Engineering & Farm Mechanization Unit integrates engineering technology into agriculture to reduce labor, increase efficiency, and support large-scale operations.</p>
+                    
+                    <h4 class="font-bold text-green-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Selection and supply of agricultural machinery and equipment</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Tractor, harvester, and implement service & maintenance</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Design of irrigation systems (drip, sprinkler, solar-powered)</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Development of greenhouse and hydroponic systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Post-harvest handling & storage systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Farm structure design (sheds, storage, drying yards)</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Renewable-energy solutions for agriculture</li>
+                    </ul>
+                    
+                    <div class="approach-box agriculture-approach">
+                        <h4><i class="fas fa-lightbulb text-green-600"></i> Our approach</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We combine mechanical, electrical, and automation technologies to create <strong>smart farming systems</strong> that reduce cost and increase productivity.</p>
+                    </div>
+                </div>
+                
+                <!-- Agro-Processing & Value-Addition Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-green-500 to-green-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-industry text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Agro-Processing & Value-Addition</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">This unit focuses on converting raw agricultural products into value-added commodities, supporting income generation, export potential, and rural development.</p>
+                    
+                    <h4 class="font-bold text-green-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Setting up small and medium-scale processing plants</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Coconut, spices, fruits, vegetables & cereal processing</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Packaging and quality-control systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Product design and market-oriented development</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Food safety standards guidance (HACCP, ISO)</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Secondary processing and by-product utilization</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-green-600 mr-2"></i> Support for export-oriented agribusiness projects</li>
+                    </ul>
+                    
+                    <div class="approach-box agriculture-approach">
+                        <h4><i class="fas fa-lightbulb text-green-600"></i> Our vision</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We help transform primary agricultural outputs into <strong>high-value marketable products</strong>, creating more jobs, higher profits, and sustainable economic growth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Division 4: Energy, Utilities & Sustainable Solutions Division -->
+    <section id="energy-sustainable" class="py-12 md:py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center mb-12 md:mb-16">
+                <div class="lg:w-3/5 lg:pr-10 mb-8 lg:mb-0 slide-in-left">
+                    <div class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-yellow-100 text-yellow-800 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-4">
+                        <i class="fas fa-solar-panel mr-2"></i> Energy, Utilities & Sustainable Solutions Division
+                    </div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">Energy, Utilities & Sustainable Solutions Division</h2>
+                    <p class="text-gray-700 md:text-lg mb-6 md:mb-8 leading-relaxed">
+                        The Energy, Utilities & Sustainable Solutions Division of Northern Engineering Consortium Pvt Ltd delivers innovative, environmentally responsible solutions for power, water, and infrastructure systems. We promote renewable energy, efficient resource management, and modern technologies that support a low-carbon and sustainable future.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
+                        <div class="bg-yellow-50 p-3 md:p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-yellow-900 mb-1 md:mb-2 text-sm md:text-base">Renewable Energy & Wind--Solar Power</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Wind & solar power engineering, hybrid systems & clean energy</p>
+                        </div>
+                        <div class="bg-yellow-50 p-3 md:p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-yellow-900 mb-1 md:mb-2 text-sm md:text-base">Utilities Management & Energy Efficiency</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Energy efficiency, optimization & smart management systems</p>
+                        </div>
+                        <div class="bg-yellow-50 p-3 md:p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-yellow-900 mb-1 md:mb-2 text-sm md:text-base">Sustainable Technology & Environmental Solutions</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Environmental solutions, green engineering & sustainability</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-2/5 slide-in-right">
+                    <div class="relative">
+                        <!-- Energy & Sustainable Solutions Carousel -->
+                        <div class="h-56 w-56 md:h-64 md:w-64 lg:h-72 lg:w-72 mx-auto rounded-2xl overflow-hidden shadow-2xl floating carousel-container" id="carousel-4">
+                            <!-- Image 1 -->
+                            <img src="e1.jpeg" alt="Energy Sustainable Image 1" class="carousel-slide active" data-index="0">
+                            <!-- Image 2 -->
+                            <img src="e2.jpeg" alt="Energy Sustainable Image 2" class="carousel-slide" data-index="1">
+                            <!-- Image 3 -->
+                            <img src="e3.png" alt="Energy Sustainable Image 3" class="carousel-slide" data-index="2">
+                            
+                            <div class="carousel-info">Energy & Sustainable Solutions Division</div>
+                            <div class="carousel-dots">
+                                <span class="carousel-dot active" data-carousel="4" data-index="0"></span>
+                                <span class="carousel-dot" data-carousel="4" data-index="1"></span>
+                                <span class="carousel-dot" data-carousel="4" data-index="2"></span>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-gradient-to-r from-yellow-600 to-yellow-800 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl shadow-xl">
+                            <h4 class="font-bold text-base md:text-lg">Division 04</h4>
+                            <p class="text-xs md:text-sm">Sustainable Energy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Units for Division 4 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Renewable Energy & Wind--Solar Power Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-yellow-500 to-yellow-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-wind text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Renewable Energy & Wind--Solar Power</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">This unit focuses on the development of wind and solar power systems, along with other renewable energy technologies. We plan, design, and implement clean energy projects for residential, commercial, and industrial applications.</p>
+                    
+                    <h4 class="font-bold text-yellow-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> <strong>Wind energy project feasibility and design</strong></li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Small and medium wind turbine systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Hybrid <strong>wind--solar</strong> power solutions</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Grid-connected and off-grid renewable systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Solar PV design, installation, and maintenance</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Battery energy storage and power management systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Renewable-powered water pumping systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Monitoring, performance evaluation, and after-sales service</li>
+                    </ul>
+                    
+                    <div class="approach-box energy-approach">
+                        <h4><i class="fas fa-lightbulb text-yellow-600"></i> Our commitment</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We promote <strong>low-carbon, sustainable electricity generation</strong> using wind, solar, and other renewable resources to reduce energy costs and environmental impact.</p>
+                    </div>
+                </div>
+                
+                <!-- Utilities Management & Energy Efficiency Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-yellow-500 to-yellow-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-chart-line text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Utilities Management & Energy Efficiency</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">The Utilities Management & Energy Efficiency Unit helps organizations optimize the use of electricity, water, and other utilities through engineering assessments and smart management systems.</p>
+                    
+                    <h4 class="font-bold text-yellow-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Energy audits and consumption analysis</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Power quality and load management solutions</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Building and industrial utility system optimization</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Water supply, treatment, and distribution systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Wastewater management and recycling solutions</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> HVAC efficiency improvement projects</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Smart metering and monitoring systems</li>
+                    </ul>
+                    
+                    <div class="approach-box energy-approach">
+                        <h4><i class="fas fa-lightbulb text-yellow-600"></i> Our focus</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We enable clients to <strong>reduce operational costs</strong> while improving performance through efficient use of energy and utilities.</p>
+                    </div>
+                </div>
+                
+                <!-- Sustainable Technology & Environmental Solutions Unit -->
+                <div class="division-card bg-white p-6 md:p-8 rounded-xl shadow-md zoom-in">
+                    <div class="h-14 w-14 md:h-16 md:w-16 bg-gradient-to-r from-yellow-500 to-yellow-700 rounded-xl flex items-center justify-center mb-4 md:mb-6 division-icon">
+                        <i class="fas fa-leaf text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Sustainable Technology & Environmental Solutions</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">This unit promotes sustainable engineering practices and environmental protection technologies that support greener business operations and community development.</p>
+                    
+                    <h4 class="font-bold text-yellow-700 mb-2 text-sm md:text-base">Key services</h4>
+                    <ul class="space-y-2 md:space-y-3 mb-4">
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Environmental impact assessments (EIA support)</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Waste management and resource-recovery systems</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Green building design guidance</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> ESG and sustainability reporting support</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Climate-resilient infrastructure planning</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Water and wastewater treatment solutions</li>
+                        <li class="service-item pl-3 py-1.5 md:py-2 text-sm md:text-base"><i class="fas fa-check-circle text-yellow-600 mr-2"></i> Awareness and training on sustainability practices</li>
+                    </ul>
+                    
+                    <div class="approach-box energy-approach">
+                        <h4><i class="fas fa-lightbulb text-yellow-600"></i> Our vision</h4>
+                        <p class="text-gray-700 text-sm md:text-base">We work toward a future where technology, industry, and nature coexist through <strong>responsible engineering and sustainable innovation</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Contact CTA Section -->
+    <section class="py-16 md:py-20 bg-gradient-to-r from-blue-900 to-blue-800">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto fade-up">
+                <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">Ready to Partner with Our Divisions?</h2>
+                <p class="text-lg md:text-xl text-blue-100 mb-8 md:mb-10 px-2">Contact us to discuss how our specialized divisions can support your next project with integrated engineering solutions.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 md:space-x-6">
+                    <a href="contact.html" class="inline-block bg-white text-blue-900 font-bold py-3 px-8 md:py-4 md:px-10 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1">
+                        <i class="fas fa-envelope mr-2"></i> Contact Our Team
+                    </a>
+                    <a href="tel:+15551234567" class="inline-block bg-transparent border-2 border-white text-white font-bold py-3 px-8 md:py-4 md:px-10 rounded-xl hover:bg-white/10 transition-all">
+                        <i class="fas fa-phone mr-2"></i> Call Us Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODERN FOOTER WITH MODALS (EXACTLY LIKE CAREERS PAGE) -->
+    <footer id="contact" class="modern-footer text-gray-300 pt-16 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4 hover-lift">
+                        <img src="logo.png" alt="Northern Engineering Consortium Logo" class="footer-logo-img"
+                             onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').style.display='flex';">
+                        
+                        <div id="footer-logo-fallback" class="footer-logo-fallback" style="display: none;">
+                            NEC
+                        </div>
+                        
+                        <div>
+                            <h2 class="text-lg font-bold text-white">Northern Engineering Consortium</h2>
+                            <p class="text-sm text-gray-400">Private Limited</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Pioneering integrated engineering solutions since 1978. Transforming visions into sustainable infrastructure across five continents.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#" class="social-icon hover-lift">
+                            <i class="fab fa-youtube text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Quick Links</h3>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="footer-link text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="footer-link text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="divisions.html" class="footer-link text-gray-400 hover:text-white">Our Divisions</a></li>
+                        <li><a href="projects.html" class="footer-link text-gray-400 hover:text-white">Projects</a></li>
+                        <li><a href="careers.html" class="footer-link text-gray-400 hover:text-white">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Services</h3>
+                    <ul class="space-y-4">
+                        <li><a href="divisions.html#mep-maintenance" class="footer-link text-gray-400 hover:text-white">MEP & Maintenance</a></li>
+                        <li><a href="divisions.html#construction-civil" class="footer-link text-gray-400 hover:text-white">Construction & Civil</a></li>
+                        <li><a href="divisions.html#agriculture-agro" class="footer-link text-gray-400 hover:text-white">Agriculture & Agro-Solution</a></li>
+                        <li><a href="divisions.html#energy-sustainable" class="footer-link text-gray-400 hover:text-white">Energy & Sustainable Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 pb-2 border-b border-gray-800">Contact Info</h3>
+                    <ul class="space-y-5">
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-blue-400"></i>
+                            <span class="text-gray-400 text-sm">124 Engineering Plaza, Industrial Zone, Northern City 10001</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-blue-400"></i>
+                            <span class="text-gray-400 text-sm">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-blue-400"></i>
+                            <span class="text-gray-400 text-sm">info@northernengineering.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-gray-500 text-sm">
+                        &copy; 2023 Northern Engineering Consortium (Private) Limited. All rights reserved.
+                        <span class="block md:inline mt-1 md:mt-0 md:ml-2">Registration No:PV-00213709</span>
+                    </p>
+                    <div class="flex space-x-6 text-sm text-gray-500">
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors" data-modal="privacy-policy-modal">Privacy Policy</a>
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors" data-modal="terms-modal">Terms of Service</a>
+                        <a href="#" class="modal-link hover:text-gray-300 transition-colors" data-modal="cookie-policy-modal">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS FOR POLICIES (EXACTLY LIKE CAREERS PAGE) -->
+    
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-policy-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('privacy-policy-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <p>Northern Engineering Consortium Pvt Ltd ("we", "our", or "us") operates the website <strong>northernsustain.com</strong> and is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information in accordance with the applicable laws of Sri Lanka.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>1. Information We Collect</h3>
+                    <p>We may collect the following information when you interact with us or visit our website:</p>
+                    <ul>
+                        <li>Name, email address, phone number, postal address</li>
+                        <li>Company or organization details</li>
+                        <li>Messages or inquiries sent through forms or email</li>
+                        <li>IP address, browser type, and basic website usage data through cookies</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>2. How We Use Your Information</h3>
+                    <p>Your information may be used for the following purposes:</p>
+                    <ul>
+                        <li>To provide, operate, and manage our engineering and consultancy services</li>
+                        <li>To communicate regarding inquiries, quotations, and projects</li>
+                        <li>To improve our website and customer support</li>
+                        <li>To comply with legal and regulatory obligations in Sri Lanka</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>3. Sharing of Information</h3>
+                    <p>We do <strong>not sell, rent, or trade</strong> your personal information.</p>
+                    <p>We may share information with:</p>
+                    <ul>
+                        <li>Trusted service providers working on our behalf</li>
+                        <li>Regulatory or legal authorities, if required by law</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>4. Cookies</h3>
+                    <p>Our website may use cookies to enhance your browsing experience and analyze traffic.</p>
+                    <p>You may disable cookies through your browser settings; however, some features may not function properly.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>5. Data Security</h3>
+                    <p>We implement reasonable technical and organizational safeguards to protect your personal information. However, no internet-based method of data transmission is completely secure.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>6. Your Rights</h3>
+                    <p>Subject to applicable law, you may request:</p>
+                    <ul>
+                        <li>Access to your personal data</li>
+                        <li>Correction of inaccurate data</li>
+                        <li>Deletion of certain data</li>
+                        <li>Withdrawal of consent for marketing communications</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>7. Third-Party Websites</h3>
+                    <p>Our website may include links to third-party websites. We are not responsible for their privacy policies or practices.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>8. Data Retention</h3>
+                    <p>We retain personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, comply with legal obligations, resolve disputes, and enforce agreements. When personal data is no longer required, it will be securely deleted or anonymized.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>9. Changes to This Privacy Policy</h3>
+                    <p>We may update this Privacy Policy periodically. Changes will be posted on <strong>northernsustain.com</strong> with a revised "Last updated" date.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Us</h4>
+                    <p>For privacy-related inquiries, please contact:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Modal -->
+    <div id="terms-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms & Conditions</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('terms-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <p>These Terms & Conditions govern the use of <strong>northernsustain.com</strong> and the services provided by Northern Engineering Consortium Pvt Ltd in Sri Lanka. By accessing or using our website, you agree to be bound by these Terms.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>1. Use of Website</h3>
+                    <p>You agree to use our website lawfully and not to:</p>
+                    <ul>
+                        <li>Engage in fraudulent or harmful activities</li>
+                        <li>Upload or transmit malicious software</li>
+                        <li>Copy or misuse website content</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>2. Services</h3>
+                    <p>Northern Engineering Consortium Pvt Ltd provides engineering, construction, energy, sustainability, consultancy, and related professional services. Specific service scope, timelines, and pricing will be defined in written quotations, proposals, or agreements.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>3. Intellectual Property</h3>
+                    <p>All text, graphics, logos, photos, and other content on <strong>northernsustain.com</strong> are the property of Northern Engineering Consortium Pvt Ltd. Reproduction or distribution without written permission is prohibited.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>4. Quotations, Orders, and Payments</h3>
+                    <ul>
+                        <li>All quotations are valid for the period stated in the quotation document</li>
+                        <li>Work will commence upon written confirmation and agreed payment terms</li>
+                        <li>Delayed payments may result in suspension of services or additional charges as permitted by law</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>5. Limitation of Liability</h3>
+                    <p>To the maximum extent permitted by Sri Lankan law, we shall not be liable for:</p>
+                    <ul>
+                        <li>Indirect or consequential loss or damage</li>
+                        <li>Business interruption, loss of data, or profit loss</li>
+                        <li>Issues arising from third-party websites linked from ours</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>6. Disclaimer of Warranties</h3>
+                    <p>The website and its content are provided on an "as is" and "as available" basis. While we strive to keep information accurate and up to date, we do not warrant that the website will be uninterrupted, error-free, secure, or free of viruses or other harmful components.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>7. User Information Accuracy</h3>
+                    <p>You are responsible for ensuring that any information you submit through our website is accurate, complete, and lawful. We shall not be responsible for any consequences arising from incorrect or misleading information provided by users.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>8. Force Majeure</h3>
+                    <p>We shall not be liable for any failure or delay in performance caused by events beyond our reasonable control, including but not limited to natural disasters, power failures, labor disputes, government actions, pandemics, or internet service disruptions.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>9. Termination</h3>
+                    <p>We reserve the right to restrict or terminate website access and service provision in case of misuse or violation of these Terms.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>10. Governing Law and Jurisdiction</h3>
+                    <p>These Terms & Conditions are governed by the laws of Sri Lanka.</p>
+                    <p>Any disputes will be subject to the jurisdiction of the courts of Sri Lanka.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>11. Changes to Terms</h3>
+                    <p>We may revise these Terms & Conditions at any time. Continued use of our website after changes indicates acceptance of the updated Terms.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Information</h4>
+                    <p>For questions regarding these Terms & Conditions, please contact:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Policy Modal -->
+    <div id="cookie-policy-modal" class="policy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cookie Policy</h2>
+                <p class="modal-subtitle">Northern Engineering Consortium Pvt Ltd</p>
+                <button class="modal-close" onclick="closeModal('cookie-policy-modal')" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><strong>Last updated:</strong> 07 January 2026</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>What Are Cookies?</h3>
+                    <p>Cookies are small text files that are placed on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and understanding how you use our site.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>How We Use Cookies</h3>
+                    <p>We use cookies for the following purposes:</p>
+                    <ul>
+                        <li><strong>Essential Cookies:</strong> Necessary for the website to function properly</li>
+                        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
+                        <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-highlight">
+                    <p><strong>Important:</strong> By continuing to use our website, you consent to our use of cookies as described in this policy. You can manage your cookie preferences through your browser settings.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Managing Cookies</h3>
+                    <p>You can control and/or delete cookies as you wish. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed.</p>
+                    <p>However, if you do this, you may have to manually adjust some preferences every time you visit our site and some services and functionalities may not work.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Third-Party Cookies</h3>
+                    <p>Our website may use third-party services that may place their own cookies on your device. We have no control over these cookies.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Changes to This Cookie Policy</h3>
+                    <p>We may update this Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page and updating the "Last updated" date.</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h4>Contact Us</h4>
+                    <p>If you have any questions about our use of cookies, please contact us:</p>
+                    <p><strong>Northern Engineering Consortium Pvt Ltd</strong><br>
+                    Website: northernsustain.com<br>
+                    Sri Lanka</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle - MATCHING CAREERS PAGE
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuSpans = mobileMenuButton.querySelectorAll('span');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                
+                // Animate hamburger to X - MATCHING CAREERS PAGE
+                if (mobileMenu.classList.contains('open')) {
+                    menuSpans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    menuSpans[1].style.opacity = '0';
+                    menuSpans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    menuSpans[0].style.transform = 'none';
+                    menuSpans[1].style.opacity = '1';
+                    menuSpans[2].style.transform = 'none';
+                }
+            });
+            
+            // Close menu when clicking on links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    menuSpans[0].style.transform = 'none';
+                    menuSpans[1].style.opacity = '1';
+                    menuSpans[2].style.transform = 'none';
+                });
+            });
+        }
+
+        // Smooth scrolling with proper offset for mobile
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        // Calculate offset based on header height and device type
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const isMobile = window.innerWidth <= 768;
+                        const offset = isMobile ? headerHeight + 20 : headerHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active state for division navigation
+                        document.querySelectorAll('.division-nav-btn').forEach(btn => {
+                            btn.classList.remove('bg-blue-100', 'text-blue-900');
+                            btn.classList.add('bg-white', 'text-blue-900');
+                        });
+                        
+                        this.classList.remove('bg-white', 'text-blue-900');
+                        this.classList.add('bg-blue-100', 'text-blue-900');
+                        
+                        // Close mobile menu if open
+                        if (mobileMenu && mobileMenu.classList.contains('open')) {
+                            mobileMenu.classList.remove('open');
+                            menuSpans[0].style.transform = 'none';
+                            menuSpans[1].style.opacity = '1';
+                            menuSpans[2].style.transform = 'none';
+                        }
+                    }
+                }
+            });
+        });
+
+        // Animation observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-up, .slide-in-left, .slide-in-right, .zoom-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Image Carousel Functionality
+        class ImageCarousel {
+            constructor(carouselId, intervalTime = 3000) {
+                this.carousel = document.getElementById(carouselId);
+                this.slides = this.carousel ? this.carousel.querySelectorAll('.carousel-slide') : [];
+                this.dots = this.carousel ? this.carousel.querySelectorAll('.carousel-dot') : [];
+                this.currentIndex = 0;
+                this.intervalTime = intervalTime;
+                this.interval = null;
+                
+                if (this.slides.length > 0) {
+                    this.init();
+                }
+            }
+            
+            init() {
+                // Show first slide
+                this.showSlide(0);
+                
+                // Start auto rotation
+                this.startAutoRotation();
+                
+                // Add click events to dots
+                this.dots.forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        const index = parseInt(e.target.getAttribute('data-index'));
+                        this.showSlide(index);
+                        this.resetAutoRotation();
+                    });
+                });
+                
+                // Pause on hover
+                this.carousel.addEventListener('mouseenter', () => {
+                    this.stopAutoRotation();
+                });
+                
+                this.carousel.addEventListener('mouseleave', () => {
+                    this.startAutoRotation();
+                });
+            }
+            
+            showSlide(index) {
+                // Hide all slides
+                this.slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Remove active class from all dots
+                this.dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Show selected slide
+                this.slides[index].classList.add('active');
+                
+                // Activate corresponding dot
+                this.dots[index].classList.add('active');
+                
+                this.currentIndex = index;
+            }
+            
+            nextSlide() {
+                let nextIndex = this.currentIndex + 1;
+                if (nextIndex >= this.slides.length) {
+                    nextIndex = 0;
+                }
+                this.showSlide(nextIndex);
+            }
+            
+            startAutoRotation() {
+                this.interval = setInterval(() => {
+                    this.nextSlide();
+                }, this.intervalTime);
+            }
+            
+            stopAutoRotation() {
+                if (this.interval) {
+                    clearInterval(this.interval);
+                    this.interval = null;
+                }
+            }
+            
+            resetAutoRotation() {
+                this.stopAutoRotation();
+                this.startAutoRotation();
+            }
+        }
+
+        // Sticky navigation on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (header) {
+                if(window.scrollY > 50) {
+                    header.classList.add('shadow-lg', 'py-2');
+                    header.classList.remove('py-3');
+                } else {
+                    header.classList.remove('shadow-lg', 'py-2');
+                    header.classList.add('py-3');
+                }
+            }
+            
+            // Division navigation highlight on scroll
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPosition = window.scrollY + 150;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.division-nav-btn').forEach(btn => {
+                        btn.classList.remove('bg-blue-100', 'text-blue-900');
+                        btn.classList.add('bg-white', 'text-blue-900');
+                    });
+                    
+                    const correspondingBtn = document.querySelector(`.division-nav-btn[href="#${sectionId}"]`);
+                    if (correspondingBtn) {
+                        correspondingBtn.classList.remove('bg-white', 'text-blue-900');
+                        correspondingBtn.classList.add('bg-blue-100', 'text-blue-900');
+                    }
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                // Close mobile menu on desktop
+                if (mobileMenu && mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    menuSpans[0].style.transform = 'none';
+                    menuSpans[1].style.opacity = '1';
+                    menuSpans[2].style.transform = 'none';
+                }
+            }
+        });
+
+        // Initialize animations for hero section
+        setTimeout(() => {
+            const hero = document.querySelector('.division-hero .fade-up');
+            if(hero) {
+                hero.classList.add('visible');
+            }
+        }, 100);
+
+        // MODAL FUNCTIONALITY INITIALIZATION (FROM CAREERS PAGE)
+        initModalFunctionality();
+
+        // Initialize image carousels for each division
+        // Each carousel will change images every 3 seconds (3000ms)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set sticky nav initial state
+            const header = document.querySelector('header');
+            if(window.scrollY > 50) {
+                header.classList.add('shadow-lg', 'py-2');
+                header.classList.remove('py-3');
+            }
+            
+            // Initialize division navigation
+            const firstDivisionBtn = document.querySelector('.division-nav-btn');
+            if (firstDivisionBtn) {
+                firstDivisionBtn.classList.remove('bg-white', 'text-blue-900');
+                firstDivisionBtn.classList.add('bg-blue-100', 'text-blue-900');
+            }
+            
+            // Initialize image carousels for each division
+            const carousel1 = new ImageCarousel('carousel-1', 3000); // MEP & Maintenance
+            const carousel2 = new ImageCarousel('carousel-2', 3000); // Construction & Civil
+            const carousel3 = new ImageCarousel('carousel-3', 3000); // Agriculture & Agro-Solution
+            const carousel4 = new ImageCarousel('carousel-4', 3000); // Energy & Sustainable
+            
+            // Store carousels in window for debugging if needed
+            window.carousels = {
+                carousel1, carousel2, carousel3, carousel4
+            };
+        });
+
+        // MODAL FUNCTIONALITY (FROM CAREERS PAGE)
+        function initModalFunctionality() {
+            // Modal functions
+            window.openModal = function(modalId) {
+                const modal = document.getElementById(modalId);
+                if(modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Add smooth entrance animation
+                    setTimeout(() => {
+                        modal.style.opacity = '1';
+                    }, 10);
+                }
+            };
+            
+            window.closeModal = function(modalId) {
+                const modal = document.getElementById(modalId);
+                if(modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            };
+            
+            // Close modal when clicking outside content
+            document.querySelectorAll('.policy-modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if(e.target === this) {
+                        closeModal(this.id);
+                    }
+                });
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if(e.key === 'Escape') {
+                    const activeModal = document.querySelector('.policy-modal.active');
+                    if(activeModal) {
+                        closeModal(activeModal.id);
+                    }
+                }
+            });
+            
+            // Add click event listeners to footer policy links
+            document.querySelectorAll('.modal-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.getAttribute('data-modal');
+                    if (modalId) {
+                        openModal(modalId);
+                    }
+                });
+            });
+            
+            // Add touch events for mobile swipe to close
+            let touchStartY = 0;
+            let touchEndY = 0;
+            
+            document.querySelectorAll('.policy-modal .modal-content').forEach(content => {
+                content.addEventListener('touchstart', function(e) {
+                    touchStartY = e.changedTouches[0].screenY;
+                });
+                
+                content.addEventListener('touchend', function(e) {
+                    touchEndY = e.changedTouches[0].screenY;
+                    
+                    // If user swiped down significantly, close the modal
+                    if (touchEndY - touchStartY > 100) {
+                        const modal = this.closest('.policy-modal');
+                        if (modal) {
+                            closeModal(modal.id);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
